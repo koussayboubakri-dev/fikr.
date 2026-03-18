@@ -198,7 +198,7 @@ button{cursor:pointer;border:none;font-family:inherit}
     <span class="lesson-pill">🌱 درس ٣</span>
     <span class="xp-pill" id="xp">⭐ ٠ XP</span>
   </div>
-  <button class="btn-back" onclick="window.location.href='index.html'">← رجوع</button>
+  <button class="btn-back" onclick="window.location.href = BASE + 'index.html'">← رجوع</button>
 </nav>
 <div class="prog-wrap"><div class="prog-fill" id="prog" style="width:0%"></div></div>
 
@@ -469,6 +469,9 @@ button{cursor:pointer;border:none;font-family:inherit}
 </div>
 
 <script>
+// ── BASE PATH — works on GitHub Pages and locally ──
+const BASE = window.location.pathname.replace(/\/[^\/]*$/, '/');
+
 // ── AUTH GUARD — redirect to login if not signed in ──
 (async () => {
   try {
@@ -480,7 +483,7 @@ button{cursor:pointer;border:none;font-family:inherit}
     await new Promise(resolve => {
       const unsub = onAuthStateChanged(auth, u => { unsub(); resolve(u); });
     }).then(user => {
-      if (!user) window.location.href = "index.html";
+      if (!user) window.location.href = BASE + 'index.html';
     });
   } catch(e) {}
 })();
@@ -655,8 +658,8 @@ async function finish(){
       await updateDoc(doc(db,'users',user.uid),{lessonsCompleted:arrayUnion('lesson3'),xp:curXP+100});
     }
     if(btn){btn.textContent='✅ تم الحفظ! جارٍ العودة...';}
-    setTimeout(()=>{window.location.href='index.html';},1000);
-  } catch(e){ window.location.href='index.html'; }
+    setTimeout(()=>{window.location.href = BASE + 'index.html';},1000);
+  } catch(e){ window.location.href = BASE + 'index.html'; }
 }
 
 updateNums();
