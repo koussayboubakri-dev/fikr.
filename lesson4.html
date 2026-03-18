@@ -646,16 +646,21 @@ function quiz(btn,qid,correct,fbId,nextId){
     },1400);
   }
 }
-// ── AUTH GUARD: redirect to login if not signed in ──
+// ── AUTH GUARD: redirect if not logged in or not subscribed ──
 (async () => {
   try {
     const { initializeApp, getApps } = await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js");
     const { getAuth, onAuthStateChanged } = await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js");
+    const { getFirestore, doc, getDoc } = await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js");
     const cfg = {apiKey:"AIzaSyBeD4ng-pNWSLgkrNmK1Re8FYnmCNCMBU8",authDomain:"fikr-app-fbdf7.firebaseapp.com",projectId:"fikr-app-fbdf7",storageBucket:"fikr-app-fbdf7.firebasestorage.app",messagingSenderId:"378212535527",appId:"1:378212535527:web:99331970433b4428dd2642"};
     const app = getApps().length ? getApps()[0] : initializeApp(cfg);
     const auth = getAuth(app);
+    const db = getFirestore(app);
     const user = await new Promise(r => { const u = onAuthStateChanged(auth, x => { u(); r(x); }); });
-    if (!user) { window.location.href = window.location.pathname.replace(/\/[^\/]*$/, '/') + 'index.html'; }
+    if (!user) { window.location.href = 'index.html'; return; }
+    const snap = await getDoc(doc(db, 'users', user.uid));
+    const sub = snap.data()?.subscription;
+    if (sub !== 'active') { window.location.href = 'index.html'; }
   } catch(e) {}
 })();
 
@@ -679,7 +684,7 @@ async function finish() {
     }
     if (btn) { btn.textContent = '✅ تم الحفظ! جارٍ العودة...'; }
   } catch(e) {}
-  setTimeout(() => { window.location.href = window.location.pathname.replace(/\/[^\/]*$/, '/') + 'index.html'; }, 1000);
+  setTimeout(() => { window.location.href = 'index.html'; }, 1000);
 }
 </script>
 </body>

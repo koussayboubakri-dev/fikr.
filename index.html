@@ -1535,15 +1535,15 @@
           <div class="lesson-info"><div class="lesson-title">أول لعبة بـ Scratch</div><div class="lesson-desc">نبني لعبة بسيطة خطوة بخطوة</div></div>
           <span class="lesson-badge free-badge" id="lbadge-2">مجاني</span>
         </div>
-        <div class="lesson-card free" id="lcard-3" onclick="openLesson(3,'الحركة والأحداث')">
+        <div class="lesson-card locked" id="lcard-3" onclick="showUpgrade()">
           <div class="lesson-num">٣</div>
           <div class="lesson-info"><div class="lesson-title">الحركة والأحداث</div><div class="lesson-desc">تحريك الكائنات بالمفاتيح</div></div>
-          <span class="lesson-badge free-badge" id="lbadge-3">مجاني</span>
+          <span class="lesson-badge lock-badge">🔒</span>
         </div>
-        <div class="lesson-card free" id="lcard-4" onclick="openLesson(4,'الشروط واللعبة الكاملة')">
+        <div class="lesson-card locked" id="lcard-4" onclick="showUpgrade()">
           <div class="lesson-num">٤</div>
           <div class="lesson-info"><div class="lesson-title">الشروط واللعبة الكاملة</div><div class="lesson-desc">if / else وبناء لعبة حقيقية</div></div>
-          <span class="lesson-badge free-badge" id="lbadge-4">مجاني</span>
+          <span class="lesson-badge lock-badge">🔒</span>
         </div>
       </div>
     </div>
@@ -2080,8 +2080,7 @@
 
   // ══ STUDENT LESSON VIEWER ══
   window.openLesson = function(lessonId, title) {
-    const base = window.location.pathname.replace(/\/[^\/]*$/, '/');
-    const files = { 1: base+'lesson1.html', 2: base+'lesson2.html', 3: base+'lesson3.html', 4: base+'lesson4.html' };
+    const files = { 1: 'lesson1.html', 2: 'lesson2.html', 3: 'lesson3.html', 4: 'lesson4.html' };
     if (files[lessonId]) { window.location.href = files[lessonId]; return; }
     document.getElementById('lesson-modal-title').textContent = 'الدرس ' + lessonId + ': ' + title;
     document.getElementById('lesson-modal').style.display = 'flex';
