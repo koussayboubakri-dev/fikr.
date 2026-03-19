@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>فِكر · ك١ — Python المتقدم والخوارزميات</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&family=Cairo:wght@400;700;900&family=Fira+Code:wght@400;500;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --gold:#c8922a;--gold-l:#e8b84b;--gold-pale:#fff8e6;--gold-dark:#92670f;
+  --teal:#1a6b72;--teal-pale:#e0f5f7;
+  --green:#16a34a;--green-pale:#dcfce7;
+  --red:#dc2626;--red-pale:#fee2e2;
+  --blue:#2563eb;--blue-pale:#dbeafe;
+  --purple:#7c3aed;--purple-pale:#ede9fe;
+  --orange:#ea580c;--orange-pale:#ffedd5;
+  --accent:#7c3aed;--accent-pale:#ede9fe;--accent-dark:#5b21b6;
+  --bg:#faf9ff;--white:#fff;--text:#1a1d26;--soft:#64748b;--border:#e4dff5;
+  --font:'Tajawal',sans-serif;--font-ui:'Cairo',sans-serif;--font-code:'Fira Code',monospace;
+  --r:16px;--r2:24px;--r3:36px;
+  --shadow:0 4px 20px rgba(124,58,237,0.08);--shadow-lg:0 8px 40px rgba(124,58,237,0.14);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+button{cursor:pointer;border:none;font-family:inherit}
+
+.topbar{background:var(--white);border-bottom:2px solid var(--border);padding:0 28px;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(124,58,237,0.07)}
+.logo{font-family:var(--font-ui);font-size:1.5rem;font-weight:900;color:var(--teal)}
+.logo span{color:var(--gold)}
+.lesson-pill{background:var(--accent-pale);color:var(--accent-dark);font-family:var(--font-ui);font-size:0.78rem;font-weight:700;padding:5px 14px;border-radius:99px;border:1.5px solid rgba(124,58,237,0.25)}
+.xp-pill{background:var(--gold-pale);color:var(--gold);font-family:var(--font-ui);font-size:0.82rem;font-weight:800;padding:5px 14px;border-radius:99px;border:1.5px solid rgba(200,146,42,0.2);transition:.3s}
+.btn-back{font-family:var(--font-ui);font-size:0.82rem;font-weight:700;color:var(--soft);background:#f1f0f9;padding:8px 18px;border-radius:99px;transition:.2s}
+.btn-back:hover{background:#e4dff5;color:var(--text)}
+
+.prog-wrap{height:6px;background:#ede9f9}
+.prog-fill{height:6px;background:linear-gradient(90deg,var(--accent),var(--gold-l));transition:width .5s cubic-bezier(.4,0,.2,1);border-radius:0 99px 99px 0}
+
+.step{display:none;animation:fadeUp .4s ease both}
+.step.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.step-body{max-width:780px;margin:0 auto;padding:40px 20px 120px}
+
+.hero{background:linear-gradient(135deg,#ede9fe 0%,#faf9ff 50%,#fef3c7 100%);border-radius:var(--r3);padding:52px 40px;text-align:center;border:2px solid rgba(124,58,237,0.15);box-shadow:var(--shadow);margin-bottom:24px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-60px;right:-60px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(124,58,237,0.08),transparent 70%)}
+.hero-emoji{font-size:4rem;margin-bottom:16px;display:block;animation:bounce 2s infinite}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.hero-title{font-family:var(--font-ui);font-size:2rem;font-weight:900;color:var(--accent-dark);margin-bottom:10px}
+.hero-sub{font-size:1rem;color:var(--soft);line-height:1.8;max-width:480px;margin:0 auto 28px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.chip{display:flex;align-items:center;gap:6px;font-family:var(--font-ui);font-size:0.82rem;font-weight:700;padding:7px 16px;border-radius:99px;border:2px solid}
+.chip-purple{background:var(--purple-pale);color:var(--purple);border-color:rgba(124,58,237,0.2)}
+.chip-gold{background:var(--gold-pale);color:var(--gold-dark);border-color:rgba(200,146,42,0.25)}
+.chip-green{background:var(--green-pale);color:var(--green);border-color:rgba(22,163,74,0.2)}
+
+.s-tag{font-family:var(--font-ui);font-size:0.72rem;font-weight:700;color:var(--accent-dark);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}
+.s-title{font-family:var(--font-ui);font-size:1.6rem;font-weight:900;color:var(--text);margin-bottom:8px;line-height:1.3}
+.s-lead{font-size:0.97rem;color:var(--soft);line-height:1.8;margin-bottom:28px}
+
+.hbox{border-radius:var(--r2);padding:24px 28px;margin:20px 0;border-right:5px solid}
+.hbox.purple{background:var(--purple-pale);border-color:var(--purple)}
+.hbox.gold{background:var(--gold-pale);border-color:var(--gold)}
+.hbox.green{background:var(--green-pale);border-color:var(--green)}
+.hbox.orange{background:var(--orange-pale);border-color:var(--orange)}
+.hbox h3{font-family:var(--font-ui);font-size:0.95rem;font-weight:800;margin-bottom:8px}
+.hbox.purple h3{color:var(--accent-dark)}
+.hbox.gold h3{color:var(--gold-dark)}
+.hbox.green h3{color:var(--green)}
+.hbox.orange h3{color:var(--orange)}
+.hbox p{font-size:0.92rem;color:var(--soft);line-height:1.85}
+.hbox strong{color:var(--text)}
+
+/* CODE EDITOR */
+.code-editor{background:#1e1e2e;border-radius:var(--r2);overflow:hidden;box-shadow:var(--shadow-lg);margin:20px 0;border:2px solid rgba(124,58,237,0.2)}
+.editor-bar{background:#2a2a3e;padding:12px 18px;display:flex;align-items:center;gap:8px;border-bottom:1px solid rgba(255,255,255,0.06)}
+.ed-dot{width:10px;height:10px;border-radius:50%}
+.editor-bar span{font-family:var(--font-ui);font-size:0.78rem;color:rgba(255,255,255,0.35);margin-right:auto}
+.run-btn{font-family:var(--font-ui);font-size:0.78rem;font-weight:700;background:var(--green);color:#fff;padding:5px 14px;border-radius:8px;border:none;cursor:pointer;transition:.2s}
+.run-btn:hover{background:#15803d;transform:translateY(-1px)}
+.code-area{padding:20px 24px;font-family:var(--font-code);font-size:0.88rem;line-height:1.9}
+.code-line{display:flex;gap:16px}
+.ln{color:rgba(255,255,255,0.18);min-width:24px;text-align:left;user-select:none;flex-shrink:0;font-size:0.78rem;padding-top:2px}
+.kw{color:#c084fc}.fn{color:#86efac}.st{color:#fde68a}.cm{color:#6272a4}.nm{color:#93c5fd}.vr{color:#f9a8d4}.op{color:#e2e8f0}
+.output-area{background:#0f1117;border-top:1px solid rgba(255,255,255,0.06);padding:14px 24px}
+.output-label{font-family:var(--font-ui);font-size:0.7rem;font-weight:700;color:rgba(255,255,255,0.3);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
+.output-text{font-family:var(--font-code);font-size:0.88rem;color:#86efac;min-height:24px}
+
+/* BUBBLE SORT VISUALIZER */
+.sort-viz{background:var(--white);border:2px solid var(--border);border-radius:var(--r2);padding:28px;margin:20px 0;box-shadow:var(--shadow)}
+.sort-title{font-family:var(--font-ui);font-weight:800;color:var(--text);margin-bottom:16px;font-size:1rem}
+.bars-wrap{display:flex;align-items:flex-end;gap:8px;height:160px;margin-bottom:16px;padding:8px;background:#f8f7ff;border-radius:var(--r);border:1.5px solid var(--border)}
+.bar{border-radius:6px 6px 0 0;transition:height .4s ease,background .3s;min-width:32px;flex:1;display:flex;align-items:flex-end;justify-content:center;padding-bottom:4px;font-family:var(--font-ui);font-size:0.7rem;font-weight:800}
+.bar.normal{background:linear-gradient(180deg,var(--accent),var(--accent-dark))}
+.bar.comparing{background:linear-gradient(180deg,#f59e0b,#d97706);animation:pulse .4s ease infinite alternate}
+.bar.swapping{background:linear-gradient(180deg,var(--red),#b91c1c)}
+.bar.sorted{background:linear-gradient(180deg,var(--green),#15803d)}
+@keyframes pulse{from{filter:brightness(1)}to{filter:brightness(1.3)}}
+.bar-num{color:white;font-size:0.65rem;font-weight:900}
+.sort-controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.sort-btn{font-family:var(--font-ui);font-weight:700;font-size:0.85rem;padding:10px 22px;border-radius:99px;transition:.2s;border:2px solid}
+.sort-btn.primary{background:var(--accent);color:#fff;border-color:var(--accent);box-shadow:0 4px 12px rgba(124,58,237,0.3)}
+.sort-btn.primary:hover{background:var(--accent-dark)}
+.sort-btn.secondary{background:var(--white);color:var(--soft);border-color:var(--border)}
+.sort-btn.secondary:hover{border-color:var(--accent);color:var(--accent)}
+.sort-step{font-family:var(--font-ui);font-size:0.85rem;color:var(--soft);padding:8px 14px;background:#f8f7ff;border-radius:var(--r);border:1.5px solid var(--border);margin-top:10px;min-height:38px;display:flex;align-items:center}
+
+/* OOP DIAGRAM */
+.oop-diagram{background:var(--white);border:2px solid var(--border);border-radius:var(--r2);padding:24px;margin:20px 0;box-shadow:var(--shadow)}
+.class-box{background:linear-gradient(135deg,var(--accent-pale),#f5f3ff);border:2px solid rgba(124,58,237,0.3);border-radius:var(--r);overflow:hidden;margin-bottom:16px}
+.class-header{background:var(--accent);color:#fff;padding:10px 16px;font-family:var(--font-ui);font-weight:800;font-size:0.9rem;display:flex;align-items:center;gap:8px}
+.class-body{padding:14px 16px;font-family:var(--font-code);font-size:0.82rem;line-height:2}
+.class-attr{color:#f9a8d4}
+.class-method{color:#86efac}
+.object-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.object-card{background:var(--white);border:2px solid rgba(124,58,237,0.2);border-radius:var(--r);padding:12px 16px;flex:1;min-width:140px}
+.obj-title{font-family:var(--font-ui);font-size:0.75rem;font-weight:700;color:var(--accent-dark);margin-bottom:6px;letter-spacing:.5px}
+.obj-item{font-family:var(--font-code);font-size:0.78rem;color:var(--soft);margin-bottom:2px}
+
+/* CODE FILL */
+.code-fill-wrap{background:#1e1e2e;border-radius:var(--r2);overflow:hidden;margin:20px 0;border:2px solid rgba(124,58,237,0.2);box-shadow:var(--shadow)}
+.code-fill-bar{background:#2a2a3e;padding:12px 18px;display:flex;align-items:center;gap:8px;border-bottom:1px solid rgba(255,255,255,0.06)}
+.code-fill-bar span{font-family:var(--font-ui);font-size:0.78rem;color:rgba(255,255,255,0.35);margin-right:auto}
+.code-fill-body{padding:20px 24px;font-family:var(--font-code);font-size:0.88rem;line-height:2.4;color:#e2e8f0}
+.code-blank{display:inline-block;background:rgba(124,58,237,0.15);border:1.5px dashed rgba(124,58,237,0.5);border-radius:6px;min-width:80px;padding:1px 8px;font-family:var(--font-code);font-size:0.85rem;color:#c084fc;outline:none;transition:.2s;text-align:center}
+.code-blank:focus{background:rgba(124,58,237,0.25);border-color:var(--accent);box-shadow:0 0 0 3px rgba(124,58,237,0.15)}
+.code-blank.correct{background:rgba(22,163,74,0.15);border-color:var(--green);color:#86efac}
+.code-blank.wrong{background:rgba(220,38,38,0.12);border-color:var(--red);animation:shake .4s ease}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.check-btn{font-family:var(--font-ui);font-weight:800;font-size:0.88rem;color:#fff;background:linear-gradient(135deg,var(--accent),var(--accent-dark));padding:10px 24px;border-radius:99px;margin:14px 24px;transition:.2s;box-shadow:0 4px 14px rgba(124,58,237,0.3)}
+.check-btn:hover{transform:translateY(-2px)}
+.fill-fb{margin:0 24px 16px;border-radius:var(--r);padding:12px 16px;font-family:var(--font-ui);font-size:0.88rem;font-weight:600;border:2px solid;display:none;line-height:1.7}
+.fill-fb.show{display:block;animation:fadeUp .3s ease}
+.fill-fb.ok{background:var(--green-pale);border-color:rgba(22,163,74,0.3);color:var(--green)}
+.fill-fb.no{background:var(--red-pale);border-color:rgba(220,38,38,0.25);color:var(--red)}
+
+/* QUIZ */
+.quiz-q{font-family:var(--font-ui);font-size:1.05rem;font-weight:800;color:var(--text);margin-bottom:18px;line-height:1.5}
+.quiz-opts{display:flex;flex-direction:column;gap:10px;margin-bottom:18px}
+.quiz-opt{background:var(--white);border:2.5px solid var(--border);border-radius:var(--r);padding:14px 20px;font-family:var(--font-ui);font-size:0.92rem;font-weight:600;color:var(--soft);text-align:right;transition:.2s}
+.quiz-opt:hover{border-color:var(--accent);background:var(--accent-pale);color:var(--accent-dark)}
+.quiz-opt.correct{border-color:var(--green);background:var(--green-pale);color:var(--green)}
+.quiz-opt.wrong{border-color:var(--red);background:var(--red-pale);color:var(--red);animation:shake .4s ease}
+.quiz-fb{border-radius:var(--r);padding:14px 18px;font-family:var(--font-ui);font-size:0.9rem;display:none;margin-bottom:16px;line-height:1.7;border:2px solid;font-weight:600}
+.quiz-fb.show{display:block;animation:fadeUp .3s ease}
+.quiz-fb.ok{background:var(--green-pale);border-color:rgba(22,163,74,0.3);color:var(--green)}
+.quiz-fb.no{background:var(--red-pale);border-color:rgba(220,38,38,0.25);color:var(--red)}
+
+/* CELEBRATION */
+.celebration{background:linear-gradient(135deg,#ede9fe,#faf9ff,#fef3c7);border-radius:var(--r3);padding:56px 32px;text-align:center;border:2px solid rgba(124,58,237,0.15);box-shadow:var(--shadow-lg)}
+.cel-emoji{font-size:4rem;display:block;margin-bottom:20px;animation:bounce 1s infinite}
+.xp-badge{display:inline-flex;align-items:center;gap:10px;background:var(--gold-pale);border:2.5px solid rgba(200,146,42,0.4);border-radius:99px;padding:12px 28px;font-family:var(--font-ui);font-size:1.4rem;font-weight:900;color:var(--gold-dark);margin-bottom:20px;animation:popIn .5s .2s cubic-bezier(.34,1.56,.64,1) both}
+@keyframes popIn{from{transform:scale(0.4);opacity:0}to{transform:scale(1);opacity:1}}
+.cel-title{font-family:var(--font-ui);font-size:2rem;font-weight:900;color:var(--accent-dark);margin-bottom:10px}
+.cel-sub{font-size:1rem;color:var(--soft);line-height:1.8;margin-bottom:28px;max-width:440px;margin-left:auto;margin-right:auto}
+.badge-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:28px}
+.badge-item{background:var(--white);border:2px solid var(--border);border-radius:var(--r2);padding:14px 20px;display:flex;align-items:center;gap:10px;font-family:var(--font-ui);font-size:0.85rem;color:var(--soft);box-shadow:var(--shadow)}
+.badge-item .bi{font-size:1.5rem}
+.badge-item strong{color:var(--text);display:block;font-size:0.88rem}
+
+/* NAV */
+.step-nav{position:fixed;bottom:0;right:0;left:0;background:rgba(250,249,255,0.95);backdrop-filter:blur(16px);border-top:2px solid var(--border);padding:16px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 -4px 20px rgba(124,58,237,0.08)}
+.btn-next{font-family:var(--font-ui);font-weight:900;font-size:0.95rem;color:#fff;background:linear-gradient(135deg,var(--accent),var(--accent-dark));padding:13px 32px;border-radius:99px;box-shadow:0 4px 16px rgba(124,58,237,0.4);transition:.2s}
+.btn-next:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(124,58,237,0.5)}
+.btn-next:disabled{opacity:.35;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-prev{font-family:var(--font-ui);font-weight:700;font-size:0.9rem;color:var(--soft);background:#f1f0f9;padding:13px 22px;border-radius:99px;transition:.2s}
+.btn-prev:hover{background:#e4dff5;color:var(--text)}
+.step-dots{display:flex;gap:6px;align-items:center}
+.dot{width:8px;height:8px;border-radius:50%;background:#e4dff5;transition:.3s}
+.dot.active{background:var(--accent);width:24px;border-radius:99px}
+.dot.done{background:var(--green)}
+
+@media(max-width:640px){.step-body{padding:28px 14px 110px}.topbar{padding:0 14px}.hero{padding:36px 20px}}
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <div class="logo">فِ<span>كر</span></div>
+  <div style="display:flex;align-items:center;gap:8px">
+    <span class="lesson-pill">🚀 ك١ — الكبير</span>
+    <span class="xp-pill" id="xp">⭐ ٠ XP</span>
+  </div>
+  <button class="btn-back" onclick="window.location.href='index.html'">← رجوع</button>
+</nav>
+<div class="prog-wrap"><div class="prog-fill" id="prog" style="width:0%"></div></div>
+
+<!-- STEP 1: HERO -->
+<div class="step active" id="s1">
+  <div class="step-body">
+    <div class="hero">
+      <span class="hero-emoji">🧠</span>
+      <h1 class="hero-title">Python المتقدم والخوارزميات!</h1>
+      <p class="hero-sub">انتقل من المبرمج المبتدئ إلى المحترف — خوارزميات الترتيب والبرمجة الكائنية!</p>
+      <div class="chips">
+        <div class="chip chip-purple">⏱️ ٥٠ دقيقة</div>
+        <div class="chip chip-gold">🏅 ١٥٠ XP</div>
+        <div class="chip chip-green">🚀 مستوى متقدم</div>
+      </div>
+    </div>
+    <div class="hbox purple">
+      <h3>🎯 ماذا ستتعلم اليوم؟</h3>
+      <p>✦ خوارزمية Bubble Sort — كيف يرتب الحاسوب الأرقام<br/>✦ البرمجة الكائنية OOP — class والكائنات<br/>✦ تصميم كلاس من الصفر بالخصائص والأساليب<br/>✦ تحدي كود: أكمل كلاس السيارة!</p>
+    </div>
+  </div>
+  <div class="step-nav">
+    <div></div>
+    <div class="step-dots">
+      <div class="dot active"></div><div class="dot"></div><div class="dot"></div>
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+    </div>
+    <button class="btn-next" onclick="goStep(2)">ابدأ الدرس ←</button>
+  </div>
+</div>
+
+<!-- STEP 2: BUBBLE SORT -->
+<div class="step" id="s2">
+  <div class="step-body">
+    <div class="s-tag">الخوارزميات</div>
+    <h2 class="s-title">Bubble Sort — الفقاعات الذكية! 🫧</h2>
+    <p class="s-lead">كيف يرتب الحاسوب قائمة أرقام؟ يقارن كل رقمين متجاورين ويبدّل موقعهما إذا كانا بترتيب خاطئ — مراراً حتى تُرتَّب القائمة!</p>
+
+    <div class="sort-viz">
+      <div class="sort-title">📊 مرئية Bubble Sort التفاعلية</div>
+      <div class="bars-wrap" id="bars-wrap"></div>
+      <div class="sort-step" id="sort-step">اضغط "خطوة" لبدء الخوارزمية...</div>
+      <div class="sort-controls" style="margin-top:14px">
+        <button class="sort-btn primary" onclick="sortStep()">خطوة واحدة ▶</button>
+        <button class="sort-btn primary" onclick="autoSort()" id="auto-btn">تشغيل تلقائي ⚡</button>
+        <button class="sort-btn secondary" onclick="resetSort()">إعادة تعيين 🔄</button>
+      </div>
+    </div>
+
+    <div class="code-editor">
+      <div class="editor-bar">
+        <div class="ed-dot" style="background:#ff5f57"></div><div class="ed-dot" style="background:#febc2e"></div><div class="ed-dot" style="background:#28c840"></div>
+        <span>bubble_sort.py</span>
+        <button class="run-btn" onclick="runBubble()">▶ شغّل</button>
+      </div>
+      <div class="code-area">
+        <div class="code-line"><span class="ln">1</span><span><span class="kw">def</span> <span class="fn">bubble_sort</span>(<span class="vr">قائمة</span>):</span></div>
+        <div class="code-line"><span class="ln">2</span><span style="padding-right:20px"><span class="vr">ن</span> = <span class="fn">len</span>(<span class="vr">قائمة</span>)</span></div>
+        <div class="code-line"><span class="ln">3</span><span style="padding-right:20px"><span class="kw">for</span> <span class="vr">i</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="vr">ن</span>):</span></div>
+        <div class="code-line"><span class="ln">4</span><span style="padding-right:40px"><span class="kw">for</span> <span class="vr">j</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="nm">0</span>, <span class="vr">ن</span>-<span class="vr">i</span>-<span class="nm">1</span>):</span></div>
+        <div class="code-line"><span class="ln">5</span><span style="padding-right:60px"><span class="kw">if</span> <span class="vr">قائمة</span>[<span class="vr">j</span>] > <span class="vr">قائمة</span>[<span class="vr">j</span>+<span class="nm">1</span>]:</span></div>
+        <div class="code-line"><span class="ln">6</span><span style="padding-right:80px"><span class="vr">قائمة</span>[<span class="vr">j</span>], <span class="vr">قائمة</span>[<span class="vr">j</span>+<span class="nm">1</span>] = <span class="vr">قائمة</span>[<span class="vr">j</span>+<span class="nm">1</span>], <span class="vr">قائمة</span>[<span class="vr">j</span>]</span></div>
+        <div class="code-line"><span class="ln">7</span><span style="padding-right:20px"><span class="kw">return</span> <span class="vr">قائمة</span></span></div>
+        <div class="code-line"><span class="ln">8</span><span>&nbsp;</span></div>
+        <div class="code-line"><span class="ln">9</span><span><span class="vr">أرقام</span> = [<span class="nm">64</span>, <span class="nm">34</span>, <span class="nm">25</span>, <span class="nm">12</span>, <span class="nm">22</span>]</span></div>
+        <div class="code-line"><span class="ln">10</span><span><span class="fn">print</span>(<span class="fn">bubble_sort</span>(<span class="vr">أرقام</span>))</span></div>
+      </div>
+      <div class="output-area">
+        <div class="output-label">الناتج</div>
+        <div class="output-text" id="out-bubble">اضغط شغّل...</div>
+      </div>
+    </div>
+  </div>
+  <div class="step-nav">
+    <button class="btn-prev" onclick="goStep(1)">→ السابق</button>
+    <div class="step-dots">
+      <div class="dot done"></div><div class="dot active"></div><div class="dot"></div>
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+    </div>
+    <button class="btn-next" id="s2-next" onclick="goStep(3)" disabled>التالي ←</button>
+  </div>
+</div>
+
+<!-- STEP 3: OOP INTRO -->
+<div class="step" id="s3">
+  <div class="step-body">
+    <div class="s-tag">البرمجة الكائنية OOP</div>
+    <h2 class="s-title">class — قالب تصنيع الكائنات! 🏭</h2>
+    <p class="s-lead">الكلاس مثل قالب أو وصفة — تعرّفه مرة وتصنع منه كائنات كثيرة. كل كائن له خصائصه الخاصة!</p>
+
+    <div class="oop-diagram">
+      <div class="sort-title" style="margin-bottom:14px">🎓 تشريح الكلاس</div>
+      <div class="class-box">
+        <div class="class-header">🎓 class طالب</div>
+        <div class="class-body">
+          <div><span class="kw">def</span> <span class="fn">__init__</span>(<span class="vr">self</span>, <span class="class-attr">اسم</span>, <span class="class-attr">درجة</span>):</div>
+          <div style="padding-right:20px"><span class="vr">self</span>.<span class="class-attr">اسم</span> = <span class="class-attr">اسم</span></div>
+          <div style="padding-right:20px"><span class="vr">self</span>.<span class="class-attr">درجة</span> = <span class="class-attr">درجة</span></div>
+          <div style="margin-top:8px"><span class="kw">def</span> <span class="class-method">تقديم</span>(<span class="vr">self</span>):</div>
+          <div style="padding-right:20px"><span class="fn">print</span>(<span class="st">f"أنا {self.اسم}، درجتي {self.درجة}"</span>)</div>
+        </div>
+      </div>
+      <div style="font-family:var(--font-ui);font-size:0.8rem;color:var(--soft);margin-bottom:12px;font-weight:600">↓ الكائنات المصنوعة من الكلاس</div>
+      <div class="object-row">
+        <div class="object-card">
+          <div class="obj-title">طالب ١ 🙋</div>
+          <div class="obj-item">اسم = "أحمد"</div>
+          <div class="obj-item">درجة = 95</div>
+        </div>
+        <div class="object-card">
+          <div class="obj-title">طالب ٢ 🙋‍♀️</div>
+          <div class="obj-item">اسم = "سارة"</div>
+          <div class="obj-item">درجة = 88</div>
+        </div>
+        <div class="object-card">
+          <div class="obj-title">طالب ٣ 🙋‍♂️</div>
+          <div class="obj-item">اسم = "يوسف"</div>
+          <div class="obj-item">درجة = 92</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="code-editor">
+      <div class="editor-bar">
+        <div class="ed-dot" style="background:#ff5f57"></div><div class="ed-dot" style="background:#febc2e"></div><div class="ed-dot" style="background:#28c840"></div>
+        <span>oop.py</span>
+        <button class="run-btn" onclick="runOOP()">▶ شغّل</button>
+      </div>
+      <div class="code-area">
+        <div class="code-line"><span class="ln">1</span><span><span class="kw">class</span> <span class="fn">طالب</span>:</span></div>
+        <div class="code-line"><span class="ln">2</span><span style="padding-right:20px"><span class="kw">def</span> <span class="fn">__init__</span>(<span class="vr">self</span>, <span class="vr">اسم</span>, <span class="vr">درجة</span>):</span></div>
+        <div class="code-line"><span class="ln">3</span><span style="padding-right:40px"><span class="vr">self</span>.<span class="vr">اسم</span> = <span class="vr">اسم</span></span></div>
+        <div class="code-line"><span class="ln">4</span><span style="padding-right:40px"><span class="vr">self</span>.<span class="vr">درجة</span> = <span class="vr">درجة</span></span></div>
+        <div class="code-line"><span class="ln">5</span><span style="padding-right:20px"><span class="kw">def</span> <span class="fn">تقديم</span>(<span class="vr">self</span>):</span></div>
+        <div class="code-line"><span class="ln">6</span><span style="padding-right:40px"><span class="fn">print</span>(<span class="st">f"أنا {self.اسم}، درجتي {self.درجة}"</span>)</span></div>
+        <div class="code-line"><span class="ln">7</span><span>&nbsp;</span></div>
+        <div class="code-line"><span class="ln">8</span><span><span class="vr">أحمد</span> = <span class="fn">طالب</span>(<span class="st">"أحمد"</span>, <span class="nm">95</span>)</span></div>
+        <div class="code-line"><span class="ln">9</span><span><span class="vr">سارة</span> = <span class="fn">طالب</span>(<span class="st">"سارة"</span>, <span class="nm">88</span>)</span></div>
+        <div class="code-line"><span class="ln">10</span><span><span class="vr">أحمد</span>.<span class="fn">تقديم</span>()</span></div>
+        <div class="code-line"><span class="ln">11</span><span><span class="vr">سارة</span>.<span class="fn">تقديم</span>()</span></div>
+      </div>
+      <div class="output-area">
+        <div class="output-label">الناتج</div>
+        <div class="output-text" id="out-oop">اضغط شغّل...</div>
+      </div>
+    </div>
+
+    <div class="hbox gold">
+      <h3>💡 الفكرة الأساسية</h3>
+      <p><strong>class</strong> = قالب | <strong>object</strong> = نسخة من القالب<br/>مثل: طيارة (كلاس) ← طيارة رقم ١، طيارة رقم ٢... (كائنات)</p>
+    </div>
+  </div>
+  <div class="step-nav">
+    <button class="btn-prev" onclick="goStep(2)">→ السابق</button>
+    <div class="step-dots">
+      <div class="dot done"></div><div class="dot done"></div><div class="dot active"></div>
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+    </div>
+    <button class="btn-next" id="s3-next" onclick="goStep(4)" disabled>التالي ←</button>
+  </div>
+</div>
+
+<!-- STEP 4: CODE FILL -->
+<div class="step" id="s4">
+  <div class="step-body">
+    <div class="s-tag">اكتب الكود! ✍️</div>
+    <h2 class="s-title">أكمل كلاس السيارة!</h2>
+    <p class="s-lead">أكمل الأماكن الفارغة لإنشاء كلاس سيارة كامل بخصائص وأسلوب.</p>
+
+    <div class="code-fill-wrap">
+      <div class="code-fill-bar">
+        <div class="ed-dot" style="background:#ff5f57"></div><div class="ed-dot" style="background:#febc2e"></div><div class="ed-dot" style="background:#28c840"></div>
+        <span>أكمل الكود</span>
+      </div>
+      <div class="code-fill-body">
+        <div style="margin-bottom:8px">
+          <span style="color:#c084fc">class</span>
+          <span> </span>
+          <input class="code-blank" id="b1" placeholder="اسم_الكلاس" style="width:110px"/>
+          <span style="color:#e2e8f0">:</span>
+        </div>
+        <div style="padding-right:24px;margin-bottom:8px">
+          <span style="color:#c084fc">def</span>
+          <span style="color:#86efac"> __init__</span>
+          <span style="color:#e2e8f0">(self, ماركة, سرعة):</span>
+        </div>
+        <div style="padding-right:48px;margin-bottom:8px">
+          <span style="color:#e2e8f0">self.</span>
+          <input class="code-blank" id="b2" placeholder="الخاصية" style="width:90px"/>
+          <span style="color:#e2e8f0"> = ماركة</span>
+        </div>
+        <div style="padding-right:48px;margin-bottom:8px">
+          <span style="color:#e2e8f0">self.سرعة = سرعة</span>
+        </div>
+        <div style="padding-right:24px;margin-bottom:8px">
+          <span style="color:#c084fc">def</span>
+          <span> </span>
+          <input class="code-blank" id="b3" placeholder="اسم_الأسلوب" style="width:120px"/>
+          <span style="color:#e2e8f0">(self):</span>
+        </div>
+        <div style="padding-right:48px;margin-bottom:12px">
+          <span style="color:#86efac">print</span>
+          <span style="color:#e2e8f0">(f"السيارة {self.ماركة} بسرعة {self.سرعة}")</span>
+        </div>
+        <div>
+          <span style="color:#f9a8d4">مرسيدس</span>
+          <span style="color:#e2e8f0"> = </span>
+          <input class="code-blank" id="b4" placeholder="اسم_الكلاس" style="width:110px"/>
+          <span style="color:#e2e8f0">("مرسيدس", 200)</span>
+        </div>
+      </div>
+      <button class="check-btn" onclick="checkFill()">✓ تحقق من الكود</button>
+      <div class="fill-fb" id="fill-fb"></div>
+    </div>
+
+    <div class="hbox purple">
+      <h3>💡 تلميح</h3>
+      <p>الفراغ ١ و٤: اسم الكلاس (مثل <strong>سيارة</strong>)<br/>
+      الفراغ ٢: اسم الخاصية (مثل <strong>ماركة</strong>)<br/>
+      الفراغ ٣: اسم الأسلوب (مثل <strong>وصف</strong>)</p>
+    </div>
+  </div>
+  <div class="step-nav">
+    <button class="btn-prev" onclick="goStep(3)">→ السابق</button>
+    <div class="step-dots">
+      <div class="dot done"></div><div class="dot done"></div><div class="dot done"></div>
+      <div class="dot active"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+    </div>
+    <button class="btn-next" id="s4-next" onclick="goStep(5)" disabled>التالي ←</button>
+  </div>
+</div>
+
+<!-- STEP 5: COMPREHENSIONS -->
+<div class="step" id="s5">
+  <div class="step-body">
+    <div class="s-tag">Python المتقدم</div>
+    <h2 class="s-title">List Comprehension — Python الذكي! ⚡</h2>
+    <p class="s-lead">بدل ٥ أسطر كود، اكتب سطراً واحداً ذكياً — هذا ما يميز Python المتقدم!</p>
+
+    <div class="code-editor">
+      <div class="editor-bar">
+        <div class="ed-dot" style="background:#ff5f57"></div><div class="ed-dot" style="background:#febc2e"></div><div class="ed-dot" style="background:#28c840"></div>
+        <span>comprehension.py</span>
+        <button class="run-btn" onclick="runComprehension()">▶ شغّل</button>
+      </div>
+      <div class="code-area">
+        <div class="code-line"><span class="ln">1</span><span><span class="cm"># الطريقة القديمة — 5 أسطر</span></span></div>
+        <div class="code-line"><span class="ln">2</span><span><span class="vr">مربعات</span> = []</span></div>
+        <div class="code-line"><span class="ln">3</span><span><span class="kw">for</span> <span class="vr">i</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="nm">1</span>, <span class="nm">6</span>):</span></div>
+        <div class="code-line"><span class="ln">4</span><span style="padding-right:20px"><span class="vr">مربعات</span>.<span class="fn">append</span>(<span class="vr">i</span>**<span class="nm">2</span>)</span></div>
+        <div class="code-line"><span class="ln">5</span><span>&nbsp;</span></div>
+        <div class="code-line"><span class="ln">6</span><span><span class="cm"># الطريقة الذكية — سطر واحد! ⚡</span></span></div>
+        <div class="code-line"><span class="ln">7</span><span><span class="vr">مربعات_ذكية</span> = [<span class="vr">i</span>**<span class="nm">2</span> <span class="kw">for</span> <span class="vr">i</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="nm">1</span>, <span class="nm">6</span>)]</span></div>
+        <div class="code-line"><span class="ln">8</span><span>&nbsp;</span></div>
+        <div class="code-line"><span class="ln">9</span><span><span class="cm"># فلترة — الأرقام الزوجية فقط</span></span></div>
+        <div class="code-line"><span class="ln">10</span><span><span class="vr">أزواج</span> = [<span class="vr">i</span> <span class="kw">for</span> <span class="vr">i</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="nm">1</span>, <span class="nm">11</span>) <span class="kw">if</span> <span class="vr">i</span>%<span class="nm">2</span>==<span class="nm">0</span>]</span></div>
+        <div class="code-line"><span class="ln">11</span><span><span class="fn">print</span>(<span class="vr">مربعات_ذكية</span>)</span></div>
+        <div class="code-line"><span class="ln">12</span><span><span class="fn">print</span>(<span class="vr">أزواج</span>)</span></div>
+      </div>
+      <div class="output-area">
+        <div class="output-label">الناتج</div>
+        <div class="output-text" id="out-comp">اضغط شغّل...</div>
+      </div>
+    </div>
+
+    <div class="hbox green">
+      <h3>✅ قاعدة List Comprehension</h3>
+      <p><strong>[التعبير for المتغيّر in القائمة if الشرط]</strong><br/>
+      الشرط اختياري — يمكن حذفه إذا لم تحتج للفلترة</p>
+    </div>
+  </div>
+  <div class="step-nav">
+    <button class="btn-prev" onclick="goStep(4)">→ السابق</button>
+    <div class="step-dots">
+      <div class="dot done"></div><div class="dot done"></div><div class="dot done"></div>
+      <div class="dot done"></div><div class="dot active"></div><div class="dot"></div><div class="dot"></div>
+    </div>
+    <button class="btn-next" id="s5-next" onclick="goStep(6)" disabled>التالي ←</button>
+  </div>
+</div>
+
+<!-- STEP 6: QUIZ -->
+<div class="step" id="s6">
+  <div class="step-body">
+    <div class="s-tag">اختبر نفسك 🎯</div>
+    <h2 class="s-title">سؤالان على المستوى المتقدم!</h2>
+
+    <div style="background:var(--white);border:2px solid var(--border);border-radius:var(--r2);padding:28px;box-shadow:var(--shadow);margin-bottom:16px">
+      <div class="quiz-q">١. ما الهدف من خوارزمية Bubble Sort؟</div>
+      <div class="quiz-opts" id="q1">
+        <button class="quiz-opt" onclick="quiz(this,'q1',false,'q1fb')">حذف العناصر المكررة</button>
+        <button class="quiz-opt" onclick="quiz(this,'q1',true,'q1fb')">ترتيب عناصر القائمة بالمقارنة والتبديل</button>
+        <button class="quiz-opt" onclick="quiz(this,'q1',false,'q1fb')">البحث عن عنصر معين</button>
+        <button class="quiz-opt" onclick="quiz(this,'q1',false,'q1fb')">دمج قائمتين</button>
+      </div>
+      <div class="quiz-fb" id="q1fb"></div>
+    </div>
+
+    <div style="background:var(--white);border:2px solid var(--border);border-radius:var(--r2);padding:28px;box-shadow:var(--shadow)" id="q2wrap">
+      <div class="quiz-q">٢. في البرمجة الكائنية OOP، ما الفرق بين الكلاس والكائن؟</div>
+      <div class="quiz-opts" id="q2">
+        <button class="quiz-opt" onclick="quiz(this,'q2',false,'q2fb')">لا فرق بينهما</button>
+        <button class="quiz-opt" onclick="quiz(this,'q2',true,'q2fb','s6-next')">الكلاس قالب، الكائن نسخة مصنوعة من القالب</button>
+        <button class="quiz-opt" onclick="quiz(this,'q2',false,'q2fb')">الكلاس أسرع من الكائن</button>
+        <button class="quiz-opt" onclick="quiz(this,'q2',false,'q2fb')">الكائن يحتوي على الكلاس</button>
+      </div>
+      <div class="quiz-fb" id="q2fb"></div>
+    </div>
+  </div>
+  <div class="step-nav">
+    <button class="btn-prev" onclick="goStep(5)">→ السابق</button>
+    <div class="step-dots">
+      <div class="dot done"></div><div class="dot done"></div><div class="dot done"></div>
+      <div class="dot done"></div><div class="dot done"></div><div class="dot active"></div><div class="dot"></div>
+    </div>
+    <button class="btn-next" id="s6-next" onclick="goStep(7)" disabled>التالي ←</button>
+  </div>
+</div>
+
+<!-- STEP 7: CELEBRATION -->
+<div class="step" id="s7">
+  <div class="step-body">
+    <div class="celebration">
+      <span class="cel-emoji">🧠</span>
+      <div class="xp-badge">🏅 +١٥٠ XP</div>
+      <h2 class="cel-title">مبرمج محترف!</h2>
+      <p class="cel-sub">تعلمت خوارزميات الترتيب والبرمجة الكائنية — هذا ما يعرفه طلاب الجامعة!<br/><strong>الدرس الثاني: HTML وCSS — ابنِ صفحات الويب! 🌐</strong></p>
+      <div class="badge-row">
+        <div class="badge-item"><span class="bi">🧠</span><div><strong>خبير الخوارزميات</strong>أتقنت Bubble Sort</div></div>
+        <div class="badge-item"><span class="bi">🏭</span><div><strong>مصمم الكلاسات</strong>أتقنت OOP</div></div>
+      </div>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <button class="btn-next" onclick="finish()" style="padding:15px 40px;font-size:1rem">✅ احفظ تقدمي</button>
+        <button class="btn-prev" onclick="goStep(1)" style="padding:15px 24px">🔁 أعد الدرس</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+let step=1, xp=0;
+const TOTAL=7;
+
+function goStep(n){
+  document.getElementById('s'+step).classList.remove('active');
+  step=n;
+  document.getElementById('s'+n).classList.add('active');
+  document.getElementById('prog').style.width=((n-1)/(TOTAL-1)*100)+'%';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function addXP(a){
+  xp+=a;
+  const el=document.getElementById('xp');
+  el.textContent='⭐ '+xp+' XP';
+  el.style.transform='scale(1.4)';
+  setTimeout(()=>el.style.transform='',300);
+}
+
+// ── BUBBLE SORT VISUALIZER ──
+let sortArr=[64,34,25,12,22];
+let si=0, sj=0, sortDone=false, autoInterval=null;
+
+function initBars(){
+  const wrap=document.getElementById('bars-wrap');
+  wrap.innerHTML='';
+  const max=Math.max(...sortArr);
+  sortArr.forEach((v,idx)=>{
+    const bar=document.createElement('div');
+    bar.className='bar normal';
+    bar.id='bar-'+idx;
+    bar.style.height=(v/max*130+20)+'px';
+    bar.innerHTML=`<span class="bar-num">${v}</span>`;
+    wrap.appendChild(bar);
+  });
+}
+
+function resetSort(){
+  clearInterval(autoInterval);autoInterval=null;
+  sortArr=[64,34,25,12,22];
+  si=0;sj=0;sortDone=false;
+  initBars();
+  document.getElementById('sort-step').textContent='اضغط "خطوة" لبدء الخوارزمية...';
+  document.getElementById('sort-step').style.color='';
+  document.getElementById('auto-btn').disabled=false;
+  document.getElementById('s2-next').disabled=true;
+}
+
+function sortStep(){
+  if(sortDone) return;
+  const n=sortArr.length;
+  if(si>=n){
+    sortDone=true;
+    sortArr.forEach((_,idx)=>{ document.getElementById('bar-'+idx).className='bar sorted'; });
+    document.getElementById('sort-step').textContent='✅ اكتمل الترتيب! الأرقام من الأصغر للأكبر.';
+    document.getElementById('sort-step').style.color='#16a34a';
+    clearInterval(autoInterval);
+    document.getElementById('s2-next').disabled=false;
+    addXP(20);
+    return;
+  }
+  sortArr.forEach((_,idx)=>{ document.getElementById('bar-'+idx).className='bar normal'; });
+  if(sj<n-si-1){
+    document.getElementById('bar-'+sj).className='bar comparing';
+    document.getElementById('bar-'+(sj+1)).className='bar comparing';
+    document.getElementById('sort-step').textContent=`مقارنة ${sortArr[sj]} و ${sortArr[sj+1]}`;
+    if(sortArr[sj]>sortArr[sj+1]){
+      [sortArr[sj],sortArr[sj+1]]=[sortArr[sj+1],sortArr[sj]];
+      document.getElementById('bar-'+sj).className='bar swapping';
+      document.getElementById('bar-'+(sj+1)).className='bar swapping';
+      document.getElementById('sort-step').textContent+=` ← تبديل!`;
+      const max=Math.max(...sortArr);
+      sortArr.forEach((v,idx)=>{
+        const bar=document.getElementById('bar-'+idx);
+        bar.style.height=(v/max*130+20)+'px';
+        bar.innerHTML=`<span class="bar-num">${v}</span>`;
+      });
+    }
+    sj++;
+  } else {
+    document.getElementById('bar-'+(n-si-1)).className='bar sorted';
+    sj=0;si++;
+  }
+}
+
+function autoSort(){
+  if(autoInterval||sortDone) return;
+  document.getElementById('auto-btn').disabled=true;
+  autoInterval=setInterval(()=>{ sortStep(); if(sortDone) clearInterval(autoInterval); },600);
+}
+
+initBars();
+
+// ── RUN FUNCTIONS ──
+function runBubble(){
+  document.getElementById('out-bubble').innerHTML='[12, 22, 25, 34, 64]';
+  addXP(10); document.getElementById('s2-next').disabled=false;
+}
+function runOOP(){
+  document.getElementById('out-oop').innerHTML='أنا أحمد، درجتي 95<br/>أنا سارة، درجتي 88';
+  addXP(15); document.getElementById('s3-next').disabled=false;
+}
+function runComprehension(){
+  document.getElementById('out-comp').innerHTML='[1, 4, 9, 16, 25]<br/>[2, 4, 6, 8, 10]';
+  addXP(15); document.getElementById('s5-next').disabled=false;
+}
+
+// ── CODE FILL ──
+function checkFill(){
+  const b1=document.getElementById('b1').value.trim();
+  const b2=document.getElementById('b2').value.trim();
+  const b3=document.getElementById('b3').value.trim();
+  const b4=document.getElementById('b4').value.trim();
+  const fb=document.getElementById('fill-fb');
+  const ok = b1.length>1 && b2.length>1 && b3.length>1 && b4===b1;
+  if(ok){
+    ['b1','b2','b3','b4'].forEach(id=>document.getElementById(id).classList.add('correct'));
+    fb.innerHTML=`✅ <strong>ممتاز!</strong> كلاس <strong>${b1}</strong> مكتمل — يمكنك إنشاء كائنات سيارات لا حصر لها!`;
+    fb.className='fill-fb show ok';
+    addXP(35); document.getElementById('s4-next').disabled=false;
+  } else {
+    fb.innerHTML='❌ تذكّر: الفراغ ١ و٤ يجب أن يكونا نفس اسم الكلاس!';
+    fb.className='fill-fb show no';
+    ['b1','b2','b3','b4'].forEach(id=>{ if(document.getElementById(id).value.length<2) document.getElementById(id).classList.add('wrong'); });
+    setTimeout(()=>['b1','b2','b3','b4'].forEach(id=>document.getElementById(id).classList.remove('wrong')),1000);
+  }
+}
+
+// ── QUIZ ──
+let q1done=false;
+function quiz(btn,qid,correct,fbId,nextId){
+  document.querySelectorAll('#'+qid+' .quiz-opt').forEach(o=>o.disabled=true);
+  const fb=document.getElementById(fbId);
+  if(correct){
+    btn.classList.add('correct');
+    const msgs={
+      q1fb:'✅ <strong>صحيح!</strong> Bubble Sort يقارن كل رقمين متجاورين ويبدّلهما إذا كانا مقلوبين!',
+      q2fb:'✅ <strong>ممتاز!</strong> الكلاس = القالب، الكائن = النسخة. مثل: طيارة (كلاس) ← EK101 (كائن)'
+    };
+    fb.innerHTML=msgs[fbId]||'✅ صحيح!';
+    fb.className='quiz-fb show ok';
+    addXP(20);
+    if(qid==='q1'){ q1done=true; setTimeout(()=>document.getElementById('q2wrap').style.display='block',600); }
+    if(nextId) document.getElementById(nextId).disabled=false;
+  } else {
+    btn.classList.add('wrong');
+    fb.innerHTML='❌ فكّر مجدداً!';
+    fb.className='quiz-fb show no';
+    setTimeout(()=>{
+      document.querySelectorAll('#'+qid+' .quiz-opt').forEach(o=>o.disabled=false);
+      btn.classList.remove('wrong'); fb.className='quiz-fb';
+    },1400);
+  }
+}
+
+// ── AUTH GUARD ──
+(async()=>{
+  try{
+    const{initializeApp,getApps}=await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js");
+    const{getAuth,onAuthStateChanged}=await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js");
+    const{getFirestore,doc,getDoc}=await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js");
+    const cfg={apiKey:"AIzaSyBeD4ng-pNWSLgkrNmK1Re8FYnmCNCMBU8",authDomain:"fikr-app-fbdf7.firebaseapp.com",projectId:"fikr-app-fbdf7",storageBucket:"fikr-app-fbdf7.firebasestorage.app",messagingSenderId:"378212535527",appId:"1:378212535527:web:99331970433b4428dd2642"};
+    const app=getApps().length?getApps()[0]:initializeApp(cfg);
+    const auth=getAuth(app);const db=getFirestore(app);
+    const user=await new Promise(r=>{const u=onAuthStateChanged(auth,x=>{u();r(x);});});
+    if(!user){window.location.href='index.html';return;}
+    const snap=await getDoc(doc(db,'users',user.uid));
+    if(snap.data()?.subscription!=='active'){window.location.href='index.html';}
+  }catch(e){}
+})();
+
+// ── FINISH ──
+async function finish(){
+  const btn=document.querySelector('.celebration .btn-next');
+  if(btn){btn.disabled=true;btn.textContent='جارٍ الحفظ... ⏳';}
+  try{
+    const{initializeApp,getApps}=await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js");
+    const{getAuth,onAuthStateChanged}=await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js");
+    const{getFirestore,doc,getDoc,updateDoc,arrayUnion}=await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js");
+    const cfg={apiKey:"AIzaSyBeD4ng-pNWSLgkrNmK1Re8FYnmCNCMBU8",authDomain:"fikr-app-fbdf7.firebaseapp.com",projectId:"fikr-app-fbdf7",storageBucket:"fikr-app-fbdf7.firebasestorage.app",messagingSenderId:"378212535527",appId:"1:378212535527:web:99331970433b4428dd2642"};
+    const app=getApps().length?getApps()[0]:initializeApp(cfg);
+    const auth=getAuth(app);const db=getFirestore(app);
+    const user=await new Promise(r=>{const u=onAuthStateChanged(auth,x=>{u();r(x);});});
+    if(user){
+      const snap=await getDoc(doc(db,'users',user.uid));
+      await updateDoc(doc(db,'users',user.uid),{lessonsCompleted:arrayUnion('lesson-k1'),xp:(snap.data()?.xp||0)+150});
+    }
+    if(btn){btn.textContent='✅ تم الحفظ! جارٍ العودة...';}
+  }catch(e){}
+  setTimeout(()=>{window.location.href='index.html';},1000);
+}
+</script>
+</body>
+</html>

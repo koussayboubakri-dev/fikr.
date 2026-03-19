@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>فِكر · ك٣ — JavaScript المدخل</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&family=Cairo:wght@400;700;900&family=Fira+Code:wght@400;500;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --gold:#c8922a;--gold-l:#e8b84b;--gold-pale:#fff8e6;--gold-dark:#92670f;
+  --teal:#1a6b72;--teal-pale:#e0f5f7;
+  --green:#16a34a;--green-pale:#dcfce7;
+  --red:#dc2626;--red-pale:#fee2e2;
+  --blue:#2563eb;--blue-pale:#dbeafe;
+  --accent:#ca8a04;--accent-pale:#fef9c3;--accent-dark:#92670f;
+  --bg:#fffdf0;--white:#fff;--text:#1a1d26;--soft:#64748b;--border:#fde68a;
+  --font:'Tajawal',sans-serif;--font-ui:'Cairo',sans-serif;--font-code:'Fira Code',monospace;
+  --r:16px;--r2:24px;--r3:36px;
+  --shadow:0 4px 20px rgba(202,138,4,0.1);--shadow-lg:0 8px 40px rgba(202,138,4,0.16);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+button{cursor:pointer;border:none;font-family:inherit}
+
+.topbar{background:var(--white);border-bottom:2px solid var(--border);padding:0 28px;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(202,138,4,0.08)}
+.logo{font-family:var(--font-ui);font-size:1.5rem;font-weight:900;color:var(--teal)}
+.logo span{color:var(--gold)}
+.lesson-pill{background:var(--accent-pale);color:var(--accent-dark);font-family:var(--font-ui);font-size:0.78rem;font-weight:700;padding:5px 14px;border-radius:99px;border:1.5px solid rgba(202,138,4,0.3)}
+.xp-pill{background:var(--gold-pale);color:var(--gold);font-family:var(--font-ui);font-size:0.82rem;font-weight:800;padding:5px 14px;border-radius:99px;border:1.5px solid rgba(200,146,42,0.2);transition:.3s}
+.btn-back{font-family:var(--font-ui);font-size:0.82rem;font-weight:700;color:var(--soft);background:var(--accent-pale);padding:8px 18px;border-radius:99px;transition:.2s}
+.btn-back:hover{background:var(--border);color:var(--text)}
+
+.prog-wrap{height:6px;background:#fde68a}
+.prog-fill{height:6px;background:linear-gradient(90deg,var(--accent),var(--teal));transition:width .5s cubic-bezier(.4,0,.2,1);border-radius:0 99px 99px 0}
+
+.step{display:none;animation:fadeUp .4s ease both}
+.step.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.step-body{max-width:780px;margin:0 auto;padding:40px 20px 120px}
+
+.hero{background:linear-gradient(135deg,#fef9c3 0%,#fffdf0 50%,#e0f5f7 100%);border-radius:var(--r3);padding:52px 40px;text-align:center;border:2px solid rgba(202,138,4,0.2);box-shadow:var(--shadow);margin-bottom:24px}
+.hero-emoji{font-size:4rem;margin-bottom:16px;display:block;animation:bounce 2s infinite}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.hero-title{font-family:var(--font-ui);font-size:2rem;font-weight:900;color:var(--accent-dark);margin-bottom:10px}
+.hero-sub{font-size:1rem;color:var(--soft);line-height:1.8;max-width:480px;margin:0 auto 28px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.chip{display:flex;align-items:center;gap:6px;font-family:var(--font-ui);font-size:0.82rem;font-weight:700;padding:7px 16px;border-radius:99px;border:2px solid}
+.chip-yellow{background:var(--accent-pale);color:var(--accent-dark);border-color:rgba(202,138,4,0.25)}
+.chip-gold{background:var(--gold-pale);color:var(--gold-dark);border-color:rgba(200,146,42,0.25)}
+.chip-teal{background:var(--teal-pale);color:var(--teal);border-color:rgba(26,107,114,0.2)}
+
+.s-tag{font-family:var(--font-ui);font-size:0.72rem;font-weight:700;color:var(--accent-dark);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}
+.s-title{font-family:var(--font-ui);font-size:1.6rem;font-weight:900;color:var(--text);margin-bottom:8px;line-height:1.3}
+.s-lead{font-size:0.97rem;color:var(--soft);line-height:1.8;margin-bottom:28px}
+
+.hbox{border-radius:var(--r2);padding:24px 28px;margin:20px 0;border-right:5px solid}
+.hbox.yellow{background:var(--accent-pale);border-color:var(--accent)}
+.hbox.gold{background:var(--gold-pale);border-color:var(--gold)}
+.hbox.green{background:var(--green-pale);border-color:var(--green)}
+.hbox.teal{background:var(--teal-pale);border-color:var(--teal)}
+.hbox h3{font-family:var(--font-ui);font-size:0.95rem;font-weight:800;margin-bottom:8px}
+.hbox.yellow h3{color:var(--accent-dark)}
+.hbox.gold h3{color:var(--gold-dark)}
+.hbox.green h3{color:var(--green)}
+.hbox.teal h3{color:var(--teal)}
+.hbox p{font-size:0.92rem;color:var(--soft);line-height:1.85}
+.hbox strong{color:var(--text)}
+
+/* CODE EDITOR */
+.code-editor{background:#1e1e2e;border-radius:var(--r2);overflow:hidden;box-shadow:var(--shadow-lg);margin:20px 0;border:2px solid rgba(202,138,4,0.2)}
+.editor-bar{background:#2a2a3e;padding:12px 18px;display:flex;align-items:center;gap:8px;border-bottom:1px solid rgba(255,255,255,0.06)}
+.ed-dot{width:10px;height:10px;border-radius:50%}
+.editor-bar span{font-family:var(--font-ui);font-size:0.78rem;color:rgba(255,255,255,0.35);margin-right:auto}
+.run-btn{font-family:var(--font-ui);font-size:0.78rem;font-weight:700;background:var(--green);color:#fff;padding:5px 14px;border-radius:8px;border:none;cursor:pointer;transition:.2s}
+.run-btn:hover{background:#15803d}
+.code-area{padding:20px 24px;font-family:var(--font-code);font-size:0.88rem;line-height:1.9}
+.code-line{display:flex;gap:16px}
+.ln{color:rgba(255,255,255,0.18);min-width:24px;text-align:left;user-select:none;flex-shrink:0;font-size:0.78rem;padding-top:2px}
+.kw{color:#c084fc}.fn{color:#86efac}.st{color:#fde68a}.cm{color:#6272a4}.nm{color:#93c5fd}.vr{color:#f9a8d4}.op{color:#e2e8f0}
+.output-area{background:#0f1117;border-top:1px solid rgba(255,255,255,0.06);padding:14px 24px}
+.output-label{font-family:var(--font-ui);font-size:0.7rem;font-weight:700;color:rgba(255,255,255,0.3);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
+.output-text{font-family:var(--font-code);font-size:0.88rem;color:#86efac;min-height:24px}
+
+/* TRINITY DIAGRAM */
+.trinity{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:20px 0}
+.trinity-card{border-radius:var(--r2);padding:20px;text-align:center;border:2px solid;transition:.3s}
+.trinity-card:hover{transform:scale(1.04) translateY(-3px);box-shadow:var(--shadow-lg)}
+.trinity-card.html{background:#fff7ed;border-color:rgba(234,88,12,0.3)}
+.trinity-card.css{background:#e0f2fe;border-color:rgba(8,145,178,0.3)}
+.trinity-card.js{background:var(--accent-pale);border-color:rgba(202,138,4,0.3)}
+.tc-icon{font-size:2.2rem;margin-bottom:8px}
+.tc-title{font-family:var(--font-ui);font-weight:900;font-size:0.9rem;margin-bottom:4px}
+.tc-title.html{color:#ea580c}.tc-title.css{color:#0891b2}.tc-title.js{color:var(--accent-dark)}
+.tc-desc{font-size:0.78rem;color:var(--soft);line-height:1.5}
+
+/* DOM DEMO */
+.dom-demo{background:var(--white);border:2px solid var(--border);border-radius:var(--r2);padding:28px;margin:20px 0;box-shadow:var(--shadow)}
+.dom-title{font-family:var(--font-ui);font-weight:800;color:var(--text);margin-bottom:16px;font-size:1rem}
+.dom-card{background:linear-gradient(135deg,var(--accent-pale),#fffdf0);border:2px solid rgba(202,138,4,0.25);border-radius:var(--r2);padding:20px;margin-bottom:16px;transition:.4s}
+#dom-title{font-family:var(--font-ui);font-size:1.2rem;font-weight:900;color:var(--accent-dark);margin-bottom:8px;transition:.4s}
+#dom-text{font-size:0.95rem;color:var(--soft);transition:.4s}
+.dom-btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.dom-btn{font-family:var(--font-ui);font-weight:700;font-size:0.85rem;padding:10px 18px;border-radius:99px;transition:.2s;border:2px solid}
+.dom-btn.a{background:var(--accent-pale);color:var(--accent-dark);border-color:rgba(202,138,4,0.3)}
+.dom-btn.a:hover{background:var(--accent);color:#fff}
+.dom-btn.b{background:var(--green-pale);color:var(--green);border-color:rgba(22,163,74,0.3)}
+.dom-btn.b:hover{background:var(--green);color:#fff}
+.dom-btn.c{background:var(--blue-pale);color:var(--blue);border-color:rgba(37,99,235,0.2)}
+.dom-btn.c:hover{background:var(--blue);color:#fff}
+.dom-btn.d{background:var(--red-pale);color:var(--red);border-color:rgba(220,38,38,0.25)}
+.dom-btn.d:hover{background:var(--red);color:#fff}
+.dom-log{background:#1e1e2e;border-radius:var(--r);padding:12px 16px;font-family:var(--font-code);font-size:0.8rem;color:#86efac;margin-top:12px;min-height:48px;line-height:1.8}
+
+/* COUNTER DEMO */
+.counter-wrap{background:var(--white);border:2px solid var(--border);border-radius:var(--r2);padding:24px;margin:20px 0;text-align:center;box-shadow:var(--shadow)}
+.counter-num{font-family:var(--font-ui);font-size:4rem;font-weight:900;color:var(--accent-dark);line-height:1;transition:.3s}
+.counter-num.bump{animation:bump .2s ease}
+@keyframes bump{0%{transform:scale(1)}50%{transform:scale(1.3)}100%{transform:scale(1)}}
+.counter-btns{display:flex;gap:10px;justify-content:center;margin-top:16px}
+.cnt-btn{font-family:var(--font-ui);font-weight:800;font-size:1.2rem;width:52px;height:52px;border-radius:50%;border:2.5px solid;transition:.2s}
+.cnt-btn.plus{background:var(--green-pale);color:var(--green);border-color:rgba(22,163,74,0.3)}
+.cnt-btn.plus:hover{background:var(--green);color:#fff}
+.cnt-btn.minus{background:var(--red-pale);color:var(--red);border-color:rgba(220,38,38,0.25)}
+.cnt-btn.minus:hover{background:var(--red);color:#fff}
+.cnt-btn.reset{background:var(--accent-pale);color:var(--accent-dark);border-color:rgba(202,138,4,0.3)}
+.cnt-btn.reset:hover{background:var(--accent);color:#fff}
+.cnt-label{font-family:var(--font-ui);font-size:0.82rem;color:var(--soft);margin-top:10px}
+
+/* EVENTS DIAGRAM */
+.event-flow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:16px 0;padding:16px;background:var(--accent-pale);border-radius:var(--r2);border:2px solid rgba(202,138,4,0.2)}
+.ef-box{background:var(--white);border:2px solid rgba(202,138,4,0.3);border-radius:var(--r);padding:10px 14px;font-family:var(--font-ui);font-size:0.82rem;font-weight:700;color:var(--accent-dark);text-align:center}
+.ef-arr{font-size:1.2rem;color:var(--accent)}
+
+/* CODE FILL */
+.code-fill-wrap{background:#1e1e2e;border-radius:var(--r2);overflow:hidden;margin:20px 0;border:2px solid rgba(202,138,4,0.2);box-shadow:var(--shadow)}
+.code-fill-bar{background:#2a2a3e;padding:12px 18px;display:flex;align-items:center;gap:8px;border-bottom:1px solid rgba(255,255,255,0.06)}
+.code-fill-bar span{font-family:var(--font-ui);font-size:0.78rem;color:rgba(255,255,255,0.35);margin-right:auto}
+.code-fill-body{padding:20px 24px;font-family:var(--font-code);font-size:0.88rem;line-height:2.4;color:#e2e8f0;direction:ltr}
+.code-blank{display:inline-block;background:rgba(202,138,4,0.15);border:1.5px dashed rgba(202,138,4,0.5);border-radius:6px;min-width:80px;padding:1px 8px;font-family:var(--font-code);font-size:0.85rem;color:#fde68a;outline:none;transition:.2s;text-align:center;direction:ltr}
+.code-blank:focus{background:rgba(202,138,4,0.25);border-color:var(--accent);box-shadow:0 0 0 3px rgba(202,138,4,0.15)}
+.code-blank.correct{background:rgba(22,163,74,0.15);border-color:var(--green);color:#86efac}
+.code-blank.wrong{background:rgba(220,38,38,0.12);border-color:var(--red);animation:shake .4s ease}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.check-btn{font-family:var(--font-ui);font-weight:800;font-size:0.88rem;color:#fff;background:linear-gradient(135deg,var(--accent),var(--accent-dark));padding:10px 24px;border-radius:99px;margin:14px 24px;transition:.2s;box-shadow:0 4px 14px rgba(202,138,4,0.3)}
+.check-btn:hover{transform:translateY(-2px)}
+.fill-fb{margin:0 24px 16px;border-radius:var(--r);padding:12px 16px;font-family:var(--font-ui);font-size:0.88rem;font-weight:600;border:2px solid;display:none;line-height:1.7}
+.fill-fb.show{display:block;animation:fadeUp .3s ease}
+.fill-fb.ok{background:var(--green-pale);border-color:rgba(22,163,74,0.3);color:var(--green)}
+.fill-fb.no{background:var(--red-pale);border-color:rgba(220,38,38,0.25);color:var(--red)}
+
+/* QUIZ */
+.quiz-q{font-family:var(--font-ui);font-size:1.05rem;font-weight:800;color:var(--text);margin-bottom:18px;line-height:1.5}
+.quiz-opts{display:flex;flex-direction:column;gap:10px;margin-bottom:18px}
+.quiz-opt{background:var(--white);border:2.5px solid var(--border);border-radius:var(--r);padding:14px 20px;font-family:var(--font-ui);font-size:0.92rem;font-weight:600;color:var(--soft);text-align:right;transition:.2s}
+.quiz-opt:hover{border-color:var(--accent);background:var(--accent-pale);color:var(--accent-dark)}
+.quiz-opt.correct{border-color:var(--green);background:var(--green-pale);color:var(--green)}
+.quiz-opt.wrong{border-color:var(--red);background:var(--red-pale);color:var(--red);animation:shake .4s ease}
+.quiz-fb{border-radius:var(--r);padding:14px 18px;font-family:var(--font-ui);font-size:0.9rem;display:none;margin-bottom:16px;line-height:1.7;border:2px solid;font-weight:600}
+.quiz-fb.show{display:block;animation:fadeUp .3s ease}
+.quiz-fb.ok{background:var(--green-pale);border-color:rgba(22,163,74,0.3);color:var(--green)}
+.quiz-fb.no{background:var(--red-pale);border-color:rgba(220,38,38,0.25);color:var(--red)}
+
+/* CELEBRATION */
+.celebration{background:linear-gradient(135deg,#fef9c3,#fffdf0,#e0f5f7);border-radius:var(--r3);padding:56px 32px;text-align:center;border:2px solid rgba(202,138,4,0.2);box-shadow:var(--shadow-lg)}
+.cel-emoji{font-size:4rem;display:block;margin-bottom:20px;animation:bounce 1s infinite}
+.xp-badge{display:inline-flex;align-items:center;gap:10px;background:var(--gold-pale);border:2.5px solid rgba(200,146,42,0.4);border-radius:99px;padding:12px 28px;font-family:var(--font-ui);font-size:1.4rem;font-weight:900;color:var(--gold-dark);margin-bottom:20px;animation:popIn .5s .2s cubic-bezier(.34,1.56,.64,1) both}
+@keyframes popIn{from{transform:scale(0.4);opacity:0}to{transform:scale(1);opacity:1}}
+.cel-title{font-family:var(--font-ui);font-size:2rem;font-weight:900;color:var(--accent-dark);margin-bottom:10px}
+.cel-sub{font-size:1rem;color:var(--soft);line-height:1.8;margin-bottom:28px;max-width:440px;margin-left:auto;margin-right:auto}
+.badge-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:28px}
+.badge-item{background:var(--white);border:2px solid var(--border);border-radius:var(--r2);padding:14px 20px;display:flex;align-items:center;gap:10px;font-family:var(--font-ui);font-size:0.85rem;color:var(--soft);box-shadow:var(--shadow)}
+.badge-item .bi{font-size:1.5rem}
+.badge-item strong{color:var(--text);display:block;font-size:0.88rem}
+
+/* NAV */
+.step-nav{position:fixed;bottom:0;right:0;left:0;background:rgba(255,253,240,0.95);backdrop-filter:blur(16px);border-top:2px solid var(--border);padding:16px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 -4px 20px rgba(202,138,4,0.09)}
+.btn-next{font-family:var(--font-ui);font-weight:900;font-size:0.95rem;color:#fff;background:linear-gradient(135deg,var(--accent),var(--accent-dark));padding:13px 32px;border-radius:99px;box-shadow:0 4px 16px rgba(202,138,4,0.4);transition:.2s}
+.btn-next:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(202,138,4,0.5)}
+.btn-next:disabled{opacity:.35;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-prev{font-family:var(--font-ui);font-weight:700;font-size:0.9rem;color:var(--soft);background:var(--accent-pale);padding:13px 22px;border-radius:99px;transition:.2s}
+.btn-prev:hover{background:var(--border);color:var(--text)}
+.step-dots{display:flex;gap:6px;align-items:center}
+.dot{width:8px;height:8px;border-radius:50%;background:#fde68a;transition:.3s}
+.dot.active{background:var(--accent);width:24px;border-radius:99px}
+.dot.done{background:var(--green)}
+
+@media(max-width:640px){.trinity{grid-template-columns:1fr 1fr}.step-body{padding:28px 14px 110px}.topbar{padding:0 14px}.hero{padding:36px 20px}}
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <div class="logo">فِ<span>كر</span></div>
+  <div style="display:flex;align-items:center;gap:8px">
+    <span class="lesson-pill">🚀 ك٣ — الكبير</span>
+    <span class="xp-pill" id="xp">⭐ ٠ XP</span>
+  </div>
+  <button class="btn-back" onclick="window.location.href='index.html'">← رجوع</button>
+</nav>
+<div class="prog-wrap"><div class="prog-fill" id="prog" style="width:0%"></div></div>
+
+<!-- STEP 1: HERO -->
+<div class="step active" id="s1">
+  <div class="step-body">
+    <div class="hero">
+      <span class="hero-emoji">⚡</span>
+      <h1 class="hero-title">JavaScript المدخل!</h1>
+      <p class="hero-sub">أضف الحياة لصفحاتك — JavaScript هو عقل الموقع الذي يجعل كل شيء يتحرك ويستجيب!</p>
+      <div class="chips">
+        <div class="chip chip-yellow">⏱️ ٥٠ دقيقة</div>
+        <div class="chip chip-gold">🏅 ١٥٠ XP</div>
+        <div class="chip chip-teal">⚡ تفاعل حي</div>
+      </div>
+    </div>
+    <div class="hbox yellow">
+      <h3>🎯 ماذا ستتعلم اليوم؟</h3>
+      <p>✦ ثالوث الويب: HTML + CSS + JavaScript<br/>✦ المتغيّرات والدوال في JS<br/>✦ الـ DOM — كيف تتحكم JS في الصفحة<br/>✦ الأحداث — onclick واستجابة النقر!</p>
+    </div>
+  </div>
+  <div class="step-nav">
+    <div></div>
+    <div class="step-dots">
+      <div class="dot active"></div><div class="dot"></div><div class="dot"></div>
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+    </div>
+    <button class="btn-next" onclick="goStep(2)">ابدأ الدرس ←</button>
+  </div>
+</div>
+
+<!-- STEP 2: TRINITY -->
+<div class="step" id="s2">
+  <div class="step-body">
+    <div class="s-tag">ثالوث الويب</div>
+    <h2 class="s-title">HTML + CSS + JS = موقع حقيقي! 🌐</h2>
+    <p class="s-lead">الويب مبني على ٣ لغات تعمل معاً — تعرّفت على الأوليتين، JavaScript هي اللغة الثالثة الأقوى!</p>
+
+    <div class="trinity">
+      <div class="trinity-card html">
+        <div class="tc-icon">🏗️</div>
+        <div class="tc-title html">HTML</div>
+        <div class="tc-desc">الهيكل والمحتوى<br/>ماذا يوجد في الصفحة</div>
+      </div>
+      <div class="trinity-card css">
+        <div class="tc-icon">🎨</div>
+        <div class="tc-title css">CSS</div>
+        <div class="tc-desc">الشكل والتنسيق<br/>كيف يبدو كل شيء</div>
+      </div>
+      <div class="trinity-card js">
+        <div class="tc-icon">⚡</div>
+        <div class="tc-title js">JavaScript</div>
+        <div class="tc-desc">السلوك والتفاعل<br/>ماذا يحدث عند الضغط</div>
+      </div>
+    </div>
+
+    <div class="code-editor">
+      <div class="editor-bar">
+        <div class="ed-dot" style="background:#ff5f57"></div><div class="ed-dot" style="background:#febc2e"></div><div class="ed-dot" style="background:#28c840"></div>
+        <span>js_basics.js</span>
+        <button class="run-btn" onclick="runBasics()">▶ شغّل</button>
+      </div>
+      <div class="code-area">
+        <div class="code-line"><span class="ln">1</span><span><span class="cm">// المتغيّرات في JavaScript</span></span></div>
+        <div class="code-line"><span class="ln">2</span><span><span class="kw">let</span> <span class="vr">اسم</span> = <span class="st">"أحمد"</span>;</span></div>
+        <div class="code-line"><span class="ln">3</span><span><span class="kw">const</span> <span class="vr">سنة</span> = <span class="nm">2025</span>;</span></div>
+        <div class="code-line"><span class="ln">4</span><span>&nbsp;</span></div>
+        <div class="code-line"><span class="ln">5</span><span><span class="cm">// الدوال في JavaScript</span></span></div>
+        <div class="code-line"><span class="ln">6</span><span><span class="kw">function</span> <span class="fn">ترحيب</span>(<span class="vr">شخص</span>) {</span></div>
+        <div class="code-line"><span class="ln">7</span><span style="padding-right:20px"><span class="kw">return</span> <span class="st">`مرحباً ${<span class="vr">شخص</span>}! عام ${<span class="vr">سنة</span>}`</span>;</span></div>
+        <div class="code-line"><span class="ln">8</span><span>}</span></div>
+        <div class="code-line"><span class="ln">9</span><span>&nbsp;</span></div>
+        <div class="code-line"><span class="ln">10</span><span><span class="fn">console</span>.<span class="fn">log</span>(<span class="fn">ترحيب</span>(<span class="vr">اسم</span>));</span></div>
+      </div>
+      <div class="output-area">
+        <div class="output-label">console.log</div>
+        <div class="output-text" id="out-basics">اضغط شغّل...</div>
+      </div>
+    </div>
+
+    <div class="hbox gold">
+      <h3>💡 let مقابل const</h3>
+      <p><strong>let</strong> = متغيّر قابل للتغيير (مثل العمر يتغير كل سنة)<br/>
+      <strong>const</strong> = ثابت لا يتغيّر (مثل تاريخ الميلاد)</p>
+    </div>
+  </div>
+  <div class="step-nav">
+    <button class="btn-prev" onclick="goStep(1)">→ السابق</button>
+    <div class="step-dots">
+      <div class="dot done"></div><div class="dot active"></div><div class="dot"></div>
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+    </div>
+    <button class="btn-next" id="s2-next" onclick="goStep(3)" disabled>التالي ←</button>
+  </div>
+</div>
+
+<!-- STEP 3: DOM DEMO -->
+<div class="step" id="s3">
+  <div class="step-body">
+    <div class="s-tag">الـ DOM — Document Object Model</div>
+    <h2 class="s-title">JS تتحكم في الصفحة! 🎮</h2>
+    <p class="s-lead">الـ DOM هو طريقة JavaScript للوصول إلى أي عنصر في HTML وتغييره — اضغط الأزرار وشاهد البطاقة تتغير!</p>
+
+    <div class="dom-demo">
+      <div class="dom-title">🎯 تجربة DOM التفاعلية</div>
+      <div class="dom-card" id="dom-card">
+        <div id="dom-title">مرحباً! أنا بطاقة DOM ⚡</div>
+        <div id="dom-text">اضغط الأزرار أدناه لتغيير محتواي وشكلي!</div>
+      </div>
+      <div class="dom-btns">
+        <button class="dom-btn a" onclick="domAction('text')">📝 غيّر النص</button>
+        <button class="dom-btn b" onclick="domAction('color')">🎨 غيّر اللون</button>
+        <button class="dom-btn c" onclick="domAction('size')">🔡 غيّر الحجم</button>
+        <button class="dom-btn d" onclick="domAction('reset')">🔄 إعادة تعيين</button>
+      </div>
+      <div class="dom-log" id="dom-log">// سيظهر هنا كود JS المستخدم...</div>
+    </div>
+
+    <div class="s-tag" style="margin-top:24px">كيف يعمل؟</div>
+    <div class="event-flow">
+      <div class="ef-box">المستخدم<br/>يضغط</div>
+      <div class="ef-arr">→</div>
+      <div class="ef-box">onclick<br/>ينشّط</div>
+      <div class="ef-arr">→</div>
+      <div class="ef-box">دالة JS<br/>تُنفَّذ</div>
+      <div class="ef-arr">→</div>
+      <div class="ef-box">DOM<br/>يتغير</div>
+      <div class="ef-arr">→</div>
+      <div class="ef-box">الصفحة<br/>تتحدث</div>
+    </div>
+
+    <div class="hbox teal">
+      <h3>💡 document.getElementById</h3>
+      <p>هذا هو "المفتاح السحري" — JS تستخدمه للوصول لأي عنصر HTML عبر id:<br/>
+      <strong>document.getElementById("عنوانI").innerHTML = "نص جديد"</strong></p>
+    </div>
+  </div>
+  <div class="step-nav">
+    <button class="btn-prev" onclick="goStep(2)">→ السابق</button>
+    <div class="step-dots">
+      <div class="dot done"></div><div class="dot done"></div><div class="dot active"></div>
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+    </div>
+    <button class="btn-next" id="s3-next" onclick="goStep(4)" disabled>التالي ←</button>
+  </div>
+</div>
+
+<!-- STEP 4: COUNTER DEMO -->
+<div class="step" id="s4">
+  <div class="step-body">
+    <div class="s-tag">تطبيق عملي</div>
+    <h2 class="s-title">عداد تفاعلي — Events + DOM! ⚡</h2>
+    <p class="s-lead">هذا التطبيق الصغير يجمع كل ما تعلمته — متغيّرات + دوال + أحداث + DOM. الجبن فوق الجبنة!</p>
+
+    <div class="counter-wrap">
+      <div class="cnt-label">العداد الحالي</div>
+      <div class="counter-num" id="counter">0</div>
+      <div class="counter-btns">
+        <button class="cnt-btn minus" onclick="changeCounter(-1)">−</button>
+        <button class="cnt-btn reset" onclick="changeCounter(0)">↺</button>
+        <button class="cnt-btn plus" onclick="changeCounter(1)">+</button>
+      </div>
+      <div class="cnt-label" id="counter-msg" style="margin-top:12px;font-weight:700;color:var(--accent-dark)">جرّب الأزرار!</div>
+    </div>
+
+    <div class="code-editor">
+      <div class="editor-bar">
+        <div class="ed-dot" style="background:#ff5f57"></div><div class="ed-dot" style="background:#febc2e"></div><div class="ed-dot" style="background:#28c840"></div>
+        <span>counter.js — كود العداد</span>
+      </div>
+      <div class="code-area">
+        <div class="code-line"><span class="ln">1</span><span><span class="kw">let</span> <span class="vr">عداد</span> = <span class="nm">0</span>;</span></div>
+        <div class="code-line"><span class="ln">2</span><span>&nbsp;</span></div>
+        <div class="code-line"><span class="ln">3</span><span><span class="kw">function</span> <span class="fn">زيادة</span>() {</span></div>
+        <div class="code-line"><span class="ln">4</span><span style="padding-right:20px"><span class="vr">عداد</span>++;</span></div>
+        <div class="code-line"><span class="ln">5</span><span style="padding-right:20px"><span class="fn">document</span>.<span class="fn">getElementById</span>(<span class="st">"عداد"</span>).<span class="fn">innerHTML</span> = <span class="vr">عداد</span>;</span></div>
+        <div class="code-line"><span class="ln">6</span><span>}</span></div>
+        <div class="code-line"><span class="ln">7</span><span>&nbsp;</span></div>
+        <div class="code-line"><span class="ln">8</span><span><span class="cm">// في HTML:</span></span></div>
+        <div class="code-line"><span class="ln">9</span><span><span class="op">&lt;</span><span class="fn">button</span> <span class="st">onclick</span><span class="op">=</span><span class="st">"زيادة()"</span><span class="op">&gt;</span>+<span class="op">&lt;/</span><span class="fn">button</span><span class="op">&gt;</span></span></div>
+      </div>
+    </div>
+  </div>
+  <div class="step-nav">
+    <button class="btn-prev" onclick="goStep(3)">→ السابق</button>
+    <div class="step-dots">
+      <div class="dot done"></div><div class="dot done"></div><div class="dot done"></div>
+      <div class="dot active"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+    </div>
+    <button class="btn-next" id="s4-next" onclick="goStep(5)" disabled>التالي ←</button>
+  </div>
+</div>
+
+<!-- STEP 5: CODE FILL -->
+<div class="step" id="s5">
+  <div class="step-body">
+    <div class="s-tag">اكتب الكود! ✍️</div>
+    <h2 class="s-title">أكمل دالة تغيير اللون!</h2>
+    <p class="s-lead">أكمل الأماكن الفارغة لبناء دالة JS تغيّر لون بطاقة عند الضغط عليها.</p>
+
+    <div class="code-fill-wrap">
+      <div class="code-fill-bar">
+        <div class="ed-dot" style="background:#ff5f57"></div><div class="ed-dot" style="background:#febc2e"></div><div class="ed-dot" style="background:#28c840"></div>
+        <span>change_color.js — أكمل الكود</span>
+      </div>
+      <div class="code-fill-body">
+        <div style="margin-bottom:8px">
+          <span style="color:#c084fc">function</span>
+          <span> </span>
+          <input class="code-blank" id="b1" placeholder="اسم_الدالة" style="width:120px"/>
+          <span>() {</span>
+        </div>
+        <div style="padding-right:24px;margin-bottom:8px">
+          <span style="color:#86efac">let</span>
+          <span> بطاقة = </span>
+          <input class="code-blank" id="b2" placeholder="document..." style="width:160px"/>
+          <span>.getElementById("card");</span>
+        </div>
+        <div style="padding-right:24px;margin-bottom:8px">
+          <span>بطاقة.style.</span>
+          <input class="code-blank" id="b3" placeholder="خاصية" style="width:120px"/>
+          <span> = "#fef9c3";</span>
+        </div>
+        <div>}</div>
+      </div>
+      <button class="check-btn" onclick="checkFill()">✓ تحقق من الكود</button>
+      <div class="fill-fb" id="fill-fb"></div>
+    </div>
+
+    <div class="hbox yellow">
+      <h3>💡 تلميح</h3>
+      <p>الفراغ ١: اسم مناسب للدالة (مثل <strong>غيرLoan</strong>)<br/>
+      الفراغ ٢: الكائن الذي يصل للعناصر (<strong>document</strong>)<br/>
+      الفراغ ٣: خاصية CSS للخلفية (<strong>background</strong>)</p>
+    </div>
+  </div>
+  <div class="step-nav">
+    <button class="btn-prev" onclick="goStep(4)">→ السابق</button>
+    <div class="step-dots">
+      <div class="dot done"></div><div class="dot done"></div><div class="dot done"></div>
+      <div class="dot done"></div><div class="dot active"></div><div class="dot"></div><div class="dot"></div>
+    </div>
+    <button class="btn-next" id="s5-next" onclick="goStep(6)" disabled>التالي ←</button>
+  </div>
+</div>
+
+<!-- STEP 6: QUIZ -->
+<div class="step" id="s6">
+  <div class="step-body">
+    <div class="s-tag">اختبر نفسك 🎯</div>
+    <h2 class="s-title">سؤالان على JavaScript!</h2>
+
+    <div style="background:var(--white);border:2px solid var(--border);border-radius:var(--r2);padding:28px;box-shadow:var(--shadow);margin-bottom:16px">
+      <div class="quiz-q">١. ما الذي يفعله <code style="font-family:var(--font-code);background:var(--accent-pale);padding:2px 8px;border-radius:4px">document.getElementById("id")</code> في JavaScript؟</div>
+      <div class="quiz-opts" id="q1">
+        <button class="quiz-opt" onclick="quiz(this,'q1',false,'q1fb')">يحذف عنصراً من الصفحة</button>
+        <button class="quiz-opt" onclick="quiz(this,'q1',true,'q1fb')">يجلب عنصر HTML بالـ id المحدد ليتحكم فيه</button>
+        <button class="quiz-opt" onclick="quiz(this,'q1',false,'q1fb')">ينشئ عنصراً جديداً</button>
+        <button class="quiz-opt" onclick="quiz(this,'q1',false,'q1fb')">يطبع النص في الشاشة</button>
+      </div>
+      <div class="quiz-fb" id="q1fb"></div>
+    </div>
+
+    <div style="background:var(--white);border:2px solid var(--border);border-radius:var(--r2);padding:28px;box-shadow:var(--shadow)" id="q2wrap">
+      <div class="quiz-q">٢. ما الفرق بين <code style="font-family:var(--font-code);background:var(--accent-pale);padding:2px 6px;border-radius:4px">let</code> و <code style="font-family:var(--font-code);background:var(--accent-pale);padding:2px 6px;border-radius:4px">const</code> في JavaScript؟</div>
+      <div class="quiz-opts" id="q2">
+        <button class="quiz-opt" onclick="quiz(this,'q2',false,'q2fb')">لا فرق بينهما</button>
+        <button class="quiz-opt" onclick="quiz(this,'q2',true,'q2fb','s6-next')">let قابل للتغيير، const ثابت لا يتغير</button>
+        <button class="quiz-opt" onclick="quiz(this,'q2',false,'q2fb')">const أسرع من let</button>
+        <button class="quiz-opt" onclick="quiz(this,'q2',false,'q2fb')">let للأرقام، const للنصوص</button>
+      </div>
+      <div class="quiz-fb" id="q2fb"></div>
+    </div>
+  </div>
+  <div class="step-nav">
+    <button class="btn-prev" onclick="goStep(5)">→ السابق</button>
+    <div class="step-dots">
+      <div class="dot done"></div><div class="dot done"></div><div class="dot done"></div>
+      <div class="dot done"></div><div class="dot done"></div><div class="dot active"></div><div class="dot"></div>
+    </div>
+    <button class="btn-next" id="s6-next" onclick="goStep(7)" disabled>التالي ←</button>
+  </div>
+</div>
+
+<!-- STEP 7: CELEBRATION -->
+<div class="step" id="s7">
+  <div class="step-body">
+    <div class="celebration">
+      <span class="cel-emoji">⚡</span>
+      <div class="xp-badge">🏅 +١٥٠ XP</div>
+      <h2 class="cel-title">مطوّر Full Stack مبتدئ!</h2>
+      <p class="cel-sub">تعلمت الثالوث الكامل: HTML + CSS + JavaScript — هذا ما يعرفه كل مطوّر ويب محترف!<br/><strong>الدرس الأخير: مشروع التخرج — ابنِ موقعك الكامل! 🏆</strong></p>
+      <div class="badge-row">
+        <div class="badge-item"><span class="bi">⚡</span><div><strong>مبرمج JavaScript</strong>أتقنت التفاعل</div></div>
+        <div class="badge-item"><span class="bi">🎮</span><div><strong>سيد الـ DOM</strong>تحكمت في الصفحة</div></div>
+      </div>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <button class="btn-next" onclick="finish()" style="padding:15px 40px;font-size:1rem">✅ احفظ تقدمي</button>
+        <button class="btn-prev" onclick="goStep(1)" style="padding:15px 24px">🔁 أعد الدرس</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+let step=1, xp=0;
+const TOTAL=7;
+let domActionsCount=0, counterChanged=false;
+
+function goStep(n){
+  document.getElementById('s'+step).classList.remove('active');
+  step=n;
+  document.getElementById('s'+n).classList.add('active');
+  document.getElementById('prog').style.width=((n-1)/(TOTAL-1)*100)+'%';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function addXP(a){
+  xp+=a;
+  const el=document.getElementById('xp');
+  el.textContent='⭐ '+xp+' XP';
+  el.style.transform='scale(1.4)';
+  setTimeout(()=>el.style.transform='',300);
+}
+
+function runBasics(){
+  document.getElementById('out-basics').textContent='مرحباً أحمد! عام 2025';
+  addXP(15);
+  document.getElementById('s2-next').disabled=false;
+}
+
+// DOM DEMO
+const domStates=[
+  {title:'مرحباً! أنا بطاقة DOM ⚡',text:'اضغط الأزرار أدناه لتغيير محتواي وشكلي!',bg:'linear-gradient(135deg,#fef9c3,#fffdf0)',border:'rgba(202,138,4,0.25)'},
+  {title:'تم تغيير النص! 📝',text:'JavaScript غيّرت هذا النص باستخدام innerHTML',bg:'linear-gradient(135deg,#e0f2fe,#f0faff)',border:'rgba(8,145,178,0.3)'},
+  {title:'ألوان جديدة! 🎨',text:'CSS يمكن تغييره بـ JS عبر element.style',bg:'linear-gradient(135deg,#dcfce7,#f0fdf4)',border:'rgba(22,163,74,0.3)'},
+  {title:'حجم أكبر! 🔡',text:'يمكن تغيير أي خاصية CSS ديناميكياً بـ JS',bg:'linear-gradient(135deg,#ede9fe,#f5f3ff)',border:'rgba(124,58,237,0.3)'},
+];
+const domLogs=[
+  '// انتظر اضغط زراً...',
+  'document.getElementById("dom-title").innerHTML = "تم تغيير النص! 📝";\ndocument.getElementById("dom-text").innerHTML = "...";',
+  'document.getElementById("dom-card").style.background = "...";\ndocument.getElementById("dom-card").style.borderColor = "...";',
+  'document.getElementById("dom-title").style.fontSize = "1.6rem";\ndocument.getElementById("dom-text").style.fontSize = "1.1rem";',
+];
+
+function domAction(type){
+  const card=document.getElementById('dom-card');
+  const title=document.getElementById('dom-title');
+  const text=document.getElementById('dom-text');
+  const log=document.getElementById('dom-log');
+  if(type==='reset'){
+    const s=domStates[0];
+    card.style.background=s.bg; card.style.borderColor=s.border;
+    title.innerHTML=s.title; text.innerHTML=s.text;
+    title.style.fontSize=''; text.style.fontSize='';
+    log.textContent=domLogs[0];
+    return;
+  }
+  const idx=type==='text'?1:type==='color'?2:3;
+  const s=domStates[idx];
+  card.style.background=s.bg; card.style.borderColor=s.border;
+  title.innerHTML=s.title; text.innerHTML=s.text;
+  if(type==='size'){title.style.fontSize='1.6rem';text.style.fontSize='1.1rem';}
+  log.textContent=domLogs[idx];
+  domActionsCount++;
+  addXP(5);
+  if(domActionsCount>=3) document.getElementById('s3-next').disabled=false;
+}
+
+// COUNTER
+let counterVal=0;
+function changeCounter(delta){
+  if(delta===0) counterVal=0;
+  else counterVal+=delta;
+  const el=document.getElementById('counter');
+  el.textContent=counterVal;
+  el.className='counter-num bump';
+  setTimeout(()=>el.className='counter-num',200);
+  const msg=document.getElementById('counter-msg');
+  if(counterVal>5) msg.textContent='رائع! وصلت لـ '+counterVal+' 🎉';
+  else if(counterVal<0) msg.textContent='ما المشكلة؟ '+counterVal+' 😅';
+  else msg.textContent='العداد الحالي: '+counterVal;
+  addXP(3);
+  if(!counterChanged){counterChanged=true;document.getElementById('s4-next').disabled=false;}
+}
+
+// CODE FILL
+function checkFill(){
+  const b1=document.getElementById('b1').value.trim();
+  const b2=document.getElementById('b2').value.trim().toLowerCase();
+  const b3=document.getElementById('b3').value.trim().toLowerCase();
+  const fb=document.getElementById('fill-fb');
+  const ok2=b2==='document';
+  const ok3=b3==='background'||b3==='backgroundcolor'||b3==='background-color';
+  if(b1.length>1&&ok2&&ok3){
+    ['b1','b2','b3'].forEach(id=>document.getElementById(id).classList.add('correct'));
+    fb.innerHTML=`✅ <strong>ممتاز!</strong> دالة <strong>${b1}</strong> مكتملة — تستطيع الآن تغيير ألوان أي عنصر بـ JS!`;
+    fb.className='fill-fb show ok';
+    addXP(35);document.getElementById('s5-next').disabled=false;
+  } else {
+    fb.innerHTML='❌ تذكّر: الفراغ ٢ = document، الفراغ ٣ = background';
+    fb.className='fill-fb show no';
+    ['b1','b2','b3'].forEach((id,i)=>{
+      const vals=[b1.length>1,ok2,ok3];
+      if(!vals[i]) document.getElementById(id).classList.add('wrong');
+    });
+    setTimeout(()=>['b1','b2','b3'].forEach(id=>document.getElementById(id).classList.remove('wrong')),1000);
+  }
+}
+
+let q1done=false;
+function quiz(btn,qid,correct,fbId,nextId){
+  document.querySelectorAll('#'+qid+' .quiz-opt').forEach(o=>o.disabled=true);
+  const fb=document.getElementById(fbId);
+  if(correct){
+    btn.classList.add('correct');
+    const msgs={
+      q1fb:'✅ <strong>صحيح!</strong> getElementById هو البوابة السحرية — تعطيها id العنصر وتأخذ العنصر كاملاً لتغييره!',
+      q2fb:'✅ <strong>ممتاز!</strong> let مرن يتغير، const ثابت للأبد — استخدم const كلما أمكن للكود الأنظف!'
+    };
+    fb.innerHTML=msgs[fbId]||'✅ صحيح!';
+    fb.className='quiz-fb show ok';addXP(20);
+    if(qid==='q1'){q1done=true;setTimeout(()=>document.getElementById('q2wrap').style.display='block',600);}
+    if(nextId)document.getElementById(nextId).disabled=false;
+  } else {
+    btn.classList.add('wrong');fb.innerHTML='❌ فكّر مجدداً!';fb.className='quiz-fb show no';
+    setTimeout(()=>{document.querySelectorAll('#'+qid+' .quiz-opt').forEach(o=>o.disabled=false);btn.classList.remove('wrong');fb.className='quiz-fb';},1400);
+  }
+}
+
+(async()=>{
+  try{
+    const{initializeApp,getApps}=await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js");
+    const{getAuth,onAuthStateChanged}=await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js");
+    const{getFirestore,doc,getDoc}=await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js");
+    const cfg={apiKey:"AIzaSyBeD4ng-pNWSLgkrNmK1Re8FYnmCNCMBU8",authDomain:"fikr-app-fbdf7.firebaseapp.com",projectId:"fikr-app-fbdf7",storageBucket:"fikr-app-fbdf7.firebasestorage.app",messagingSenderId:"378212535527",appId:"1:378212535527:web:99331970433b4428dd2642"};
+    const app=getApps().length?getApps()[0]:initializeApp(cfg);
+    const auth=getAuth(app);const db=getFirestore(app);
+    const user=await new Promise(r=>{const u=onAuthStateChanged(auth,x=>{u();r(x);});});
+    if(!user){window.location.href='index.html';return;}
+    const snap=await getDoc(doc(db,'users',user.uid));
+    if(snap.data()?.subscription!=='active'){window.location.href='index.html';}
+  }catch(e){}
+})();
+
+async function finish(){
+  const btn=document.querySelector('.celebration .btn-next');
+  if(btn){btn.disabled=true;btn.textContent='جارٍ الحفظ... ⏳';}
+  try{
+    const{initializeApp,getApps}=await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js");
+    const{getAuth,onAuthStateChanged}=await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js");
+    const{getFirestore,doc,getDoc,updateDoc,arrayUnion}=await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js");
+    const cfg={apiKey:"AIzaSyBeD4ng-pNWSLgkrNmK1Re8FYnmCNCMBU8",authDomain:"fikr-app-fbdf7.firebaseapp.com",projectId:"fikr-app-fbdf7",storageBucket:"fikr-app-fbdf7.firebasestorage.app",messagingSenderId:"378212535527",appId:"1:378212535527:web:99331970433b4428dd2642"};
+    const app=getApps().length?getApps()[0]:initializeApp(cfg);
+    const auth=getAuth(app);const db=getFirestore(app);
+    const user=await new Promise(r=>{const u=onAuthStateChanged(auth,x=>{u();r(x);});});
+    if(user){const snap=await getDoc(doc(db,'users',user.uid));await updateDoc(doc(db,'users',user.uid),{lessonsCompleted:arrayUnion('lesson-k3'),xp:(snap.data()?.xp||0)+150});}
+    if(btn){btn.textContent='✅ تم الحفظ! جارٍ العودة...';}
+  }catch(e){}
+  setTimeout(()=>{window.location.href='index.html';},1000);
+}
+</script>
+</body>
+</html>

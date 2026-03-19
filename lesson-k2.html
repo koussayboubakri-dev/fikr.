@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>فِكر · ك٢ — HTML وCSS الأساسيات</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&family=Cairo:wght@400;700;900&family=Fira+Code:wght@400;500;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --gold:#c8922a;--gold-l:#e8b84b;--gold-pale:#fff8e6;--gold-dark:#92670f;
+  --teal:#1a6b72;--teal-pale:#e0f5f7;
+  --green:#16a34a;--green-pale:#dcfce7;
+  --red:#dc2626;--red-pale:#fee2e2;
+  --blue:#2563eb;--blue-pale:#dbeafe;
+  --purple:#7c3aed;--purple-pale:#ede9fe;
+  --accent:#0891b2;--accent-pale:#e0f2fe;--accent-dark:#0e7490;
+  --bg:#f0faff;--white:#fff;--text:#1a1d26;--soft:#64748b;--border:#bae6fd;
+  --font:'Tajawal',sans-serif;--font-ui:'Cairo',sans-serif;--font-code:'Fira Code',monospace;
+  --r:16px;--r2:24px;--r3:36px;
+  --shadow:0 4px 20px rgba(8,145,178,0.09);--shadow-lg:0 8px 40px rgba(8,145,178,0.15);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+button{cursor:pointer;border:none;font-family:inherit}
+
+.topbar{background:var(--white);border-bottom:2px solid var(--border);padding:0 28px;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(8,145,178,0.08)}
+.logo{font-family:var(--font-ui);font-size:1.5rem;font-weight:900;color:var(--teal)}
+.logo span{color:var(--gold)}
+.lesson-pill{background:var(--accent-pale);color:var(--accent-dark);font-family:var(--font-ui);font-size:0.78rem;font-weight:700;padding:5px 14px;border-radius:99px;border:1.5px solid rgba(8,145,178,0.25)}
+.xp-pill{background:var(--gold-pale);color:var(--gold);font-family:var(--font-ui);font-size:0.82rem;font-weight:800;padding:5px 14px;border-radius:99px;border:1.5px solid rgba(200,146,42,0.2);transition:.3s}
+.btn-back{font-family:var(--font-ui);font-size:0.82rem;font-weight:700;color:var(--soft);background:#e0f2fe;padding:8px 18px;border-radius:99px;transition:.2s}
+.btn-back:hover{background:#bae6fd;color:var(--text)}
+
+.prog-wrap{height:6px;background:#bae6fd}
+.prog-fill{height:6px;background:linear-gradient(90deg,var(--accent),var(--gold-l));transition:width .5s cubic-bezier(.4,0,.2,1);border-radius:0 99px 99px 0}
+
+.step{display:none;animation:fadeUp .4s ease both}
+.step.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.step-body{max-width:780px;margin:0 auto;padding:40px 20px 120px}
+
+.hero{background:linear-gradient(135deg,#e0f2fe 0%,#f0faff 50%,#fef3c7 100%);border-radius:var(--r3);padding:52px 40px;text-align:center;border:2px solid rgba(8,145,178,0.15);box-shadow:var(--shadow);margin-bottom:24px}
+.hero-emoji{font-size:4rem;margin-bottom:16px;display:block;animation:bounce 2s infinite}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.hero-title{font-family:var(--font-ui);font-size:2rem;font-weight:900;color:var(--accent-dark);margin-bottom:10px}
+.hero-sub{font-size:1rem;color:var(--soft);line-height:1.8;max-width:480px;margin:0 auto 28px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.chip{display:flex;align-items:center;gap:6px;font-family:var(--font-ui);font-size:0.82rem;font-weight:700;padding:7px 16px;border-radius:99px;border:2px solid}
+.chip-cyan{background:var(--accent-pale);color:var(--accent-dark);border-color:rgba(8,145,178,0.2)}
+.chip-gold{background:var(--gold-pale);color:var(--gold-dark);border-color:rgba(200,146,42,0.25)}
+.chip-green{background:var(--green-pale);color:var(--green);border-color:rgba(22,163,74,0.2)}
+
+.s-tag{font-family:var(--font-ui);font-size:0.72rem;font-weight:700;color:var(--accent-dark);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}
+.s-title{font-family:var(--font-ui);font-size:1.6rem;font-weight:900;color:var(--text);margin-bottom:8px;line-height:1.3}
+.s-lead{font-size:0.97rem;color:var(--soft);line-height:1.8;margin-bottom:28px}
+
+.hbox{border-radius:var(--r2);padding:24px 28px;margin:20px 0;border-right:5px solid}
+.hbox.cyan{background:var(--accent-pale);border-color:var(--accent)}
+.hbox.gold{background:var(--gold-pale);border-color:var(--gold)}
+.hbox.green{background:var(--green-pale);border-color:var(--green)}
+.hbox.purple{background:var(--purple-pale);border-color:var(--purple)}
+.hbox h3{font-family:var(--font-ui);font-size:0.95rem;font-weight:800;margin-bottom:8px}
+.hbox.cyan h3{color:var(--accent-dark)}
+.hbox.gold h3{color:var(--gold-dark)}
+.hbox.green h3{color:var(--green)}
+.hbox.purple h3{color:var(--purple)}
+.hbox p{font-size:0.92rem;color:var(--soft);line-height:1.85}
+.hbox strong{color:var(--text)}
+
+/* HTML vs CSS CONCEPT */
+.concept-split{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:20px 0}
+.concept-box{border-radius:var(--r2);padding:22px;border:2px solid;text-align:center;transition:.3s}
+.concept-box:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+.concept-box.html-b{background:#fff7ed;border-color:rgba(234,88,12,0.25)}
+.concept-box.css-b{background:var(--accent-pale);border-color:rgba(8,145,178,0.25)}
+.concept-icon{font-size:2.6rem;margin-bottom:10px}
+.concept-name{font-family:var(--font-ui);font-weight:900;font-size:1rem;margin-bottom:6px}
+.concept-name.html{color:#ea580c}
+.concept-name.css{color:var(--accent)}
+.concept-desc{font-size:0.82rem;color:var(--soft);line-height:1.6}
+
+/* TAG CARDS */
+.tag-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px 0}
+.tag-card{background:var(--white);border:2px solid var(--border);border-radius:var(--r);padding:14px;text-align:center;transition:.25s}
+.tag-card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.tag-code{font-family:var(--font-code);font-size:0.85rem;font-weight:700;color:var(--accent-dark);background:var(--accent-pale);padding:4px 10px;border-radius:6px;display:inline-block;margin-bottom:6px}
+.tag-desc{font-family:var(--font-ui);font-size:0.78rem;color:var(--soft)}
+
+/* LIVE EDITOR */
+.live-editor{background:var(--white);border:2px solid var(--border);border-radius:var(--r2);overflow:hidden;margin:20px 0;box-shadow:var(--shadow-lg)}
+.live-editor-bar{background:linear-gradient(135deg,var(--accent),var(--accent-dark));padding:14px 20px;display:flex;align-items:center;justify-content:space-between}
+.live-editor-title{font-family:var(--font-ui);font-weight:800;color:#fff;font-size:0.95rem}
+.live-run-btn{font-family:var(--font-ui);font-weight:700;font-size:0.82rem;background:rgba(255,255,255,0.2);color:#fff;padding:7px 18px;border-radius:99px;border:1.5px solid rgba(255,255,255,0.4);transition:.2s}
+.live-run-btn:hover{background:rgba(255,255,255,0.35)}
+.live-split{display:grid;grid-template-columns:1fr 1fr;min-height:280px}
+.live-code-side{border-left:2px solid var(--border)}
+.live-code-label{font-family:var(--font-ui);font-size:0.72rem;font-weight:700;color:var(--soft);letter-spacing:1px;text-transform:uppercase;padding:10px 14px;background:#f8fafc;border-bottom:1px solid var(--border)}
+textarea.live-code{width:100%;border:none;outline:none;resize:none;font-family:var(--font-code);font-size:0.82rem;line-height:1.8;padding:14px;background:#1e1e2e;color:#e2e8f0;min-height:240px;direction:ltr}
+.live-preview-label{font-family:var(--font-ui);font-size:0.72rem;font-weight:700;color:var(--soft);letter-spacing:1px;text-transform:uppercase;padding:10px 14px;background:#f8fafc;border-bottom:1px solid var(--border)}
+.live-preview{width:100%;min-height:240px;border:none;background:white;display:block}
+
+/* CSS PROPS GRID */
+.css-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:20px 0}
+.css-prop{background:var(--white);border:2px solid var(--border);border-radius:var(--r);padding:14px 16px;transition:.2s}
+.css-prop:hover{border-color:var(--accent)}
+.css-prop-name{font-family:var(--font-code);font-size:0.82rem;font-weight:700;color:var(--accent-dark);margin-bottom:4px}
+.css-prop-desc{font-family:var(--font-ui);font-size:0.78rem;color:var(--soft)}
+.css-prop-ex{font-family:var(--font-code);font-size:0.72rem;color:#64748b;margin-top:4px;background:#f8fafc;padding:2px 6px;border-radius:4px;display:inline-block}
+
+/* CODE FILL */
+.code-fill-wrap{background:#1e1e2e;border-radius:var(--r2);overflow:hidden;margin:20px 0;border:2px solid rgba(8,145,178,0.2);box-shadow:var(--shadow)}
+.code-fill-bar{background:#2a2a3e;padding:12px 18px;display:flex;align-items:center;gap:8px;border-bottom:1px solid rgba(255,255,255,0.06)}
+.code-fill-bar span{font-family:var(--font-ui);font-size:0.78rem;color:rgba(255,255,255,0.35);margin-right:auto}
+.code-fill-body{padding:20px 24px;font-family:var(--font-code);font-size:0.88rem;line-height:2.4;color:#e2e8f0;direction:ltr}
+.code-blank{display:inline-block;background:rgba(8,145,178,0.15);border:1.5px dashed rgba(8,145,178,0.5);border-radius:6px;min-width:70px;padding:1px 8px;font-family:var(--font-code);font-size:0.85rem;color:#67e8f9;outline:none;transition:.2s;text-align:center;direction:ltr}
+.code-blank:focus{background:rgba(8,145,178,0.25);border-color:var(--accent);box-shadow:0 0 0 3px rgba(8,145,178,0.15)}
+.code-blank.correct{background:rgba(22,163,74,0.15);border-color:var(--green);color:#86efac}
+.code-blank.wrong{background:rgba(220,38,38,0.12);border-color:var(--red);animation:shake .4s ease}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.check-btn{font-family:var(--font-ui);font-weight:800;font-size:0.88rem;color:#fff;background:linear-gradient(135deg,var(--accent),var(--accent-dark));padding:10px 24px;border-radius:99px;margin:14px 24px;transition:.2s;box-shadow:0 4px 14px rgba(8,145,178,0.3)}
+.check-btn:hover{transform:translateY(-2px)}
+.fill-fb{margin:0 24px 16px;border-radius:var(--r);padding:12px 16px;font-family:var(--font-ui);font-size:0.88rem;font-weight:600;border:2px solid;display:none;line-height:1.7}
+.fill-fb.show{display:block;animation:fadeUp .3s ease}
+.fill-fb.ok{background:var(--green-pale);border-color:rgba(22,163,74,0.3);color:var(--green)}
+.fill-fb.no{background:var(--red-pale);border-color:rgba(220,38,38,0.25);color:var(--red)}
+
+/* QUIZ */
+.quiz-q{font-family:var(--font-ui);font-size:1.05rem;font-weight:800;color:var(--text);margin-bottom:18px;line-height:1.5}
+.quiz-opts{display:flex;flex-direction:column;gap:10px;margin-bottom:18px}
+.quiz-opt{background:var(--white);border:2.5px solid var(--border);border-radius:var(--r);padding:14px 20px;font-family:var(--font-ui);font-size:0.92rem;font-weight:600;color:var(--soft);text-align:right;transition:.2s}
+.quiz-opt:hover{border-color:var(--accent);background:var(--accent-pale);color:var(--accent-dark)}
+.quiz-opt.correct{border-color:var(--green);background:var(--green-pale);color:var(--green)}
+.quiz-opt.wrong{border-color:var(--red);background:var(--red-pale);color:var(--red);animation:shake .4s ease}
+.quiz-fb{border-radius:var(--r);padding:14px 18px;font-family:var(--font-ui);font-size:0.9rem;display:none;margin-bottom:16px;line-height:1.7;border:2px solid;font-weight:600}
+.quiz-fb.show{display:block;animation:fadeUp .3s ease}
+.quiz-fb.ok{background:var(--green-pale);border-color:rgba(22,163,74,0.3);color:var(--green)}
+.quiz-fb.no{background:var(--red-pale);border-color:rgba(220,38,38,0.25);color:var(--red)}
+
+/* CELEBRATION */
+.celebration{background:linear-gradient(135deg,#e0f2fe,#f0faff,#fef3c7);border-radius:var(--r3);padding:56px 32px;text-align:center;border:2px solid rgba(8,145,178,0.15);box-shadow:var(--shadow-lg)}
+.cel-emoji{font-size:4rem;display:block;margin-bottom:20px;animation:bounce 1s infinite}
+.xp-badge{display:inline-flex;align-items:center;gap:10px;background:var(--gold-pale);border:2.5px solid rgba(200,146,42,0.4);border-radius:99px;padding:12px 28px;font-family:var(--font-ui);font-size:1.4rem;font-weight:900;color:var(--gold-dark);margin-bottom:20px;animation:popIn .5s .2s cubic-bezier(.34,1.56,.64,1) both}
+@keyframes popIn{from{transform:scale(0.4);opacity:0}to{transform:scale(1);opacity:1}}
+.cel-title{font-family:var(--font-ui);font-size:2rem;font-weight:900;color:var(--accent-dark);margin-bottom:10px}
+.cel-sub{font-size:1rem;color:var(--soft);line-height:1.8;margin-bottom:28px;max-width:440px;margin-left:auto;margin-right:auto}
+.badge-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:28px}
+.badge-item{background:var(--white);border:2px solid var(--border);border-radius:var(--r2);padding:14px 20px;display:flex;align-items:center;gap:10px;font-family:var(--font-ui);font-size:0.85rem;color:var(--soft);box-shadow:var(--shadow)}
+.badge-item .bi{font-size:1.5rem}
+.badge-item strong{color:var(--text);display:block;font-size:0.88rem}
+
+/* NAV */
+.step-nav{position:fixed;bottom:0;right:0;left:0;background:rgba(240,250,255,0.95);backdrop-filter:blur(16px);border-top:2px solid var(--border);padding:16px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 -4px 20px rgba(8,145,178,0.08)}
+.btn-next{font-family:var(--font-ui);font-weight:900;font-size:0.95rem;color:#fff;background:linear-gradient(135deg,var(--accent),var(--accent-dark));padding:13px 32px;border-radius:99px;box-shadow:0 4px 16px rgba(8,145,178,0.4);transition:.2s}
+.btn-next:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(8,145,178,0.5)}
+.btn-next:disabled{opacity:.35;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-prev{font-family:var(--font-ui);font-weight:700;font-size:0.9rem;color:var(--soft);background:#e0f2fe;padding:13px 22px;border-radius:99px;transition:.2s}
+.btn-prev:hover{background:#bae6fd;color:var(--text)}
+.step-dots{display:flex;gap:6px;align-items:center}
+.dot{width:8px;height:8px;border-radius:50%;background:#bae6fd;transition:.3s}
+.dot.active{background:var(--accent);width:24px;border-radius:99px}
+.dot.done{background:var(--green)}
+
+@media(max-width:640px){
+  .concept-split{grid-template-columns:1fr}
+  .tag-grid{grid-template-columns:repeat(2,1fr)}
+  .live-split{grid-template-columns:1fr}
+  .css-grid{grid-template-columns:1fr}
+  .step-body{padding:28px 14px 110px}
+  .topbar{padding:0 14px}
+  .hero{padding:36px 20px}
+}
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <div class="logo">فِ<span>كر</span></div>
+  <div style="display:flex;align-items:center;gap:8px">
+    <span class="lesson-pill">🚀 ك٢ — الكبير</span>
+    <span class="xp-pill" id="xp">⭐ ٠ XP</span>
+  </div>
+  <button class="btn-back" onclick="window.location.href='index.html'">← رجوع</button>
+</nav>
+<div class="prog-wrap"><div class="prog-fill" id="prog" style="width:0%"></div></div>
+
+<!-- STEP 1: HERO -->
+<div class="step active" id="s1">
+  <div class="step-body">
+    <div class="hero">
+      <span class="hero-emoji">🌐</span>
+      <h1 class="hero-title">HTML وCSS الأساسيات!</h1>
+      <p class="hero-sub">ابنِ صفحات ويب حقيقية من الصفر — تعلّم لغة الهيكل ولغة التجميل!</p>
+      <div class="chips">
+        <div class="chip chip-cyan">⏱️ ٥٠ دقيقة</div>
+        <div class="chip chip-gold">🏅 ١٥٠ XP</div>
+        <div class="chip chip-green">🌐 محرر حي</div>
+      </div>
+    </div>
+    <div class="hbox cyan">
+      <h3>🎯 ماذا ستتعلم اليوم؟</h3>
+      <p>✦ الفرق بين HTML وCSS — الهيكل والشكل<br/>✦ الوسوم الأساسية: h1, p, div, img, a<br/>✦ خصائص CSS: اللون، الحجم، المسافات<br/>✦ محرر حي — اكتب وشاهد النتيجة فوراً!</p>
+    </div>
+  </div>
+  <div class="step-nav">
+    <div></div>
+    <div class="step-dots">
+      <div class="dot active"></div><div class="dot"></div><div class="dot"></div>
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+    </div>
+    <button class="btn-next" onclick="goStep(2)">ابدأ الدرس ←</button>
+  </div>
+</div>
+
+<!-- STEP 2: HTML vs CSS -->
+<div class="step" id="s2">
+  <div class="step-body">
+    <div class="s-tag">المفهوم الأساسي</div>
+    <h2 class="s-title">HTML = الهيكل، CSS = الجمال! 🏗️🎨</h2>
+    <p class="s-lead">كل موقع ويب مبني من لغتين معاً — HTML يضع العظام، CSS يضيف الملابس والألوان!</p>
+
+    <div class="concept-split">
+      <div class="concept-box html-b">
+        <div class="concept-icon">🏗️</div>
+        <div class="concept-name html">HTML</div>
+        <div class="concept-desc">HyperText Markup Language<br/>يُحدد <strong>ما يوجد</strong> في الصفحة<br/>العناوين، الفقرات، الصور، الروابط</div>
+      </div>
+      <div class="concept-box css-b">
+        <div class="concept-icon">🎨</div>
+        <div class="concept-name css">CSS</div>
+        <div class="concept-desc">Cascading Style Sheets<br/>يُحدد <strong>كيف يبدو</strong> كل شيء<br/>الألوان، الحجم، المسافات، الخطوط</div>
+      </div>
+    </div>
+
+    <div class="hbox gold">
+      <h3>💡 مثال واقعي</h3>
+      <p>المنزل = HTML (الجدران، الغرف، الأبواب)<br/>الديكور = CSS (الطلاء، الأثاث، الإضاءة)<br/>بدون HTML لا يوجد شيء — بدون CSS كل شيء رمادي مملّ!</p>
+    </div>
+
+    <div class="s-tag" style="margin-top:28px">الوسوم الأساسية</div>
+    <h2 class="s-title" style="font-size:1.2rem">أهم وسوم HTML 🏷️</h2>
+    <div class="tag-grid">
+      <div class="tag-card"><div class="tag-code">&lt;h1&gt;</div><div class="tag-desc">العنوان الرئيسي</div></div>
+      <div class="tag-card"><div class="tag-code">&lt;h2&gt;-&lt;h6&gt;</div><div class="tag-desc">عناوين فرعية</div></div>
+      <div class="tag-card"><div class="tag-code">&lt;p&gt;</div><div class="tag-desc">فقرة نص</div></div>
+      <div class="tag-card"><div class="tag-code">&lt;div&gt;</div><div class="tag-desc">صندوق تجميع</div></div>
+      <div class="tag-card"><div class="tag-code">&lt;img&gt;</div><div class="tag-desc">صورة</div></div>
+      <div class="tag-card"><div class="tag-code">&lt;a&gt;</div><div class="tag-desc">رابط</div></div>
+    </div>
+  </div>
+  <div class="step-nav">
+    <button class="btn-prev" onclick="goStep(1)">→ السابق</button>
+    <div class="step-dots">
+      <div class="dot done"></div><div class="dot active"></div><div class="dot"></div>
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+    </div>
+    <button class="btn-next" onclick="goStep(3)">فهمت! ←</button>
+  </div>
+</div>
+
+<!-- STEP 3: LIVE EDITOR -->
+<div class="step" id="s3">
+  <div class="step-body">
+    <div class="s-tag">محرر حي 🔴</div>
+    <h2 class="s-title">اكتب HTML وشاهد النتيجة فوراً!</h2>
+    <p class="s-lead">هذا محرر ويب حقيقي — عدّل الكود في اليسار وشاهد صفحتك تتغير في اليمين فوراً!</p>
+
+    <div class="live-editor">
+      <div class="live-editor-bar">
+        <div class="live-editor-title">✏️ محرر HTML/CSS الحي</div>
+        <button class="live-run-btn" onclick="updatePreview()">🔄 تحديث</button>
+      </div>
+      <div class="live-split">
+        <div>
+          <div class="live-code-label">📝 الكود</div>
+          <textarea class="live-code" id="live-code" oninput="updatePreview()">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+    body { font-family: Arial; padding: 20px; }
+    h1 { color: #0891b2; }
+    p { color: #64748b; font-size: 16px; }
+    .card {
+      background: #e0f2fe;
+      padding: 20px;
+      border-radius: 12px;
+      border: 2px solid #0891b2;
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;مرحباً بعالم الويب! 🌐&lt;/h1&gt;
+  &lt;div class="card"&gt;
+    &lt;p&gt;أنا أتعلم HTML وCSS!&lt;/p&gt;
+    &lt;p&gt;يمكنني بناء مواقع حقيقية.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</textarea>
+        </div>
+        <div>
+          <div class="live-preview-label">👁️ المعاينة الحية</div>
+          <iframe class="live-preview" id="live-preview"></iframe>
+        </div>
+      </div>
+    </div>
+
+    <div class="hbox cyan">
+      <h3>💡 جرّب هذه التعديلات</h3>
+      <p>✦ غيّر لون h1 إلى <strong>color: red;</strong><br/>
+      ✦ أضف <strong>&lt;h2&gt;عنوان فرعي&lt;/h2&gt;</strong><br/>
+      ✦ غيّر نص الفقرة بأي شيء تريده!</p>
+    </div>
+  </div>
+  <div class="step-nav">
+    <button class="btn-prev" onclick="goStep(2)">→ السابق</button>
+    <div class="step-dots">
+      <div class="dot done"></div><div class="dot done"></div><div class="dot active"></div>
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+    </div>
+    <button class="btn-next" onclick="goStep(4);addXP(30)">جرّبت المحرر ←</button>
+  </div>
+</div>
+
+<!-- STEP 4: CSS PROPERTIES -->
+<div class="step" id="s4">
+  <div class="step-body">
+    <div class="s-tag">خصائص CSS</div>
+    <h2 class="s-title">أهم خصائص CSS التي ستستخدمها دائماً! 🎨</h2>
+    <p class="s-lead">تعرّف على هذه الخصائص — ستستخدمها في كل موقع تبنيه!</p>
+
+    <div class="css-grid">
+      <div class="css-prop">
+        <div class="css-prop-name">color</div>
+        <div class="css-prop-desc">لون النص</div>
+        <div class="css-prop-ex">color: #0891b2;</div>
+      </div>
+      <div class="css-prop">
+        <div class="css-prop-name">background-color</div>
+        <div class="css-prop-desc">لون الخلفية</div>
+        <div class="css-prop-ex">background: #e0f2fe;</div>
+      </div>
+      <div class="css-prop">
+        <div class="css-prop-name">font-size</div>
+        <div class="css-prop-desc">حجم الخط</div>
+        <div class="css-prop-ex">font-size: 18px;</div>
+      </div>
+      <div class="css-prop">
+        <div class="css-prop-name">padding</div>
+        <div class="css-prop-desc">المسافة الداخلية</div>
+        <div class="css-prop-ex">padding: 20px;</div>
+      </div>
+      <div class="css-prop">
+        <div class="css-prop-name">margin</div>
+        <div class="css-prop-desc">المسافة الخارجية</div>
+        <div class="css-prop-ex">margin: 10px auto;</div>
+      </div>
+      <div class="css-prop">
+        <div class="css-prop-name">border-radius</div>
+        <div class="css-prop-desc">زوايا مدوّرة</div>
+        <div class="css-prop-ex">border-radius: 12px;</div>
+      </div>
+      <div class="css-prop">
+        <div class="css-prop-name">display: flex</div>
+        <div class="css-prop-desc">تنظيم العناصر أفقياً</div>
+        <div class="css-prop-ex">display: flex;</div>
+      </div>
+      <div class="css-prop">
+        <div class="css-prop-name">box-shadow</div>
+        <div class="css-prop-desc">ظل العنصر</div>
+        <div class="css-prop-ex">box-shadow: 0 4px 12px;</div>
+      </div>
+    </div>
+
+    <div class="live-editor" style="margin-top:20px">
+      <div class="live-editor-bar">
+        <div class="live-editor-title">🎨 جرّب خصائص CSS</div>
+        <button class="live-run-btn" onclick="updatePreview2()">🔄 تحديث</button>
+      </div>
+      <div class="live-split">
+        <div>
+          <div class="live-code-label">📝 CSS تجريبي</div>
+          <textarea class="live-code" id="live-code2" oninput="updatePreview2()">&lt;style&gt;
+  .بطاقة {
+    background: linear-gradient(135deg,#e0f2fe,#dbeafe);
+    padding: 24px;
+    border-radius: 16px;
+    border: 2px solid #0891b2;
+    box-shadow: 0 4px 20px rgba(8,145,178,0.2);
+    max-width: 300px;
+    margin: 20px auto;
+    text-align: center;
+  }
+  h2 { color: #0e7490; font-size: 22px; }
+  p { color: #64748b; font-size: 15px; }
+&lt;/style&gt;
+&lt;div class="بطاقة"&gt;
+  &lt;h2&gt;بطاقتي 🌟&lt;/h2&gt;
+  &lt;p&gt;أنا مطور ويب مبتدئ!&lt;/p&gt;
+&lt;/div&gt;</textarea>
+        </div>
+        <div>
+          <div class="live-preview-label">👁️ معاينة</div>
+          <iframe class="live-preview" id="live-preview2"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="step-nav">
+    <button class="btn-prev" onclick="goStep(3)">→ السابق</button>
+    <div class="step-dots">
+      <div class="dot done"></div><div class="dot done"></div><div class="dot done"></div>
+      <div class="dot active"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+    </div>
+    <button class="btn-next" onclick="goStep(5);addXP(20)">التالي ←</button>
+  </div>
+</div>
+
+<!-- STEP 5: CODE FILL -->
+<div class="step" id="s5">
+  <div class="step-body">
+    <div class="s-tag">اكتب الكود! ✍️</div>
+    <h2 class="s-title">أكمل بطاقة الملف الشخصي!</h2>
+    <p class="s-lead">أكمل الأماكن الفارغة لإنشاء بطاقة HTML مع تنسيق CSS جميل.</p>
+
+    <div class="code-fill-wrap">
+      <div class="code-fill-bar">
+        <div class="ed-dot" style="background:#ff5f57"></div><div class="ed-dot" style="background:#febc2e"></div><div class="ed-dot" style="background:#28c840"></div>
+        <span>profile.html — أكمل الكود</span>
+      </div>
+      <div class="code-fill-body">
+        <div style="margin-bottom:6px">&lt;<input class="code-blank" id="b1" placeholder="وسم" style="width:60px"/> style="background:#e0f2fe; padding:20px; border-radius:12px;"&gt;</div>
+        <div style="margin-bottom:6px;padding-right:20px">&lt;h1 style="color:<input class="code-blank" id="b2" placeholder="لون" style="width:80px"/>;"&gt;اسمي هنا&lt;/h1&gt;</div>
+        <div style="margin-bottom:6px;padding-right:20px">&lt;<input class="code-blank" id="b3" placeholder="وسم" style="width:60px"/>&gt;مبرمج شاب يحب الويب!&lt;/p&gt;</div>
+        <div>&lt;/div&gt;</div>
+      </div>
+      <button class="check-btn" onclick="checkFill()">✓ تحقق من الكود</button>
+      <div class="fill-fb" id="fill-fb"></div>
+    </div>
+
+    <div class="hbox cyan">
+      <h3>💡 تلميح</h3>
+      <p>الفراغ ١: وسم لتجميع العناصر (مثل <strong>div</strong>)<br/>
+      الفراغ ٢: لون CSS (مثل <strong>#0891b2</strong> أو <strong>blue</strong>)<br/>
+      الفراغ ٣: وسم الفقرة (<strong>p</strong>)</p>
+    </div>
+  </div>
+  <div class="step-nav">
+    <button class="btn-prev" onclick="goStep(4)">→ السابق</button>
+    <div class="step-dots">
+      <div class="dot done"></div><div class="dot done"></div><div class="dot done"></div>
+      <div class="dot done"></div><div class="dot active"></div><div class="dot"></div><div class="dot"></div>
+    </div>
+    <button class="btn-next" id="s5-next" onclick="goStep(6)" disabled>التالي ←</button>
+  </div>
+</div>
+
+<!-- STEP 6: QUIZ -->
+<div class="step" id="s6">
+  <div class="step-body">
+    <div class="s-tag">اختبر نفسك 🎯</div>
+    <h2 class="s-title">سؤالان على HTML وCSS!</h2>
+
+    <div style="background:var(--white);border:2px solid var(--border);border-radius:var(--r2);padding:28px;box-shadow:var(--shadow);margin-bottom:16px">
+      <div class="quiz-q">١. ما الوسم الصحيح لإنشاء صندوق يجمّع عناصر في HTML؟</div>
+      <div class="quiz-opts" id="q1">
+        <button class="quiz-opt" onclick="quiz(this,'q1',false,'q1fb')">&lt;p&gt;</button>
+        <button class="quiz-opt" onclick="quiz(this,'q1',true,'q1fb')">&lt;div&gt;</button>
+        <button class="quiz-opt" onclick="quiz(this,'q1',false,'q1fb')">&lt;h1&gt;</button>
+        <button class="quiz-opt" onclick="quiz(this,'q1',false,'q1fb')">&lt;img&gt;</button>
+      </div>
+      <div class="quiz-fb" id="q1fb"></div>
+    </div>
+
+    <div style="background:var(--white);border:2px solid var(--border);border-radius:var(--r2);padding:28px;box-shadow:var(--shadow)" id="q2wrap">
+      <div class="quiz-q">٢. أي خاصية CSS تستخدم لتغيير لون النص؟</div>
+      <div class="quiz-opts" id="q2">
+        <button class="quiz-opt" onclick="quiz(this,'q2',false,'q2fb')">background-color</button>
+        <button class="quiz-opt" onclick="quiz(this,'q2',false,'q2fb')">font-size</button>
+        <button class="quiz-opt" onclick="quiz(this,'q2',true,'q2fb','s6-next')">color</button>
+        <button class="quiz-opt" onclick="quiz(this,'q2',false,'q2fb')">padding</button>
+      </div>
+      <div class="quiz-fb" id="q2fb"></div>
+    </div>
+  </div>
+  <div class="step-nav">
+    <button class="btn-prev" onclick="goStep(5)">→ السابق</button>
+    <div class="step-dots">
+      <div class="dot done"></div><div class="dot done"></div><div class="dot done"></div>
+      <div class="dot done"></div><div class="dot done"></div><div class="dot active"></div><div class="dot"></div>
+    </div>
+    <button class="btn-next" id="s6-next" onclick="goStep(7)" disabled>التالي ←</button>
+  </div>
+</div>
+
+<!-- STEP 7: CELEBRATION -->
+<div class="step" id="s7">
+  <div class="step-body">
+    <div class="celebration">
+      <span class="cel-emoji">🌐</span>
+      <div class="xp-badge">🏅 +١٥٠ XP</div>
+      <h2 class="cel-title">مطوّر ويب حقيقي!</h2>
+      <p class="cel-sub">بنيت صفحات ويب بالكود الحقيقي — HTML وCSS هما لغة كل موقع في العالم!<br/><strong>الدرس الثالث: JavaScript — أضف الحياة لصفحاتك! ⚡</strong></p>
+      <div class="badge-row">
+        <div class="badge-item"><span class="bi">🏗️</span><div><strong>معمار HTML</strong>أتقنت الوسوم</div></div>
+        <div class="badge-item"><span class="bi">🎨</span><div><strong>فنان CSS</strong>أتقنت التنسيق</div></div>
+      </div>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <button class="btn-next" onclick="finish()" style="padding:15px 40px;font-size:1rem">✅ احفظ تقدمي</button>
+        <button class="btn-prev" onclick="goStep(1)" style="padding:15px 24px">🔁 أعد الدرس</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+let step=1, xp=0;
+const TOTAL=7;
+function goStep(n){document.getElementById('s'+step).classList.remove('active');step=n;document.getElementById('s'+n).classList.add('active');document.getElementById('prog').style.width=((n-1)/(TOTAL-1)*100)+'%';window.scrollTo({top:0,behavior:'smooth'});if(n===3)setTimeout(updatePreview,200);if(n===4)setTimeout(()=>{updatePreview();updatePreview2();},200);}
+function addXP(a){xp+=a;const el=document.getElementById('xp');el.textContent='⭐ '+xp+' XP';el.style.transform='scale(1.4)';setTimeout(()=>el.style.transform='',300);}
+
+function updatePreview(){
+  const code=document.getElementById('live-code').value;
+  const iframe=document.getElementById('live-preview');
+  const doc=iframe.contentDocument||iframe.contentWindow.document;
+  doc.open();doc.write(code);doc.close();
+}
+function updatePreview2(){
+  const code=document.getElementById('live-code2').value;
+  const iframe=document.getElementById('live-preview2');
+  const doc=iframe.contentDocument||iframe.contentWindow.document;
+  doc.open();doc.write(code);doc.close();
+}
+
+function checkFill(){
+  const b1=document.getElementById('b1').value.trim().toLowerCase();
+  const b2=document.getElementById('b2').value.trim();
+  const b3=document.getElementById('b3').value.trim().toLowerCase();
+  const fb=document.getElementById('fill-fb');
+  const ok1=b1==='div';
+  const ok2=b2.length>2;
+  const ok3=b3==='p';
+  if(ok1&&ok2&&ok3){
+    ['b1','b2','b3'].forEach(id=>document.getElementById(id).classList.add('correct'));
+    fb.innerHTML='✅ <strong>ممتاز!</strong> الكود صحيح — div يجمّع، p للفقرة، واللون في CSS!';
+    fb.className='fill-fb show ok';
+    addXP(35);document.getElementById('s5-next').disabled=false;
+  } else {
+    ['b1','b2','b3'].forEach((id,i)=>{
+      const vals=[ok1,ok2,ok3];
+      if(!vals[i]) document.getElementById(id).classList.add('wrong');
+    });
+    fb.innerHTML='❌ تذكّر: الصندوق = div، الفقرة = p، اللون بأي تنسيق CSS!';
+    fb.className='fill-fb show no';
+    setTimeout(()=>['b1','b2','b3'].forEach(id=>document.getElementById(id).classList.remove('wrong')),1000);
+  }
+}
+
+let q1done=false;
+function quiz(btn,qid,correct,fbId,nextId){
+  document.querySelectorAll('#'+qid+' .quiz-opt').forEach(o=>o.disabled=true);
+  const fb=document.getElementById(fbId);
+  if(correct){
+    btn.classList.add('correct');
+    const msgs={q1fb:'✅ <strong>صحيح!</strong> &lt;div&gt; هو الصندوق العام لتجميع أي عناصر في HTML!',q2fb:'✅ <strong>ممتاز!</strong> color تغير لون النص — background-color تغير الخلفية!'};
+    fb.innerHTML=msgs[fbId]||'✅ صحيح!';fb.className='quiz-fb show ok';addXP(20);
+    if(qid==='q1'){q1done=true;setTimeout(()=>document.getElementById('q2wrap').style.display='block',600);}
+    if(nextId)document.getElementById(nextId).disabled=false;
+  } else {
+    btn.classList.add('wrong');fb.innerHTML='❌ فكّر مجدداً!';fb.className='quiz-fb show no';
+    setTimeout(()=>{document.querySelectorAll('#'+qid+' .quiz-opt').forEach(o=>o.disabled=false);btn.classList.remove('wrong');fb.className='quiz-fb';},1400);
+  }
+}
+
+(async()=>{
+  try{
+    const{initializeApp,getApps}=await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js");
+    const{getAuth,onAuthStateChanged}=await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js");
+    const{getFirestore,doc,getDoc}=await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js");
+    const cfg={apiKey:"AIzaSyBeD4ng-pNWSLgkrNmK1Re8FYnmCNCMBU8",authDomain:"fikr-app-fbdf7.firebaseapp.com",projectId:"fikr-app-fbdf7",storageBucket:"fikr-app-fbdf7.firebasestorage.app",messagingSenderId:"378212535527",appId:"1:378212535527:web:99331970433b4428dd2642"};
+    const app=getApps().length?getApps()[0]:initializeApp(cfg);
+    const auth=getAuth(app);const db=getFirestore(app);
+    const user=await new Promise(r=>{const u=onAuthStateChanged(auth,x=>{u();r(x);});});
+    if(!user){window.location.href='index.html';return;}
+    const snap=await getDoc(doc(db,'users',user.uid));
+    if(snap.data()?.subscription!=='active'){window.location.href='index.html';}
+  }catch(e){}
+})();
+
+async function finish(){
+  const btn=document.querySelector('.celebration .btn-next');
+  if(btn){btn.disabled=true;btn.textContent='جارٍ الحفظ... ⏳';}
+  try{
+    const{initializeApp,getApps}=await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js");
+    const{getAuth,onAuthStateChanged}=await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js");
+    const{getFirestore,doc,getDoc,updateDoc,arrayUnion}=await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js");
+    const cfg={apiKey:"AIzaSyBeD4ng-pNWSLgkrNmK1Re8FYnmCNCMBU8",authDomain:"fikr-app-fbdf7.firebaseapp.com",projectId:"fikr-app-fbdf7",storageBucket:"fikr-app-fbdf7.firebasestorage.app",messagingSenderId:"378212535527",appId:"1:378212535527:web:99331970433b4428dd2642"};
+    const app=getApps().length?getApps()[0]:initializeApp(cfg);
+    const auth=getAuth(app);const db=getFirestore(app);
+    const user=await new Promise(r=>{const u=onAuthStateChanged(auth,x=>{u();r(x);});});
+    if(user){const snap=await getDoc(doc(db,'users',user.uid));await updateDoc(doc(db,'users',user.uid),{lessonsCompleted:arrayUnion('lesson-k2'),xp:(snap.data()?.xp||0)+150});}
+    if(btn){btn.textContent='✅ تم الحفظ! جارٍ العودة...';}
+  }catch(e){}
+  setTimeout(()=>{window.location.href='index.html';},1000);
+}
+</script>
+</body>
+</html>
