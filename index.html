@@ -88,7 +88,6 @@
     .btn-nav { font-family: var(--font-ui); font-size: 0.9rem; font-weight: 700; color: var(--white); background: var(--teal); padding: 10px 24px; border-radius: var(--r); transition: var(--transition); box-shadow: 0 2px 8px rgba(26,107,114,0.3); }
     .btn-nav:hover { background: var(--teal-light); transform: translateY(-1px); }
 
-    /* STICKY CTA BAR — appears on scroll */
     .sticky-cta {
       position: fixed; bottom: 0; left: 0; right: 0; z-index: 99;
       background: var(--teal);
@@ -104,7 +103,6 @@
     .sticky-cta-btn { font-family: var(--font-ui); font-weight: 700; font-size: 0.9rem; color: var(--teal); background: var(--white); padding: 10px 24px; border-radius: var(--r); white-space: nowrap; transition: var(--transition); flex-shrink: 0; }
     .sticky-cta-btn:hover { background: var(--gold-pale); }
 
-    /* HERO */
     .hero { min-height: 100vh; display: flex; align-items: center; padding: 120px 40px 80px; position: relative; overflow: hidden; }
     .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 60% at 80% 20%, rgba(26,107,114,0.08) 0%, transparent 70%), radial-gradient(ellipse 40% 40% at 10% 80%, rgba(200,146,42,0.06) 0%, transparent 70%); pointer-events: none; }
     .hero-deco { position: absolute; top: 50%; right: -40px; transform: translateY(-50%); font-family: var(--font-display); font-size: 28vw; color: rgba(26,107,114,0.04); font-weight: 700; pointer-events: none; user-select: none; line-height: 1; }
@@ -126,7 +124,6 @@
     .hero-no-cc { font-family: var(--font-ui); font-size: 0.78rem; color: var(--text-soft); display: flex; align-items: center; gap: 6px; }
     .hero-no-cc::before { content: '✓'; color: var(--teal); font-weight: 700; }
 
-    /* Hero visual */
     .hero-visual { display: flex; flex-direction: column; gap: 16px; }
     .code-card { background: var(--ink); border-radius: var(--r2); padding: 24px 28px; box-shadow: var(--shadow-lg); position: relative; overflow: hidden; }
     .code-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--teal), var(--gold)); }
@@ -143,7 +140,6 @@
     .stat-num { font-family: var(--font-ui); font-size: 1.5rem; font-weight: 900; color: var(--teal); display: block; }
     .stat-label { font-size: 0.78rem; color: var(--text-soft); font-weight: 500; }
 
-    /* SECTIONS */
     .section { padding: 100px 40px; }
     .section-inner { max-width: 1200px; margin: 0 auto; }
     .section-tag { font-family: var(--font-ui); font-size: 0.8rem; font-weight: 700; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; display: block; }
@@ -151,24 +147,9 @@
     .section-sub { font-size: 1.05rem; color: var(--text-soft); max-width: 560px; line-height: 1.8; }
     .section-head { margin-bottom: 60px; }
 
-    /* FOUNDER STRIP */
-    .founder-strip {
-      background: var(--white);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      padding: 48px 40px;
-    }
-    .founder-inner {
-      max-width: 1200px; margin: 0 auto;
-      display: grid; grid-template-columns: auto 1fr auto; gap: 40px; align-items: center;
-    }
-    .founder-avatar {
-      width: 80px; height: 80px; border-radius: 50%;
-      background: var(--teal-pale);
-      border: 3px solid var(--teal);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 2.2rem; flex-shrink: 0;
-    }
+    .founder-strip { background: var(--white); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 48px 40px; }
+    .founder-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: auto 1fr auto; gap: 40px; align-items: center; }
+    .founder-avatar { width: 80px; height: 80px; border-radius: 50%; background: var(--teal-pale); border: 3px solid var(--teal); display: flex; align-items: center; justify-content: center; font-size: 2.2rem; flex-shrink: 0; }
     .founder-quote { font-family: var(--font-display); font-size: 1.15rem; color: var(--ink); line-height: 1.8; font-style: italic; margin-bottom: 10px; }
     .founder-name { font-family: var(--font-ui); font-size: 0.88rem; font-weight: 700; color: var(--teal); }
     .founder-role { font-family: var(--font-ui); font-size: 0.8rem; color: var(--text-soft); }
@@ -176,7 +157,6 @@
     .founder-badge { display: flex; align-items: center; gap: 8px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 8px 14px; font-family: var(--font-ui); font-size: 0.78rem; font-weight: 600; color: var(--text-soft); white-space: nowrap; }
     .founder-badge-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--teal); flex-shrink: 0; }
 
-    /* HOW IT WORKS */
     .how-bg { background: var(--ink-soft); }
     .how-bg .section-title { color: var(--white); }
     .how-bg .section-tag { color: var(--gold-light); }
@@ -192,7 +172,6 @@
     .step-desc { font-size: 0.88rem; color: rgba(255,255,255,0.5); line-height: 1.7; }
     .step-outcome { margin-top: 12px; font-family: var(--font-ui); font-size: 0.78rem; color: var(--gold-light); font-weight: 600; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.08); }
 
-    /* COURSES */
     .tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
     .tier-card { background: var(--white); border: 1.5px solid var(--border); border-radius: var(--r2); padding: 36px 28px; transition: var(--transition); position: relative; overflow: hidden; }
     .tier-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; }
@@ -215,7 +194,6 @@
     .tier-cta a { display: block; text-align: center; font-family: var(--font-ui); font-weight: 700; font-size: 0.88rem; color: var(--teal); background: var(--teal-pale); padding: 10px 20px; border-radius: var(--r); transition: var(--transition); }
     .tier-cta a:hover { background: var(--teal); color: var(--white); }
 
-    /* VALUES */
     .values-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
     .value-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--r2); padding: 36px; display: flex; gap: 20px; align-items: flex-start; transition: var(--transition); }
     .value-card:hover { border-color: var(--gold); transform: translateX(-4px); }
@@ -223,24 +201,17 @@
     .value-title { font-family: var(--font-ui); font-size: 1rem; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
     .value-desc  { font-size: 0.88rem; color: var(--text-soft); line-height: 1.75; }
 
-    /* FAQ */
     .faq-section { background: var(--white); }
     .faq-list { max-width: 720px; display: flex; flex-direction: column; gap: 0; }
     .faq-item { border-bottom: 1px solid var(--border); }
     .faq-item:first-child { border-top: 1px solid var(--border); }
-    .faq-q {
-      width: 100%; text-align: right; background: none; border: none; cursor: pointer;
-      font-family: var(--font-ui); font-size: 0.95rem; font-weight: 700; color: var(--ink);
-      padding: 18px 0; display: flex; align-items: center; justify-content: space-between; gap: 16px;
-      transition: var(--transition);
-    }
+    .faq-q { width: 100%; text-align: right; background: none; border: none; cursor: pointer; font-family: var(--font-ui); font-size: 0.95rem; font-weight: 700; color: var(--ink); padding: 18px 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; transition: var(--transition); }
     .faq-q:hover { color: var(--teal); }
     .faq-icon { font-size: 1.2rem; color: var(--teal); flex-shrink: 0; transition: var(--transition); }
     .faq-a { font-size: 0.88rem; color: var(--text-soft); line-height: 1.8; max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.35s ease; }
     .faq-item.open .faq-a { max-height: 200px; padding-bottom: 16px; }
     .faq-item.open .faq-icon { transform: rotate(45deg); }
 
-    /* PRICING */
     .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 900px; margin: 0 auto; }
     .price-card { background: var(--white); border: 1.5px solid var(--border); border-radius: var(--r2); padding: 36px 28px; text-align: center; transition: var(--transition); position: relative; }
     .price-card.featured { background: var(--teal); border-color: var(--teal); transform: scale(1.04); box-shadow: var(--shadow-lg); }
@@ -258,7 +229,6 @@
     .price-guarantee { text-align: center; margin-top: 28px; font-family: var(--font-ui); font-size: 0.82rem; color: var(--text-soft); display: flex; align-items: center; justify-content: center; gap: 6px; }
     .price-guarantee::before { content: '🔒'; font-size: 0.9rem; }
 
-    /* TESTIMONIALS */
     .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
     .testimonial { background: var(--white); border: 1px solid var(--border); border-radius: var(--r2); padding: 28px; transition: var(--transition); }
     .testimonial:hover { border-color: var(--teal); box-shadow: var(--shadow); }
@@ -269,18 +239,12 @@
     .t-name { font-family: var(--font-ui); font-size: 0.85rem; font-weight: 700; color: var(--ink); }
     .t-role { font-size: 0.75rem; color: var(--text-soft); }
 
-    /* SOCIAL PROOF BANNER */
-    .social-proof-bar {
-      background: var(--ink);
-      padding: 20px 40px;
-      display: flex; align-items: center; justify-content: center; gap: 40px; flex-wrap: wrap;
-    }
+    .social-proof-bar { background: var(--ink); padding: 20px 40px; display: flex; align-items: center; justify-content: center; gap: 40px; flex-wrap: wrap; }
     .sp-item { display: flex; align-items: center; gap: 10px; }
     .sp-num { font-family: var(--font-ui); font-size: 1.4rem; font-weight: 900; color: var(--gold); }
     .sp-label { font-family: var(--font-ui); font-size: 0.82rem; color: rgba(255,255,255,0.55); }
     .sp-divider { width: 1px; height: 28px; background: rgba(255,255,255,0.1); }
 
-    /* CTA BANNER */
     .cta-banner { background: var(--teal); padding: 80px 40px; text-align: center; position: relative; overflow: hidden; }
     .cta-banner::before { content: 'فِكر'; position: absolute; font-family: var(--font-display); font-size: 20vw; color: rgba(255,255,255,0.04); font-weight: 700; top: 50%; left: 50%; transform: translate(-50%,-50%); pointer-events: none; white-space: nowrap; }
     .cta-banner .section-title { color: var(--white); margin-bottom: 16px; }
@@ -292,7 +256,6 @@
     .btn-outline-white:hover { background: rgba(255,255,255,0.1); }
     .cta-sub-note { margin-top: 16px; position: relative; z-index: 1; font-family: var(--font-ui); font-size: 0.8rem; color: rgba(255,255,255,0.6); }
 
-    /* FOOTER */
     .footer { background: var(--ink); color: rgba(255,255,255,0.5); padding: 60px 40px 32px; }
     .footer-inner { max-width: 1200px; margin: 0 auto; }
     .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
@@ -311,9 +274,6 @@
     .footer-legal a { color: rgba(255,255,255,0.35); font-family: var(--font-ui); font-size: 0.78rem; transition: var(--transition); }
     .footer-legal a:hover { color: rgba(255,255,255,0.7); }
 
-    /* ══════════════════════════════════════════════
-       AUTH SCREENS
-    ══════════════════════════════════════════════ */
     .auth-screen { min-height: 100vh; display: none; background: var(--surface); }
     .auth-screen.active { display: flex; }
     .auth-split { display: grid; grid-template-columns: 1fr 1fr; min-height: 100vh; }
@@ -349,9 +309,6 @@
     .forgot-link { font-family: var(--font-ui); font-size: 0.8rem; color: var(--teal); cursor: pointer; float: left; }
     .forgot-link:hover { text-decoration: underline; }
 
-    /* ══════════════════════════════════════════════
-       DASHBOARD
-    ══════════════════════════════════════════════ */
     .dashboard-screen { min-height: 100vh; background: var(--surface); display: none; }
     .dashboard-screen.active { display: block; }
     .dash-nav { background: var(--white); border-bottom: 1px solid var(--border); padding: 16px 40px; display: flex; align-items: center; justify-content: space-between; }
@@ -365,7 +322,6 @@
     .dash-welcome { font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
     .dash-welcome-sub { color: var(--text-soft); font-size: 0.95rem; margin-bottom: 40px; }
 
-    /* WhatsApp Banner */
     .whatsapp-banner { display: flex; align-items: center; gap: 16px; background: #25d366; border-radius: var(--r2); padding: 20px 28px; margin-bottom: 16px; transition: var(--transition); color: white; text-decoration: none; }
     .whatsapp-banner:hover { background: #1fbe5a; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,211,102,0.3); }
     .wa-icon { font-size: 2rem; flex-shrink: 0; }
@@ -373,7 +329,6 @@
     .wa-sub { font-size: 0.83rem; opacity: 0.85; }
     .wa-arrow { font-size: 1.4rem; margin-right: auto; opacity: 0.7; }
 
-    /* Tier sections */
     .tier-section { margin-bottom: 32px; }
     .tier-header { display: flex; align-items: center; gap: 14px; padding: 16px 24px; border-radius: var(--r2) var(--r2) 0 0; margin-bottom: 2px; }
     .asghar-h     { background: var(--teal); color: white; }
@@ -398,7 +353,6 @@
     .lock-badge { background: var(--surface-2); color: var(--text-soft); }
     .dash-section-title { font-family: var(--font-ui); font-size: 1.1rem; font-weight: 700; color: var(--ink); margin-bottom: 20px; }
 
-    /* MODALS */
     .modal-overlay { position: fixed; inset: 0; z-index: 200; background: rgba(13,15,20,0.6); display: flex; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(4px); }
     .modal-box { background: var(--white); border-radius: var(--r2); padding: 48px 40px; max-width: 420px; width: 100%; text-align: center; box-shadow: var(--shadow-lg); }
     .modal-icon { font-size: 3rem; margin-bottom: 16px; }
@@ -409,12 +363,10 @@
     .modal-close { font-family: var(--font-ui); font-size: 0.85rem; color: var(--text-soft); cursor: pointer; background: none; border: none; padding: 8px; }
     .modal-close:hover { color: var(--text); }
 
-    /* ADMIN STYLES */
     .adm-btn.gold  { background: rgba(200,146,42,0.15); color: #e8b84b; border: 1px solid rgba(200,146,42,0.3); }
     .adm-btn.gold:hover  { background: rgba(200,146,42,0.25); }
     #adm-search::placeholder { color: rgba(255,255,255,0.3); }
 
-    /* ANIMATIONS */
     @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     .anim-fade-up { animation: fadeUp 0.6s ease both; }
@@ -423,7 +375,6 @@
     .anim-delay-3 { animation-delay: 0.3s; }
     .anim-delay-4 { animation-delay: 0.4s; }
 
-    /* RESPONSIVE */
     @media (max-width: 900px) {
       .nav { padding: 14px 20px; }
       .hero { padding: 100px 20px 60px; }
@@ -450,7 +401,6 @@
       .social-proof-bar { gap: 20px; padding: 20px; }
       .sp-divider { display: none; }
       .sticky-cta { flex-direction: column; padding: 12px 20px; gap: 8px; text-align: center; }
-      .video-preview-section { padding: 60px 20px; }
       .faq-section { padding: 60px 20px !important; }
     }
   </style>
@@ -460,7 +410,6 @@
 <!-- ══════════════ LANDING ══════════════ -->
 <div id="screen-landing" class="screen active">
 
-  <!-- Sticky CTA bar (appears after scroll) -->
   <div class="sticky-cta" id="sticky-cta">
     <span class="sticky-cta-text"><strong>فِكر</strong> — الدرسان الأولان مجانيان تماماً</span>
     <button class="sticky-cta-btn" onclick="showScreen('register')">ابدأ مجاناً الآن ←</button>
@@ -525,7 +474,6 @@
     </div>
   </section>
 
-  <!-- FOUNDER STRIP -->
   <div class="founder-strip">
     <div class="founder-inner">
       <div class="founder-avatar">👨‍💻</div>
@@ -542,7 +490,6 @@
     </div>
   </div>
 
-  <!-- HOW IT WORKS -->
   <section class="section how-bg" id="how">
     <div class="section-inner">
       <div class="section-head">
@@ -551,35 +498,14 @@
         <p class="section-sub">رحلة تعليمية مبنية بعناية لتناسب كل طفل</p>
       </div>
       <div class="steps">
-        <div class="step">
-          <div class="step-num">١</div><div class="step-icon">👨‍👩‍👦</div>
-          <div class="step-title">سجّل حساب الوالدين</div>
-          <div class="step-desc">أنشئ حسابك كولي أمر وأضف أبناءك مع تحديد أعمارهم ومستوياتهم.</div>
-          <div class="step-outcome">→ دقيقتان فقط، بدون بطاقة ائتمان</div>
-        </div>
-        <div class="step">
-          <div class="step-num">٢</div><div class="step-icon">🗺️</div>
-          <div class="step-title">اختر المسار المناسب</div>
-          <div class="step-desc">نظام ذكي يقترح المسار الأنسب بناءً على عمر طفلك وخبرته.</div>
-          <div class="step-outcome">→ ٣ مسارات لكل الأعمار</div>
-        </div>
-        <div class="step">
-          <div class="step-num">٣</div><div class="step-icon">🎮</div>
-          <div class="step-title">تعلّم باللعب</div>
-          <div class="step-desc">دروس تفاعلية بالعربية، تحديات مشوّقة، ونقاط خبرة تحفّز الاستمرار.</div>
-          <div class="step-outcome">→ كل درس يبني على السابق</div>
-        </div>
-        <div class="step">
-          <div class="step-num">٤</div><div class="step-icon">📊</div>
-          <div class="step-title">تابع التقدم</div>
-          <div class="step-desc">لوحة تحكم للوالدين تُظهر تقدم الأبناء ودرجاتهم وشاراتهم.</div>
-          <div class="step-outcome">→ شفافية كاملة للوالدين</div>
-        </div>
+        <div class="step"><div class="step-num">١</div><div class="step-icon">👨‍👩‍👦</div><div class="step-title">سجّل حساب الوالدين</div><div class="step-desc">أنشئ حسابك كولي أمر وأضف أبناءك مع تحديد أعمارهم ومستوياتهم.</div><div class="step-outcome">→ دقيقتان فقط، بدون بطاقة ائتمان</div></div>
+        <div class="step"><div class="step-num">٢</div><div class="step-icon">🗺️</div><div class="step-title">اختر المسار المناسب</div><div class="step-desc">نظام ذكي يقترح المسار الأنسب بناءً على عمر طفلك وخبرته.</div><div class="step-outcome">→ ٣ مسارات لكل الأعمار</div></div>
+        <div class="step"><div class="step-num">٣</div><div class="step-icon">🎮</div><div class="step-title">تعلّم باللعب</div><div class="step-desc">دروس تفاعلية بالعربية، تحديات مشوّقة، ونقاط خبرة تحفّز الاستمرار.</div><div class="step-outcome">→ كل درس يبني على السابق</div></div>
+        <div class="step"><div class="step-num">٤</div><div class="step-icon">📊</div><div class="step-title">تابع التقدم</div><div class="step-desc">لوحة تحكم للوالدين تُظهر تقدم الأبناء ودرجاتهم وشاراتهم.</div><div class="step-outcome">→ شفافية كاملة للوالدين</div></div>
       </div>
     </div>
   </section>
 
-  <!-- COURSES -->
   <section class="section" id="courses">
     <div class="section-inner">
       <div class="section-head">
@@ -628,7 +554,6 @@
     </div>
   </section>
 
-  <!-- VALUES -->
   <section class="section" id="values" style="background: var(--surface-2);">
     <div class="section-inner">
       <div class="section-head">
@@ -645,7 +570,6 @@
     </div>
   </section>
 
-  <!-- PRICING -->
   <section class="section" id="pricing">
     <div class="section-inner">
       <div class="section-head" style="text-align:center;">
@@ -654,21 +578,16 @@
         <p class="section-sub" style="margin: 0 auto;">اختر الخطة المناسبة لعائلتك — بدون رسوم خفية</p>
       </div>
       <div style="display:flex;justify-content:center;gap:10px;margin-bottom:36px;flex-wrap:wrap">
-        <button class="currency-btn active" onclick="setCurrency('sar')" id="btn-sar"
-          style="font-family:var(--font-ui);font-weight:700;font-size:0.88rem;padding:9px 22px;border-radius:99px;border:2px solid var(--teal);background:var(--teal);color:var(--white);cursor:pointer;transition:var(--transition)">🇸🇦 ريال سعودي</button>
-        <button class="currency-btn" onclick="setCurrency('aed')" id="btn-aed"
-          style="font-family:var(--font-ui);font-weight:700;font-size:0.88rem;padding:9px 22px;border-radius:99px;border:2px solid var(--teal);background:transparent;color:var(--teal);cursor:pointer;transition:var(--transition)">🇦🇪 درهم إماراتي</button>
-        <button class="currency-btn" onclick="setCurrency('tnd')" id="btn-tnd"
-          style="font-family:var(--font-ui);font-weight:700;font-size:0.88rem;padding:9px 22px;border-radius:99px;border:2px solid var(--teal);background:transparent;color:var(--teal);cursor:pointer;transition:var(--transition)">🇹🇳 دينار تونسي</button>
+        <button class="currency-btn active" onclick="setCurrency('sar')" id="btn-sar" style="font-family:var(--font-ui);font-weight:700;font-size:0.88rem;padding:9px 22px;border-radius:99px;border:2px solid var(--teal);background:var(--teal);color:var(--white);cursor:pointer;transition:var(--transition)">🇸🇦 ريال سعودي</button>
+        <button class="currency-btn" onclick="setCurrency('aed')" id="btn-aed" style="font-family:var(--font-ui);font-weight:700;font-size:0.88rem;padding:9px 22px;border-radius:99px;border:2px solid var(--teal);background:transparent;color:var(--teal);cursor:pointer;transition:var(--transition)">🇦🇪 درهم إماراتي</button>
+        <button class="currency-btn" onclick="setCurrency('tnd')" id="btn-tnd" style="font-family:var(--font-ui);font-weight:700;font-size:0.88rem;padding:9px 22px;border-radius:99px;border:2px solid var(--teal);background:transparent;color:var(--teal);cursor:pointer;transition:var(--transition)">🇹🇳 دينار تونسي</button>
       </div>
       <div class="pricing-grid">
         <div class="price-card">
           <div class="price-country">أساسي</div>
           <div class="price-amount" id="price-basic">٣٩</div>
           <div class="price-currency" id="currency-basic">ريال سعودي / شهرياً</div>
-          <ul class="price-features">
-            <li>طفل واحد</li><li>جميع الدروس والمسارات</li><li>نظام XP والشارات</li><li>دعم عبر واتساب</li>
-          </ul>
+          <ul class="price-features"><li>طفل واحد</li><li>جميع الدروس والمسارات</li><li>نظام XP والشارات</li><li>دعم عبر واتساب</li></ul>
           <button class="price-btn" onclick="showScreen('register')">ابدأ مجاناً</button>
         </div>
         <div class="price-card featured">
@@ -676,18 +595,14 @@
           <div class="price-country">قياسي</div>
           <div class="price-amount" id="price-standard">٦٩</div>
           <div class="price-currency" id="currency-standard">ريال سعودي / شهرياً</div>
-          <ul class="price-features">
-            <li>طفل واحد</li><li>جميع الدروس والمسارات</li><li>نظام XP والشارات</li><li>لوحة تحكم للوالدين</li><li>دعم فني أولوية</li>
-          </ul>
+          <ul class="price-features"><li>طفل واحد</li><li>جميع الدروس والمسارات</li><li>نظام XP والشارات</li><li>لوحة تحكم للوالدين</li><li>دعم فني أولوية</li></ul>
           <button class="price-btn" onclick="showScreen('register')">ابدأ مجاناً</button>
         </div>
         <div class="price-card">
           <div class="price-country">عائلي</div>
           <div class="price-amount" id="price-family">٩٩</div>
           <div class="price-currency" id="currency-family">ريال سعودي / شهرياً</div>
-          <ul class="price-features">
-            <li>حتى ٣ أطفال</li><li>جميع الدروس والمسارات</li><li>نظام XP والشارات</li><li>لوحة تحكم للوالدين</li><li>دعم فني VIP</li><li>تقارير تقدم أسبوعية</li>
-          </ul>
+          <ul class="price-features"><li>حتى ٣ أطفال</li><li>جميع الدروس والمسارات</li><li>نظام XP والشارات</li><li>لوحة تحكم للوالدين</li><li>دعم فني VIP</li><li>تقارير تقدم أسبوعية</li></ul>
           <button class="price-btn" onclick="showScreen('register')">ابدأ مجاناً</button>
         </div>
       </div>
@@ -717,7 +632,6 @@
     }
   </script>
 
-  <!-- TESTIMONIALS -->
   <section class="section" id="testimonials" style="background: var(--surface-2);">
     <div class="section-inner">
       <div class="section-head">
@@ -725,35 +639,13 @@
         <h2 class="section-title">ماذا يقول آباء فِكر</h2>
       </div>
       <div class="testimonials-grid">
-        <div class="testimonial">
-          <div class="t-stars">★★★★★</div>
-          <div class="t-text">أخيراً منصة تتكلم لغة ابني. كان يرفض أي محتوى إنجليزي، والآن لا يتوقف عن البرمجة!</div>
-          <div class="t-author">
-            <div class="t-avatar">أي</div>
-            <div><div class="t-name">أبو يوسف</div><div class="t-role">الرياض — ولي أمر طالب ١٢ سنة</div></div>
-          </div>
-        </div>
-        <div class="testimonial">
-          <div class="t-stars">★★★★★</div>
-          <div class="t-text">ما يميز فِكر هو القيم. ابنتي تتعلم وأنا مرتاحة على المحتوى الذي تشاهده.</div>
-          <div class="t-author">
-            <div class="t-avatar">أن</div>
-            <div><div class="t-name">أم نور</div><div class="t-role">دبي — ولية أمر طالبة ١٠ سنوات</div></div>
-          </div>
-        </div>
-        <div class="testimonial">
-          <div class="t-stars">★★★★★</div>
-          <div class="t-text">لوحة تحكم الوالدين ممتازة. أرى تقدم ولدي بالتفصيل، وهذا يحفزه أكثر.</div>
-          <div class="t-author">
-            <div class="t-avatar">أح</div>
-            <div><div class="t-name">أبو حمزة</div><div class="t-role">الكويت — ولي أمر طالب ١٤ سنة</div></div>
-          </div>
-        </div>
+        <div class="testimonial"><div class="t-stars">★★★★★</div><div class="t-text">أخيراً منصة تتكلم لغة ابني. كان يرفض أي محتوى إنجليزي، والآن لا يتوقف عن البرمجة!</div><div class="t-author"><div class="t-avatar">أي</div><div><div class="t-name">أبو يوسف</div><div class="t-role">الرياض — ولي أمر طالب ١٢ سنة</div></div></div></div>
+        <div class="testimonial"><div class="t-stars">★★★★★</div><div class="t-text">ما يميز فِكر هو القيم. ابنتي تتعلم وأنا مرتاحة على المحتوى الذي تشاهده.</div><div class="t-author"><div class="t-avatar">أن</div><div><div class="t-name">أم نور</div><div class="t-role">دبي — ولية أمر طالبة ١٠ سنوات</div></div></div></div>
+        <div class="testimonial"><div class="t-stars">★★★★★</div><div class="t-text">لوحة تحكم الوالدين ممتازة. أرى تقدم ولدي بالتفصيل، وهذا يحفزه أكثر.</div><div class="t-author"><div class="t-avatar">أح</div><div><div class="t-name">أبو حمزة</div><div class="t-role">الكويت — ولي أمر طالب ١٤ سنة</div></div></div></div>
       </div>
     </div>
   </section>
 
-  <!-- SOCIAL PROOF BAR -->
   <div class="social-proof-bar">
     <div class="sp-item"><span class="sp-num">٣</span><span class="sp-label">مسارات تعليمية متكاملة</span></div>
     <div class="sp-divider"></div>
@@ -764,7 +656,6 @@
     <div class="sp-item"><span class="sp-num">٨–١٦</span><span class="sp-label">سنة الفئة العمرية</span></div>
   </div>
 
-  <!-- FAQ -->
   <section class="section faq-section" id="faq" style="padding:80px 40px;">
     <div class="section-inner">
       <div class="section-head" style="margin-bottom:40px;">
@@ -772,53 +663,16 @@
         <h2 class="section-title">كل ما تريد معرفته</h2>
       </div>
       <div class="faq-list">
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">
-            <span>كيف يتم الدفع؟ هل هو آمن؟</span>
-            <span class="faq-icon">+</span>
-          </button>
-          <div class="faq-a">يتم تفعيل الاشتراك عبر التواصل المباشر معنا على واتساب. ندعم التحويل البنكي والمحافظ الرقمية الشائعة في منطقتك. لا يوجد اشتراك تلقائي — أنت من يتحكم.</div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">
-            <span>هل يمكنني إلغاء الاشتراك في أي وقت؟</span>
-            <span class="faq-icon">+</span>
-          </button>
-          <div class="faq-a">نعم، تماماً. لا يوجد عقد أو التزام. تواصل معنا عبر واتساب وسيتم إلغاء اشتراكك فوراً دون أي رسوم إضافية.</div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">
-            <span>ما الفرق بين الخطط الثلاث؟</span>
-            <span class="faq-icon">+</span>
-          </button>
-          <div class="faq-a">الخطة الأساسية تمنح طفلاً واحداً وصولاً كاملاً للدروس مع دعم واتساب. القياسية تضيف لوحة تحكم الوالدين ودعماً ذو أولوية. العائلية تشمل حتى ٣ أطفال مع تقارير أسبوعية.</div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">
-            <span>هل المحتوى مناسب لجميع الأعمار؟</span>
-            <span class="faq-icon">+</span>
-          </button>
-          <div class="faq-a">نعم. لدينا ٣ مسارات مصممة لكل فئة: الأصغر (٨-١١) بـ Scratch، المتوسط (١١-١٤) بـ Python، والكبير (١٤-١٦) بـ Python والويب.</div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">
-            <span>هل أحتاج خبرة سابقة؟</span>
-            <span class="faq-icon">+</span>
-          </button>
-          <div class="faq-a">لا على الإطلاق. المسارات مبنية من الصفر وتبدأ بمفاهيم التفكير المنطقي قبل أي كود. كل درس يبني على السابق بشكل طبيعي ومتدرج.</div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">
-            <span>ما سياسة الخصوصية للأطفال؟</span>
-            <span class="faq-icon">+</span>
-          </button>
-          <div class="faq-a">نحن لا نجمع أي بيانات شخصية للأطفال ولا نشاركها مع أي طرف ثالث. الحساب مسجّل باسم ولي الأمر فقط، وجميع البيانات محمية ومشفّرة.</div>
-        </div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>كيف يتم الدفع؟ هل هو آمن؟</span><span class="faq-icon">+</span></button><div class="faq-a">يتم تفعيل الاشتراك عبر التواصل المباشر معنا على واتساب. ندعم التحويل البنكي والمحافظ الرقمية الشائعة في منطقتك. لا يوجد اشتراك تلقائي — أنت من يتحكم.</div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>هل يمكنني إلغاء الاشتراك في أي وقت؟</span><span class="faq-icon">+</span></button><div class="faq-a">نعم، تماماً. لا يوجد عقد أو التزام. تواصل معنا عبر واتساب وسيتم إلغاء اشتراكك فوراً دون أي رسوم إضافية.</div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>ما الفرق بين الخطط الثلاث؟</span><span class="faq-icon">+</span></button><div class="faq-a">الخطة الأساسية تمنح طفلاً واحداً وصولاً كاملاً للدروس مع دعم واتساب. القياسية تضيف لوحة تحكم الوالدين ودعماً ذو أولوية. العائلية تشمل حتى ٣ أطفال مع تقارير أسبوعية.</div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>هل المحتوى مناسب لجميع الأعمار؟</span><span class="faq-icon">+</span></button><div class="faq-a">نعم. لدينا ٣ مسارات مصممة لكل فئة: الأصغر (٨-١١) بـ Scratch، المتوسط (١١-١٤) بـ Python، والكبير (١٤-١٦) بـ Python والويب.</div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>هل أحتاج خبرة سابقة؟</span><span class="faq-icon">+</span></button><div class="faq-a">لا على الإطلاق. المسارات مبنية من الصفر وتبدأ بمفاهيم التفكير المنطقي قبل أي كود. كل درس يبني على السابق بشكل طبيعي ومتدرج.</div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>ما سياسة الخصوصية للأطفال؟</span><span class="faq-icon">+</span></button><div class="faq-a">نحن لا نجمع أي بيانات شخصية للأطفال ولا نشاركها مع أي طرف ثالث. الحساب مسجّل باسم ولي الأمر فقط، وجميع البيانات محمية ومشفّرة.</div></div>
       </div>
     </div>
   </section>
 
-  <!-- CTA BANNER -->
   <div class="cta-banner">
     <div style="position:relative;z-index:1;">
       <h2 class="section-title">ابدأ رحلة طفلك اليوم</h2>
@@ -831,7 +685,6 @@
     </div>
   </div>
 
-  <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-inner">
       <div class="footer-top">
@@ -844,58 +697,30 @@
             <div class="footer-trust-item">بيانات الأطفال محمية ومشفّرة</div>
           </div>
         </div>
-        <div class="footer-col">
-          <h4>المنصة</h4>
-          <ul>
-            <li><a href="#courses">المسارات</a></li>
-            <li><a href="#pricing">الأسعار</a></li>
-            <li><a href="#values">قيمنا</a></li>
-            <li><a href="#faq">الأسئلة الشائعة</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>الحساب</h4>
-          <ul>
-            <li><a href="#" onclick="showScreen('register')">إنشاء حساب</a></li>
-            <li><a href="#" onclick="showScreen('login')">تسجيل الدخول</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>تواصل معنا</h4>
-          <ul>
-            <li><a href="https://chat.whatsapp.com/CRbAZfLlzt21KLjkh4S5QF" target="_blank">واتساب المجموعة</a></li>
-          </ul>
-        </div>
+        <div class="footer-col"><h4>المنصة</h4><ul><li><a href="#courses">المسارات</a></li><li><a href="#pricing">الأسعار</a></li><li><a href="#values">قيمنا</a></li><li><a href="#faq">الأسئلة الشائعة</a></li></ul></div>
+        <div class="footer-col"><h4>الحساب</h4><ul><li><a href="#" onclick="showScreen('register')">إنشاء حساب</a></li><li><a href="#" onclick="showScreen('login')">تسجيل الدخول</a></li></ul></div>
+        <div class="footer-col"><h4>تواصل معنا</h4><ul><li><a href="https://chat.whatsapp.com/CRbAZfLlzt21KLjkh4S5QF" target="_blank">واتساب المجموعة</a></li></ul></div>
       </div>
       <div class="footer-bottom">
         <span>© ٢٠٢٦ فِكر — جميع الحقوق محفوظة · صُنع بـ ❤️ لأبنائنا العرب</span>
-        <div class="footer-legal">
-          <a href="#faq">سياسة الخصوصية</a>
-          <a href="#faq">الشروط والأحكام</a>
-        </div>
+        <div class="footer-legal"><a href="#faq">سياسة الخصوصية</a><a href="#faq">الشروط والأحكام</a></div>
       </div>
     </div>
   </footer>
 
-  <!-- Landing page JS -->
   <script>
-    // Sticky CTA on scroll
     window.addEventListener('scroll', () => {
       const bar = document.getElementById('sticky-cta');
       if (!bar) return;
       if (window.scrollY > 600) bar.classList.add('visible');
       else bar.classList.remove('visible');
     });
-
-    // FAQ accordion
     function toggleFaq(btn) {
       const item = btn.closest('.faq-item');
       const isOpen = item.classList.contains('open');
       document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
       if (!isOpen) item.classList.add('open');
     }
-
-
   </script>
 </div>
 
@@ -921,19 +746,10 @@
       <div class="auth-form-sub">سجّل كولي أمر، ثم أضف أبناءك</div>
       <div id="register-error" class="form-error"></div>
       <div class="form-row">
-        <div class="form-group">
-          <label class="form-label">الاسم الكامل</label>
-          <input id="reg-name" class="form-input" type="text" placeholder="محمد العبدالله" />
-        </div>
-        <div class="form-group">
-          <label class="form-label">رقم الجوال</label>
-          <input id="reg-phone" class="form-input" type="tel" placeholder="+966 5XX XXX XXX" dir="ltr" />
-        </div>
+        <div class="form-group"><label class="form-label">الاسم الكامل</label><input id="reg-name" class="form-input" type="text" placeholder="محمد العبدالله" /></div>
+        <div class="form-group"><label class="form-label">رقم الجوال</label><input id="reg-phone" class="form-input" type="tel" placeholder="+966 5XX XXX XXX" dir="ltr" /></div>
       </div>
-      <div class="form-group">
-        <label class="form-label">البريد الإلكتروني</label>
-        <input id="reg-email" class="form-input" type="email" placeholder="example@email.com" dir="ltr" />
-      </div>
+      <div class="form-group"><label class="form-label">البريد الإلكتروني</label><input id="reg-email" class="form-input" type="email" placeholder="example@email.com" dir="ltr" /></div>
       <div class="form-group">
         <label class="form-label">البلد</label>
         <select id="reg-country" class="form-input">
@@ -947,10 +763,7 @@
           <option value="OTHER">🌍 دولة أخرى</option>
         </select>
       </div>
-      <div class="form-group">
-        <label class="form-label">كلمة المرور</label>
-        <input id="reg-password" class="form-input" type="password" placeholder="٨ أحرف على الأقل" dir="ltr" />
-      </div>
+      <div class="form-group"><label class="form-label">كلمة المرور</label><input id="reg-password" class="form-input" type="password" placeholder="٨ أحرف على الأقل" dir="ltr" /></div>
       <button class="btn-submit" id="btn-register" onclick="handleRegister()">إنشاء الحساب</button>
       <div class="auth-switch">لديك حساب بالفعل؟ <a onclick="showScreen('login')">سجّل الدخول</a></div>
     </div>
@@ -977,10 +790,7 @@
       <div class="auth-form-title">تسجيل الدخول</div>
       <div class="auth-form-sub">أهلاً بك في فِكر</div>
       <div id="login-error" class="form-error"></div>
-      <div class="form-group">
-        <label class="form-label">البريد الإلكتروني</label>
-        <input id="login-email" class="form-input" type="email" placeholder="example@email.com" dir="ltr" />
-      </div>
+      <div class="form-group"><label class="form-label">البريد الإلكتروني</label><input id="login-email" class="form-input" type="email" placeholder="example@email.com" dir="ltr" /></div>
       <div class="form-group">
         <label class="form-label" style="display:flex;justify-content:space-between;">
           <span>كلمة المرور</span>
@@ -1013,114 +823,46 @@
     <div class="dash-welcome" id="dash-welcome-name">مرحباً 👋</div>
     <div class="dash-welcome-sub" style="margin-bottom:28px;">أهلاً بك في فِكر — اختر مسارك وابدأ رحلتك</div>
 
-    <!-- WhatsApp Banner -->
     <a href="https://chat.whatsapp.com/CRbAZfLlzt21KLjkh4S5QF" target="_blank" class="whatsapp-banner">
       <span class="wa-icon">💬</span>
-      <div>
-        <div class="wa-title">انضم لمجموعة فِكر على واتساب</div>
-        <div class="wa-sub">تواصل مع المدرب، احصل على المساعدة، وتابع آخر التحديثات</div>
-      </div>
+      <div><div class="wa-title">انضم لمجموعة فِكر على واتساب</div><div class="wa-sub">تواصل مع المدرب، احصل على المساعدة، وتابع آخر التحديثات</div></div>
       <span class="wa-arrow">←</span>
     </a>
 
     <div class="dash-section-title" style="margin-top:36px;margin-bottom:20px;">🗺️ خريطة المسارات</div>
 
-    <!-- ══ TIER 1: ASGHAR ══ -->
     <div class="tier-section">
-      <div class="tier-header asghar-h">
-        <span class="tier-h-icon">🌱</span>
-        <div><div class="tier-h-name">الأصغر</div><div class="tier-h-age">٨ — ١١ سنة · Scratch</div></div>
-        <span class="tier-h-free">درسان مجانيان ✦</span>
-      </div>
+      <div class="tier-header asghar-h"><span class="tier-h-icon">🌱</span><div><div class="tier-h-name">الأصغر</div><div class="tier-h-age">٨ — ١١ سنة · Scratch</div></div><span class="tier-h-free">درسان مجانيان ✦</span></div>
       <div class="lessons-grid">
-        <div class="lesson-card free" id="lcard-1" onclick="openLesson(1,'مرحباً بعالم البرمجة')">
-          <div class="lesson-num">١</div>
-          <div class="lesson-info"><div class="lesson-title">مرحباً بعالم البرمجة</div><div class="lesson-desc">مقدمة في التفكير المنطقي</div></div>
-          <span class="lesson-badge free-badge" id="lbadge-1">مجاني</span>
-        </div>
-        <div class="lesson-card free" id="lcard-2" onclick="openLesson(2,'أول لعبة بـ Scratch')">
-          <div class="lesson-num">٢</div>
-          <div class="lesson-info"><div class="lesson-title">أول لعبة بـ Scratch</div><div class="lesson-desc">نبني لعبة بسيطة خطوة بخطوة</div></div>
-          <span class="lesson-badge free-badge" id="lbadge-2">مجاني</span>
-        </div>
-        <div class="lesson-card locked" id="lcard-3" onclick="showUpgrade()">
-          <div class="lesson-num">٣</div>
-          <div class="lesson-info"><div class="lesson-title">الحركة والأحداث</div><div class="lesson-desc">تحريك الكائنات بالمفاتيح</div></div>
-          <span class="lesson-badge lock-badge">🔒</span>
-        </div>
-        <div class="lesson-card locked" id="lcard-4" onclick="showUpgrade()">
-          <div class="lesson-num">٤</div>
-          <div class="lesson-info"><div class="lesson-title">الشروط واللعبة الكاملة</div><div class="lesson-desc">if / else وبناء لعبة حقيقية</div></div>
-          <span class="lesson-badge lock-badge">🔒</span>
-        </div>
+        <div class="lesson-card free" id="lcard-1" onclick="openLesson(1,'مرحباً بعالم البرمجة')"><div class="lesson-num">١</div><div class="lesson-info"><div class="lesson-title">مرحباً بعالم البرمجة</div><div class="lesson-desc">مقدمة في التفكير المنطقي</div></div><span class="lesson-badge free-badge" id="lbadge-1">مجاني</span></div>
+        <div class="lesson-card free" id="lcard-2" onclick="openLesson(2,'أول لعبة بـ Scratch')"><div class="lesson-num">٢</div><div class="lesson-info"><div class="lesson-title">أول لعبة بـ Scratch</div><div class="lesson-desc">نبني لعبة بسيطة خطوة بخطوة</div></div><span class="lesson-badge free-badge" id="lbadge-2">مجاني</span></div>
+        <div class="lesson-card locked" id="lcard-3" onclick="showUpgrade()"><div class="lesson-num">٣</div><div class="lesson-info"><div class="lesson-title">الحركة والأحداث</div><div class="lesson-desc">تحريك الكائنات بالمفاتيح</div></div><span class="lesson-badge lock-badge">🔒</span></div>
+        <div class="lesson-card locked" id="lcard-4" onclick="showUpgrade()"><div class="lesson-num">٤</div><div class="lesson-info"><div class="lesson-title">الشروط واللعبة الكاملة</div><div class="lesson-desc">if / else وبناء لعبة حقيقية</div></div><span class="lesson-badge lock-badge">🔒</span></div>
       </div>
     </div>
 
-    <!-- ══ TIER 2: MUTAWASSIT ══ -->
     <div class="tier-section">
-      <div class="tier-header mutawassit-h">
-        <span class="tier-h-icon">⚡</span>
-        <div><div class="tier-h-name">المتوسط</div><div class="tier-h-age">١١ — ١٤ سنة · Python</div></div>
-        <span class="tier-h-lock">🔒 يتطلب اشتراكاً</span>
-      </div>
+      <div class="tier-header mutawassit-h"><span class="tier-h-icon">⚡</span><div><div class="tier-h-name">المتوسط</div><div class="tier-h-age">١١ — ١٤ سنة · Python</div></div><span class="tier-h-lock">🔒 يتطلب اشتراكاً</span></div>
       <div class="lessons-grid">
-        <div class="lesson-card free" id="lcard-5" onclick="openLesson(5,'Python بالعربية')">
-          <div class="lesson-num">١</div>
-          <div class="lesson-info"><div class="lesson-title">Python بالعربية</div><div class="lesson-desc">أول خطوة في عالم الكود</div></div>
-          <span class="lesson-badge free-badge" id="lbadge-5">مجاني</span>
-        </div>
-        <div class="lesson-card locked" id="lcard-6" onclick="showUpgrade()">
-          <div class="lesson-num">٢</div>
-          <div class="lesson-info"><div class="lesson-title">المتغيرات والدوال</div><div class="lesson-desc">أساس كل برنامج</div></div>
-          <span class="lesson-badge lock-badge">🔒</span>
-        </div>
-        <div class="lesson-card locked" id="lcard-7" onclick="showUpgrade()">
-          <div class="lesson-num">٣</div>
-          <div class="lesson-info"><div class="lesson-title">معالجة البيانات</div><div class="lesson-desc">قوائم وحلقات Python</div></div>
-          <span class="lesson-badge lock-badge">🔒</span>
-        </div>
-        <div class="lesson-card locked" id="lcard-8" onclick="showUpgrade()">
-          <div class="lesson-num">٤</div>
-          <div class="lesson-info"><div class="lesson-title">مشاريع تطبيقية</div><div class="lesson-desc">برامج حقيقية بالعربية</div></div>
-          <span class="lesson-badge lock-badge">🔒</span>
-        </div>
+        <div class="lesson-card free" id="lcard-5" onclick="openLesson(5,'Python بالعربية')"><div class="lesson-num">١</div><div class="lesson-info"><div class="lesson-title">Python بالعربية</div><div class="lesson-desc">أول خطوة في عالم الكود</div></div><span class="lesson-badge free-badge" id="lbadge-5">مجاني</span></div>
+        <div class="lesson-card locked" id="lcard-6" onclick="showUpgrade()"><div class="lesson-num">٢</div><div class="lesson-info"><div class="lesson-title">المتغيرات والدوال</div><div class="lesson-desc">أساس كل برنامج</div></div><span class="lesson-badge lock-badge">🔒</span></div>
+        <div class="lesson-card locked" id="lcard-7" onclick="showUpgrade()"><div class="lesson-num">٣</div><div class="lesson-info"><div class="lesson-title">معالجة البيانات</div><div class="lesson-desc">قوائم وحلقات Python</div></div><span class="lesson-badge lock-badge">🔒</span></div>
+        <div class="lesson-card locked" id="lcard-8" onclick="showUpgrade()"><div class="lesson-num">٤</div><div class="lesson-info"><div class="lesson-title">مشاريع تطبيقية</div><div class="lesson-desc">برامج حقيقية بالعربية</div></div><span class="lesson-badge lock-badge">🔒</span></div>
       </div>
     </div>
 
-    <!-- ══ TIER 3: KABIR ══ -->
     <div class="tier-section">
-      <div class="tier-header kabir-h">
-        <span class="tier-h-icon">🚀</span>
-        <div><div class="tier-h-name">الكبير</div><div class="tier-h-age">١٤ — ١٦ سنة · Python + Web</div></div>
-        <span class="tier-h-lock">🔒 يتطلب اشتراكاً</span>
-      </div>
+      <div class="tier-header kabir-h"><span class="tier-h-icon">🚀</span><div><div class="tier-h-name">الكبير</div><div class="tier-h-age">١٤ — ١٦ سنة · Python + Web</div></div><span class="tier-h-lock">🔒 يتطلب اشتراكاً</span></div>
       <div class="lessons-grid">
-        <div class="lesson-card locked" id="lcard-9" onclick="showUpgrade()">
-          <div class="lesson-num">١</div>
-          <div class="lesson-info"><div class="lesson-title">Python المتقدم</div><div class="lesson-desc">خوارزميات وهياكل بيانات</div></div>
-          <span class="lesson-badge lock-badge" id="lbadge-9">🔒</span>
-        </div>
-        <div class="lesson-card locked" id="lcard-10" onclick="showUpgrade()">
-          <div class="lesson-num">٢</div>
-          <div class="lesson-info"><div class="lesson-title">HTML / CSS</div><div class="lesson-desc">بناء صفحات ويب</div></div>
-          <span class="lesson-badge lock-badge" id="lbadge-10">🔒</span>
-        </div>
-        <div class="lesson-card locked" id="lcard-11" onclick="showUpgrade()">
-          <div class="lesson-num">٣</div>
-          <div class="lesson-info"><div class="lesson-title">JavaScript</div><div class="lesson-desc">حياة في الصفحات</div></div>
-          <span class="lesson-badge lock-badge" id="lbadge-11">🔒</span>
-        </div>
-        <div class="lesson-card locked" id="lcard-12" onclick="showUpgrade()">
-          <div class="lesson-num">٤</div>
-          <div class="lesson-info"><div class="lesson-title">مشروع التخرج</div><div class="lesson-desc">موقع متكامل من الصفر</div></div>
-          <span class="lesson-badge lock-badge" id="lbadge-12">🔒</span>
-        </div>
+        <div class="lesson-card locked" id="lcard-9" onclick="showUpgrade()"><div class="lesson-num">١</div><div class="lesson-info"><div class="lesson-title">Python المتقدم</div><div class="lesson-desc">خوارزميات وهياكل بيانات</div></div><span class="lesson-badge lock-badge" id="lbadge-9">🔒</span></div>
+        <div class="lesson-card locked" id="lcard-10" onclick="showUpgrade()"><div class="lesson-num">٢</div><div class="lesson-info"><div class="lesson-title">HTML / CSS</div><div class="lesson-desc">بناء صفحات ويب</div></div><span class="lesson-badge lock-badge" id="lbadge-10">🔒</span></div>
+        <div class="lesson-card locked" id="lcard-11" onclick="showUpgrade()"><div class="lesson-num">٣</div><div class="lesson-info"><div class="lesson-title">JavaScript</div><div class="lesson-desc">حياة في الصفحات</div></div><span class="lesson-badge lock-badge" id="lbadge-11">🔒</span></div>
+        <div class="lesson-card locked" id="lcard-12" onclick="showUpgrade()"><div class="lesson-num">٤</div><div class="lesson-info"><div class="lesson-title">مشروع التخرج</div><div class="lesson-desc">موقع متكامل من الصفر</div></div><span class="lesson-badge lock-badge" id="lbadge-12">🔒</span></div>
       </div>
     </div>
 
   </div>
 
-  <!-- Upgrade Modal -->
   <div id="upgrade-modal" class="modal-overlay" style="display:none;" onclick="closeUpgrade()">
     <div class="modal-box" onclick="event.stopPropagation()">
       <div class="modal-title">هذا الدرس يتطلب اشتراكاً</div>
@@ -1130,7 +872,6 @@
     </div>
   </div>
 
-  <!-- Lesson Modal (fallback for lessons without dedicated files) -->
   <div id="lesson-modal" class="modal-overlay" style="display:none;" onclick="closeLesson()">
     <div class="modal-box" onclick="event.stopPropagation()">
       <div class="modal-title" id="lesson-modal-title">الدرس</div>
@@ -1158,7 +899,6 @@
     collection, updateDoc, serverTimestamp, query, orderBy, addDoc, deleteDoc
   } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-  // ── FIREBASE CONFIG ──
   const firebaseConfig = {
     apiKey: "AIzaSyBeD4ng-pNWSLgkrNmK1Re8FYnmCNCMBU8",
     authDomain: "fikr-app-fbdf7.firebaseapp.com",
@@ -1172,7 +912,6 @@
   const auth = getAuth(app);
   const db   = getFirestore(app);
 
-  // ── ADMIN ──
   const ADMIN_PWD_HASH = '89d7a70d58c3b9137a487398d63c698f9b1652d177557031d158466119924f29';
   async function hashPwd(str) {
     const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
@@ -1188,7 +927,6 @@
     window.scrollTo(0, 0);
   }
 
-  // ── HELPERS ──
   function setError(id, msg) { const el=document.getElementById(id); el.textContent=msg; el.classList.add('visible'); }
   function clearError(id)    { const el=document.getElementById(id); el.textContent=''; el.classList.remove('visible'); }
   function setLoading(btnId, loading) {
@@ -1210,20 +948,10 @@
     return map[code] || 'حدث خطأ غير متوقع، حاول مجدداً';
   }
 
-  // ── LESSON FILE MAP (all 12 lessons) ──
   const LESSON_FILES = {
-    1:  'lesson1.html',
-    2:  'lesson2.html',
-    3:  'lesson3.html',
-    4:  'lesson4.html',
-    5:  'lesson-m1.html',
-    6:  'lesson-m2.html',
-    7:  'lesson-m3.html',
-    8:  'lesson-m4.html',
-    9:  'lesson-k1.html',
-    10: 'lesson-k2.html',
-    11: 'lesson-k3.html',
-    12: 'lesson-k4.html',
+    1:'lesson1.html', 2:'lesson2.html', 3:'lesson3.html', 4:'lesson4.html',
+    5:'lesson-m1.html', 6:'lesson-m2.html', 7:'lesson-m3.html', 8:'lesson-m4.html',
+    9:'lesson-k1.html', 10:'lesson-k2.html', 11:'lesson-k3.html', 12:'lesson-k4.html',
   };
 
   // ── DASHBOARD LOADER ──
@@ -1241,31 +969,19 @@
         [3, 4].forEach(n => {
           const card  = document.getElementById('lcard-' + n);
           const badge = document.getElementById('lbadge-' + n);
-          if (card) {
-            card.classList.remove('locked');
-            card.classList.add('free');
-            card.onclick = () => openLesson(n, card.querySelector('.lesson-title').textContent);
-          }
+          if (card) { card.classList.remove('locked'); card.classList.add('free'); card.onclick = () => openLesson(n, card.querySelector('.lesson-title').textContent); }
           if (badge) { badge.textContent = 'مشترك'; badge.className = 'lesson-badge free-badge'; }
         });
         [6, 7, 8].forEach(n => {
           const card  = document.getElementById('lcard-' + n);
           const badge = document.getElementById('lbadge-' + n);
-          if (card) {
-            card.classList.remove('locked');
-            card.classList.add('free');
-            card.onclick = () => openLesson(n, card.querySelector('.lesson-title').textContent);
-          }
+          if (card) { card.classList.remove('locked'); card.classList.add('free'); card.onclick = () => openLesson(n, card.querySelector('.lesson-title').textContent); }
           if (badge) { badge.textContent = 'مشترك'; badge.className = 'lesson-badge free-badge'; }
         });
         [9, 10, 11, 12].forEach(n => {
           const card  = document.getElementById('lcard-' + n);
           const badge = document.getElementById('lbadge-' + n);
-          if (card) {
-            card.classList.remove('locked');
-            card.classList.add('free');
-            card.onclick = () => openLesson(n, card.querySelector('.lesson-title').textContent);
-          }
+          if (card) { card.classList.remove('locked'); card.classList.add('free'); card.onclick = () => openLesson(n, card.querySelector('.lesson-title').textContent); }
           if (badge) { badge.textContent = 'مشترك'; badge.className = 'lesson-badge free-badge'; }
         });
       }
@@ -1287,17 +1003,22 @@
   }
 
   // ── AUTH STATE LISTENER ──
+  // FIX: Only redirect to dashboard when the user is on login/register screen,
+  // or when refreshing the dashboard itself.
+  // Opening a new tab starts on landing and stays there — no forced redirect.
   onAuthStateChanged(auth, async user => {
     if (user) {
       loadDashboard(user);
-      const active = document.querySelector('.auth-screen.active, #screen-landing.active');
-      if (active && active.id !== 'screen-dashboard') {
+      const onLogin     = document.getElementById('screen-login')?.classList.contains('active');
+      const onRegister  = document.getElementById('screen-register')?.classList.contains('active');
+      const onDashboard = document.getElementById('screen-dashboard')?.classList.contains('active');
+      if (onLogin || onRegister || onDashboard) {
         showScreen('dashboard');
       }
+      // If on landing page in a new tab → stay on landing (no redirect)
     }
   });
 
-  // ── INIT BUTTON LABELS ──
   document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('btn-register').dataset.label = 'إنشاء الحساب';
     document.getElementById('btn-login').dataset.label    = 'تسجيل الدخول';
@@ -1349,7 +1070,6 @@
     }
   }
 
-  // ── FORGOT PASSWORD ──
   window.handleForgotPassword = async function() {
     const email = document.getElementById('login-email').value.trim();
     if (!email) return setError('login-error', 'أدخل بريدك الإلكتروني أولاً ثم اضغط "نسيت كلمة المرور"');
@@ -1359,25 +1079,18 @@
     } catch (err) { setError('login-error', friendlyError(err.code)); }
   }
 
-  // ── LOGOUT ──
   window.handleLogout = async function() { await signOut(auth); showScreen('landing'); }
 
-  // ── MODALS ──
   window.showUpgrade  = function() { document.getElementById('upgrade-modal').style.display = 'flex'; }
   window.closeUpgrade = function() { document.getElementById('upgrade-modal').style.display = 'none'; }
   window.closeLesson  = function() { document.getElementById('lesson-modal').style.display  = 'none'; }
 
-  // ── OPEN LESSON ──
   window.openLesson = function(lessonId, title) {
-    if (LESSON_FILES[lessonId]) {
-      window.location.href = LESSON_FILES[lessonId];
-      return;
-    }
+    if (LESSON_FILES[lessonId]) { window.location.href = LESSON_FILES[lessonId]; return; }
     document.getElementById('lesson-modal-title').textContent = 'الدرس ' + lessonId + ': ' + title;
     document.getElementById('lesson-modal').style.display = 'flex';
   }
 
-  // ── ADMIN PASSWORD PROMPT ──
   window.openAdminPrompt = async function() {
     const pwd = prompt('🔐 كلمة مرور الإدارة:');
     if (!pwd) return;
@@ -1387,7 +1100,6 @@
     showScreen('admin');
   }
 
-  // ── ADMIN STATE ──
   let _allUsers = [];
 
   function formatDate(ts) {
@@ -1566,12 +1278,7 @@
           <td>${tierNames[l.tier]||l.tier}</td>
           <td style="text-align:center">${l.videoUrl?'✅':'❌'}</td>
           <td style="text-align:center">${l.isFree?'<span style="color:#4ade80;font-size:0.8rem">مجاني</span>':'<span style="color:#fbbf24;font-size:0.8rem">مدفوع</span>'}</td>
-          <td>
-            <div style="display:flex;gap:6px">
-              <button class="adm-btn green" onclick="editLesson('${l.id}')">✏️ تعديل</button>
-              <button class="adm-btn" style="background:rgba(220,38,38,0.15);color:#f87171;border:1px solid rgba(220,38,38,0.3)" onclick="deleteLesson('${l.id}','${l.title}')">🗑️</button>
-            </div>
-          </td>
+          <td><div style="display:flex;gap:6px"><button class="adm-btn green" onclick="editLesson('${l.id}')">✏️ تعديل</button><button class="adm-btn" style="background:rgba(220,38,38,0.15);color:#f87171;border:1px solid rgba(220,38,38,0.3)" onclick="deleteLesson('${l.id}','${l.title}')">🗑️</button></div></td>
         </tr>`;
     });
   }
@@ -1681,90 +1388,46 @@
       <div class="adm-stat"><span class="adm-stat-val" id="adm-wa" style="color:#34d399">—</span><div class="adm-stat-label">انضموا للواتساب</div></div>
       <div class="adm-stat"><span class="adm-stat-val" id="adm-lessons" style="color:#a78bfa">—</span><div class="adm-stat-label">دروس مكتملة</div></div>
     </div>
-
-    <!-- USERS TAB -->
     <div id="adm-tab-users">
       <div class="adm-table-wrap">
         <div class="adm-table-header">
           <span class="adm-table-title">👥 جميع المستخدمين</span>
           <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
-            <input id="adm-search" type="text" placeholder="🔍 بحث بالاسم أو البريد أو الجوال..."
-              oninput="searchUsers()"
-              style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);color:#fff;padding:8px 14px;border-radius:8px;font-family:var(--font-ui);font-size:0.82rem;outline:none;min-width:240px;direction:rtl"/>
-            <button onclick="exportCSV()" class="adm-nav-btn" style="background:rgba(200,146,42,0.2);color:#e8b84b;border:1px solid rgba(200,146,42,0.3);font-size:0.82rem;padding:8px 14px">
-              📥 تصدير CSV
-            </button>
+            <input id="adm-search" type="text" placeholder="🔍 بحث بالاسم أو البريد أو الجوال..." oninput="searchUsers()" style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);color:#fff;padding:8px 14px;border-radius:8px;font-family:var(--font-ui);font-size:0.82rem;outline:none;min-width:240px;direction:rtl"/>
+            <button onclick="exportCSV()" class="adm-nav-btn" style="background:rgba(200,146,42,0.2);color:#e8b84b;border:1px solid rgba(200,146,42,0.3);font-size:0.82rem;padding:8px 14px">📥 تصدير CSV</button>
           </div>
         </div>
         <div style="overflow-x:auto">
           <table class="adm-table">
-            <thead>
-              <tr>
-                <th>المستخدم</th><th>البلد</th><th>الجوال</th><th>الاشتراك</th>
-                <th>انتهاء</th><th>واتساب</th><th>الدروس</th><th>تاريخ التسجيل</th><th>إجراءات</th>
-              </tr>
-            </thead>
-            <tbody id="adm-tbody">
-              <tr><td colspan="9" class="adm-empty">جاري تحميل البيانات...</td></tr>
-            </tbody>
+            <thead><tr><th>المستخدم</th><th>البلد</th><th>الجوال</th><th>الاشتراك</th><th>انتهاء</th><th>واتساب</th><th>الدروس</th><th>تاريخ التسجيل</th><th>إجراءات</th></tr></thead>
+            <tbody id="adm-tbody"><tr><td colspan="9" class="adm-empty">جاري تحميل البيانات...</td></tr></tbody>
           </table>
         </div>
       </div>
     </div>
-
-    <!-- LESSONS TAB -->
     <div id="adm-tab-lessons" style="display:none">
       <div class="adm-table-wrap" style="margin-bottom:20px">
         <div class="adm-table-header"><span class="adm-table-title">➕ إضافة درس جديد</span></div>
         <div style="padding:24px;display:grid;grid-template-columns:1fr 1fr;gap:16px">
           <div><label class="adm-form-label">عنوان الدرس</label><input id="ls-title" class="adm-form-input" type="text" placeholder="مثال: مرحباً بعالم البرمجة"/></div>
-          <div>
-            <label class="adm-form-label">المسار</label>
-            <select id="ls-tier" class="adm-form-input">
-              <option value="asghar">🌱 الأصغر (٨-١١)</option>
-              <option value="mutawassit">⚡ المتوسط (١١-١٤)</option>
-              <option value="kabir">🚀 الكبير (١٤-١٦)</option>
-            </select>
-          </div>
+          <div><label class="adm-form-label">المسار</label><select id="ls-tier" class="adm-form-input"><option value="asghar">🌱 الأصغر (٨-١١)</option><option value="mutawassit">⚡ المتوسط (١١-١٤)</option><option value="kabir">🚀 الكبير (١٤-١٦)</option></select></div>
           <div><label class="adm-form-label">رقم الدرس</label><input id="ls-order" class="adm-form-input" type="number" placeholder="١" min="1"/></div>
-          <div>
-            <label class="adm-form-label">مجاني؟</label>
-            <select id="ls-free" class="adm-form-input">
-              <option value="true">✅ نعم — مجاني</option>
-              <option value="false">🔒 لا — يتطلب اشتراك</option>
-            </select>
-          </div>
+          <div><label class="adm-form-label">مجاني؟</label><select id="ls-free" class="adm-form-input"><option value="true">✅ نعم — مجاني</option><option value="false">🔒 لا — يتطلب اشتراك</option></select></div>
           <div style="grid-column:1/-1"><label class="adm-form-label">رابط الفيديو (YouTube)</label><input id="ls-video" class="adm-form-input" type="url" placeholder="https://youtube.com/embed/..." dir="ltr"/></div>
           <div style="grid-column:1/-1"><label class="adm-form-label">وصف الدرس</label><textarea id="ls-desc" class="adm-form-input" rows="3" placeholder="ما الذي سيتعلمه الطفل..."></textarea></div>
           <div style="grid-column:1/-1"><label class="adm-form-label">تحدي الدرس (اختياري)</label><textarea id="ls-challenge" class="adm-form-input" rows="3" placeholder="رابط Scratch أو تعليمات التحدي..."></textarea></div>
-          <div style="grid-column:1/-1">
-            <button onclick="saveLesson()" class="adm-nav-btn primary" style="width:100%;padding:14px;font-size:1rem">💾 حفظ الدرس</button>
-            <div id="ls-msg" style="text-align:center;margin-top:10px;font-family:var(--font-ui);font-size:0.85rem;color:#4ade80;display:none"></div>
-          </div>
+          <div style="grid-column:1/-1"><button onclick="saveLesson()" class="adm-nav-btn primary" style="width:100%;padding:14px;font-size:1rem">💾 حفظ الدرس</button><div id="ls-msg" style="text-align:center;margin-top:10px;font-family:var(--font-ui);font-size:0.85rem;color:#4ade80;display:none"></div></div>
         </div>
       </div>
       <div class="adm-table-wrap">
-        <div class="adm-table-header">
-          <span class="adm-table-title">📋 جميع الدروس</span>
-          <select id="ls-filter" class="adm-form-input" style="max-width:180px" onchange="filterLessons()">
-            <option value="all">كل المسارات</option>
-            <option value="asghar">🌱 الأصغر</option>
-            <option value="mutawassit">⚡ المتوسط</option>
-            <option value="kabir">🚀 الكبير</option>
-          </select>
-        </div>
-        <div style="overflow-x:auto">
-          <table class="adm-table">
-            <thead><tr><th>#</th><th>العنوان</th><th>المسار</th><th>الفيديو</th><th>مجاني</th><th>إجراءات</th></tr></thead>
-            <tbody id="ls-tbody"><tr><td colspan="6" class="adm-empty">لا توجد دروس بعد</td></tr></tbody>
-          </table>
-        </div>
+        <div class="adm-table-header"><span class="adm-table-title">📋 جميع الدروس</span><select id="ls-filter" class="adm-form-input" style="max-width:180px" onchange="filterLessons()"><option value="all">كل المسارات</option><option value="asghar">🌱 الأصغر</option><option value="mutawassit">⚡ المتوسط</option><option value="kabir">🚀 الكبير</option></select></div>
+        <div style="overflow-x:auto"><table class="adm-table"><thead><tr><th>#</th><th>العنوان</th><th>المسار</th><th>الفيديو</th><th>مجاني</th><th>إجراءات</th></tr></thead><tbody id="ls-tbody"><tr><td colspan="6" class="adm-empty">لا توجد دروس بعد</td></tr></tbody></table></div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ══════════════ LESSON VIEWER (dynamic from Firestore) ══════════════ -->
+<!-- ══════════════ LESSON VIEWER ══════════════ -->
 <style>
   .lesson-screen { min-height:100vh; background:var(--ink); display:none; }
   .lesson-screen.active { display:block; }
@@ -1790,10 +1453,7 @@
 <div id="screen-lesson-viewer" class="lesson-screen">
   <nav class="lv-nav">
     <div class="lv-logo">فِ<span>كر</span></div>
-    <button class="adm-nav-btn outline" onclick="showScreen('dashboard')"
-      style="font-family:var(--font-ui);font-size:0.85rem;font-weight:600;padding:8px 16px;border-radius:var(--r);border:1.5px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.7);background:transparent;cursor:pointer">
-      ← العودة
-    </button>
+    <button class="adm-nav-btn outline" onclick="showScreen('dashboard')" style="font-family:var(--font-ui);font-size:0.85rem;font-weight:600;padding:8px 16px;border-radius:var(--r);border:1.5px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.7);background:transparent;cursor:pointer">← العودة</button>
   </nav>
   <div class="lv-body">
     <div class="lv-meta">
@@ -1803,9 +1463,7 @@
     <div class="lv-title" id="lv-title">عنوان الدرس</div>
     <div class="lv-desc"  id="lv-desc">وصف الدرس</div>
     <div class="lv-section-title">🎬 الفيديو التعليمي</div>
-    <div class="lv-video-box" id="lv-video-wrap">
-      <div style="padding:60px;text-align:center;color:rgba(255,255,255,0.3)">جاري تحميل الفيديو...</div>
-    </div>
+    <div class="lv-video-box" id="lv-video-wrap"><div style="padding:60px;text-align:center;color:rgba(255,255,255,0.3)">جاري تحميل الفيديو...</div></div>
     <div id="lv-challenge-wrap">
       <div class="lv-section-title">⚡ تحدي الدرس</div>
       <div class="lv-challenge-box"><div class="lv-challenge-text" id="lv-challenge"></div></div>
